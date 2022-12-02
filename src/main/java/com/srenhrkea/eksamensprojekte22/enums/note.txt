@@ -1,0 +1,1 @@
+MySQL bruger displayName som reference i stedet for Enum, så skal finde en alternativ måde at give Enums navne strenge.

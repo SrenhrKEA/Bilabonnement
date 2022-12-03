@@ -21,7 +21,7 @@ INSERT INTO CarTypeRef
  pricePerMonth,
  brand,
  model,
- description,
+ ´description´,
  transmissionType,
  fuelType)
 VALUES (?,
@@ -59,7 +59,7 @@ INSERT INTO Damage
 (idDamage,
  DamageReportidDamageReport,
  title,
- description,
+ ´description´,
  price)
 VALUES (?,
         ?,
@@ -83,7 +83,7 @@ VALUES (?,
 INSERT INTO EquipmentRef
 (idEquipmentRef,
  title,
- description,
+ ´description´,
  price)
 VALUES (?,
         ?,
@@ -99,10 +99,8 @@ VALUES (?,
 INSERT INTO KilometragePlanRef
 (idKilometragePlanRef,
  kilometrage,
- pricePerMonth,
- LeaseidLease)
+ pricePerMonth)
 VALUES (?,
-        ?,
         ?,
         ?);
 INSERT INTO Lease
@@ -119,7 +117,7 @@ VALUES (?,
         ?,
         ?);
 INSERT INTO PickupLocation
-(idLocation,
+(idPickupLocation,
  LeaseidLease,
  PickupLocationRefidPickupLocationRef)
 VALUES (?,
@@ -136,7 +134,7 @@ VALUES (?,
         ?);
 INSERT INTO `User`
 (username,
- password,
+ ´password´,
  userType)
 VALUES (?,
         ?,

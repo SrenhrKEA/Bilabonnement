@@ -2,6 +2,7 @@ package com.srenhrkea.eksamensprojekte22.daos.impl;
 
 import com.srenhrkea.eksamensprojekte22.daos.EquipmentDAO;
 import com.srenhrkea.eksamensprojekte22.models.Equipment;
+import com.srenhrkea.eksamensprojekte22.models.KilometragePlan;
 import com.srenhrkea.eksamensprojekte22.utilities.DatabaseConnectionManager;
 
 import java.sql.Connection;
@@ -27,15 +28,14 @@ public class EquipmentDAOImpl implements EquipmentDAO {
       ResultSet rs = psts.executeQuery();
       if (rs.next()) {
         int idEquipment = rs.getInt("idEquipment");
-        int idLease = rs.getInt("LeaseidLease");
         int idEquipmentRef = rs.getInt("EquipmentRefidEquipmentRef");
+        int idLease = rs.getInt("LeaseidLease");
 
 
         equipment = new Equipment();
         equipment.setIdEquipment(idEquipment);
-        equipment.setIdEquipment(idLease);
-        equipment.setIdEquipment(idEquipmentRef);
-
+        equipment.setIdEquipmentRef(idEquipmentRef);
+        equipment.setIdLease(idLease);
 
       }
 
@@ -57,14 +57,14 @@ public class EquipmentDAOImpl implements EquipmentDAO {
       ResultSet rs = psts.executeQuery();
       while (rs.next()) {
         int idEquipment = rs.getInt("idEquipment");
-        int idLease = rs.getInt("LeaseidLease");
         int idEquipmentRef = rs.getInt("EquipmentRefidEquipmentRef");
-
+        int idLease = rs.getInt("LeaseidLease");
 
         Equipment equipment = new Equipment();
         equipment.setIdEquipment(idEquipment);
-        equipment.setIdEquipment(idLease);
-        equipment.setIdEquipment(idEquipmentRef);
+        equipment.setIdEquipmentRef(idEquipmentRef);
+        equipment.setIdLease(idLease);
+
 
         equipmentList.add(equipment);
       }
@@ -77,11 +77,43 @@ public class EquipmentDAOImpl implements EquipmentDAO {
 
   @Override
   public boolean save(Equipment equipment) {
+
+    String sql = "INSERT INTO equipment(LeaseidLease,EquipmentRefidEquipmentRef)VALUES(?,?)";
+    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+
+      psts.setInt(1, equipment.getIdLease());
+      psts.setInt(2, equipment.getIdEquipmentRef());
+
+      int executeUpdate = psts.executeUpdate();
+
+      if (executeUpdate == 1) {
+        System.out.println("Equipment is saved.");
+        return true;
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     return false;
   }
 
   @Override
   public boolean update(Equipment equipment) {
+
+    String sql = "UPDATE equipment set LeaseidLease=?, EquipmentRefidEquipmentRef=? WHERE idEquipment=?;";
+    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+
+      psts.setInt(1, equipment.getIdLease());
+      psts.setInt(2, equipment.getIdEquipmentRef());
+
+      int executeUpdate = psts.executeUpdate();
+
+      if (executeUpdate == 1) {
+        System.out.println("Equipment Plan is updated.");
+        return true;
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     return false;
   }
 

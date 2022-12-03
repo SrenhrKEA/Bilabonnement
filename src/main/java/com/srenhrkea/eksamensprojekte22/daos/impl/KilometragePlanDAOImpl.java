@@ -26,15 +26,14 @@ public class KilometragePlanDAOImpl implements KilometragePlanDAO {
       ResultSet rs = psts.executeQuery();
       if (rs.next()) {
         int idKilometragePlan = rs.getInt("idKilometragePlan");
-        double kilometrage = rs.getDouble("kilometrage");
-        double pricePerMonth = rs.getDouble("pricePerMonth");
         int idKilometragePlanRef = rs.getInt("KilometragePlanRefidKilometragePlanRef");
+        int idLease = rs.getInt("LeaseidLease");
 
         kilometragePlan = new KilometragePlan();
         kilometragePlan.setIdKilometragePlan(idKilometragePlan);
-        kilometragePlan.setKilometrage(kilometrage);
-        kilometragePlan.setPricePerMonth(pricePerMonth);
         kilometragePlan.setIdKilometragePlanRef(idKilometragePlanRef);
+        kilometragePlan.setIdLease(idLease);
+
       }
 
     } catch (Exception e) {
@@ -55,15 +54,13 @@ public class KilometragePlanDAOImpl implements KilometragePlanDAO {
       ResultSet rs = psts.executeQuery();
       while (rs.next()) {
         int idKilometragePlan = rs.getInt("idKilometragePlan");
-        double kilometrage = rs.getDouble("kilometrage");
-        double pricePerMonth = rs.getDouble("pricePerMonth");
         int idKilometragePlanRef = rs.getInt("KilometragePlanRefidKilometragePlanRef");
+        int idLease = rs.getInt("LeaseidLease");
 
         KilometragePlan kilometragePlan = new KilometragePlan();
         kilometragePlan.setIdKilometragePlan(idKilometragePlan);
-        kilometragePlan.setKilometrage(kilometrage);
-        kilometragePlan.setPricePerMonth(pricePerMonth);
         kilometragePlan.setIdKilometragePlanRef(idKilometragePlanRef);
+        kilometragePlan.setIdLease(idLease);
 
 
         kilometragePlans.add(kilometragePlan);
@@ -77,11 +74,43 @@ public class KilometragePlanDAOImpl implements KilometragePlanDAO {
 
   @Override
   public boolean save(KilometragePlan kilometragePlan) {
+
+    String sql = "INSERT INTO kilometrageplan(LeaseidLease,KilometragePlanRefidKilometragePlanRef)VALUES(?,?)";
+    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+
+      psts.setInt(1, kilometragePlan.getIdLease());
+      psts.setInt(2, kilometragePlan.getIdKilometragePlanRef());
+
+      int executeUpdate = psts.executeUpdate();
+
+      if (executeUpdate == 1) {
+        System.out.println("Kilometrage Plan is saved.");
+        return true;
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     return false;
   }
 
   @Override
   public boolean update(KilometragePlan kilometragePlan) {
+
+    String sql = "UPDATE kilometrageplan set LeaseidLease=?, KilometragePlanRefidKilometragePlanRef=? WHERE idKilometragePlan=?;";
+    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+
+      psts.setInt(1, kilometragePlan.getIdLease());
+      psts.setInt(2, kilometragePlan.getIdKilometragePlanRef());
+
+      int executeUpdate = psts.executeUpdate();
+
+      if (executeUpdate == 1) {
+        System.out.println("Kilometrage Plan is updated.");
+        return true;
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     return false;
   }
 

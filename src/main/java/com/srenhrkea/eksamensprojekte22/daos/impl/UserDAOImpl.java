@@ -99,12 +99,13 @@ public class UserDAOImpl implements UserDAO {
   @Override
   public boolean update(User user) {
 
-    String sql = "UPDATE user set ´password´=?, userType=? WHERE username=?;";
+    String sql = "UPDATE user set username=?, ´password´=?, userType=? WHERE username=?;";
     try (PreparedStatement psts = conn.prepareStatement(sql)) {
 
-      psts.setString(1, user.getPassword());
-      psts.setString(2, String.valueOf(user.getUserType()));
-      psts.setString(3, user.getUsername());
+      psts.setString(1, user.getUsername());
+      psts.setString(2, user.getPassword());
+      psts.setString(3, String.valueOf(user.getUserType()));
+
 
       int executeUpdate = psts.executeUpdate();
 

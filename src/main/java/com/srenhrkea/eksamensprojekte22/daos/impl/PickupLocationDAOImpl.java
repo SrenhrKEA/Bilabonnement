@@ -27,15 +27,14 @@ public class PickupLocationDAOImpl implements PickupLocationDAO {
       ResultSet rs = psts.executeQuery();
       if (rs.next()) {
         int idPickupLocation = rs.getInt("idPickupLocation");
-        String address = rs.getString("address");
-        String city = rs.getString("city");
-        int postalCode = rs.getInt("postalCode");
+        int idPickupLocationRef = rs.getInt("PickupLocationRefidPickupLocationRef");
+        int idLease = rs.getInt("LeaseidLease");
+
 
         pickupLocation = new PickupLocation();
         pickupLocation.setIdPickupLocation(idPickupLocation);
-        pickupLocation.setAddress(address);
-        pickupLocation.setCity(city);
-        pickupLocation.setPostalCode(postalCode);
+        pickupLocation.setIdPickupLocationRef(idPickupLocationRef);
+        pickupLocation.setIdPickupLocation(idLease);
       }
 
     } catch (Exception e) {
@@ -56,15 +55,15 @@ public class PickupLocationDAOImpl implements PickupLocationDAO {
       ResultSet rs = psts.executeQuery();
       while (rs.next()) {
         int idPickupLocation = rs.getInt("idPickupLocation");
-        String address = rs.getString("address");
-        String city = rs.getString("city");
-        int postalCode = rs.getInt("postalCode");
+        int idPickupLocationRef = rs.getInt("PickupLocationRefidPickupLocationRef");
+        int idLease = rs.getInt("LeaseidLease");
+
 
         PickupLocation pickupLocation = new PickupLocation();
         pickupLocation.setIdPickupLocation(idPickupLocation);
-        pickupLocation.setAddress(address);
-        pickupLocation.setCity(city);
-        pickupLocation.setPostalCode(postalCode);
+        pickupLocation.setIdPickupLocationRef(idPickupLocationRef);
+        pickupLocation.setIdPickupLocation(idLease);
+
 
         pickupLocations.add(pickupLocation);
       }
@@ -77,11 +76,43 @@ public class PickupLocationDAOImpl implements PickupLocationDAO {
 
   @Override
   public boolean save(PickupLocation pickupLocation) {
+
+    String sql = "INSERT INTO pickuplocation(LeaseidLease,PickupLocationRefidPickupLocationRef)VALUES(?,?)";
+    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+
+      psts.setInt(1, pickupLocation.getIdLease());
+      psts.setInt(2, pickupLocation.getIdPickupLocationRef());
+
+      int executeUpdate = psts.executeUpdate();
+
+      if (executeUpdate == 1) {
+        System.out.println("Location is saved.");
+        return true;
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     return false;
   }
 
   @Override
   public boolean update(PickupLocation pickupLocation) {
+
+    String sql = "UPDATE pickuplocation set LeaseidLease=?, PickupLocationRefidPickupLocationRef=? WHERE idPickupLocation=?;";
+    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+
+      psts.setInt(1, pickupLocation.getIdLease());
+      psts.setInt(2, pickupLocation.getIdPickupLocationRef());
+
+      int executeUpdate = psts.executeUpdate();
+
+      if (executeUpdate == 1) {
+        System.out.println("Location is updated.");
+        return true;
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     return false;
   }
 

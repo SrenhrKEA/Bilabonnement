@@ -9,7 +9,7 @@ SELECT idCarTypeRef,
        pricePerMonth,
        brand,
        model,
-       description,
+       ´description´,
        transmissionType,
        fuelType
 FROM CarTypeRef;
@@ -23,24 +23,24 @@ SELECT idCustomer,
        contactNo,
        email
 FROM Customer;
-SELECT idDamage, DamageReportidDamageReport, title, description, price
+SELECT idDamage, DamageReportidDamageReport, title, ´description´, price
 FROM Damage;
 SELECT idDamageReport, dateOfReport, CaridCarVIN
 FROM DamageReport;
 SELECT idEquipment, LeaseidLease, EquipmentRefidEquipmentRef
 FROM Equipment;
-SELECT idEquipmentRef, title, description, price
+SELECT idEquipmentRef, title, ´description´, price
 FROM EquipmentRef;
 SELECT idKilometragePlan, LeaseidLease, KilometragePlanRefidKilometragePlanRef
 FROM KilometragePlan;
-SELECT idKilometragePlanRef, kilometrage, pricePerMonth, LeaseidLease
+SELECT idKilometragePlanRef, kilometrage, pricePerMonth
 FROM KilometragePlanRef;
 SELECT idLease, durationMonths, dateOfRent, DateOfReturn, subscriptionType, CustomeridCustomer
 FROM Lease;
-SELECT idLocation, LeaseidLease, PickupLocationRefidPickupLocationRef
+SELECT idPickupLocation, LeaseidLease, PickupLocationRefidPickupLocationRef
 FROM PickupLocation;
 SELECT idPickupLocationRef, address, city, postalCode
 FROM PickupLocationRef;
-SELECT username, password, userType
+SELECT username, ´password´, userType
 FROM `User`;
 

@@ -14,7 +14,7 @@ SET seatingCapacity  = ?,
     pricePerMonth    = ?,
     brand            = ?,
     model            = ?,
-    description      = ?,
+    ´description´      = ?,
     transmissionType = ?,
     fuelType         = ?
 WHERE idCarTypeRef = ?;
@@ -31,7 +31,7 @@ WHERE idCustomer = ?;
 UPDATE Damage
 SET DamageReportidDamageReport = ?,
     title                      = ?,
-    description                = ?,
+    ´description´                = ?,
     price                      = ?
 WHERE idDamage = ?;
 UPDATE DamageReport
@@ -44,7 +44,7 @@ SET LeaseidLease               = ?,
 WHERE idEquipment = ?;
 UPDATE EquipmentRef
 SET title       = ?,
-    description = ?,
+    ´description´ = ?,
     price       = ?
 WHERE idEquipmentRef = ?;
 UPDATE KilometragePlan
@@ -53,8 +53,7 @@ SET LeaseidLease                           = ?,
 WHERE idKilometragePlan = ?;
 UPDATE KilometragePlanRef
 SET kilometrage   = ?,
-    pricePerMonth = ?,
-    LeaseidLease  = ?
+    pricePerMonth = ?
 WHERE idKilometragePlanRef = ?;
 UPDATE Lease
 SET durationMonths     = ?,
@@ -66,14 +65,14 @@ WHERE idLease = ?;
 UPDATE PickupLocation
 SET LeaseidLease                         = ?,
     PickupLocationRefidPickupLocationRef = ?
-WHERE idLocation = ?;
+WHERE idPickupLocation = ?;
 UPDATE PickupLocationRef
 SET address    = ?,
     city       = ?,
     postalCode = ?
 WHERE idPickupLocationRef = ?;
 UPDATE `User`
-SET password = ?,
+SET ´password´ = ?,
     userType = ?
 WHERE username = ?;
 

@@ -20,12 +20,12 @@ public class UserDAOImpl implements UserDAO {
   private Connection conn = DatabaseConnectionManager.getConnection();
 
   @Override
-  public Optional<User> get(String vin) {
+  public Optional<User> get(String id) {
     User user = null;
     String sql = "SELECT *FROM user WHERE username=?";
     try (PreparedStatement psts = conn.prepareStatement(sql)) {
 
-      psts.setString(1, vin);
+      psts.setString(1, id);
 
       ResultSet rs = psts.executeQuery();
       if (rs.next()) {

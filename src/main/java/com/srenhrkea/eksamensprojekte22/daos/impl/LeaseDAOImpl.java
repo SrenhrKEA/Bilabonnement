@@ -26,20 +26,18 @@ public class LeaseDAOImpl implements LeaseDAO {
       if (rs.next()) {
         int idLease = rs.getInt("idLease");
         int durationMonths = rs.getInt("durationMonths");
+        int idCustomer = rs.getInt("CustomeridCustomer");
+        Date dateOfRent = rs.getDate("dateOfRent");
+        Date dateOfReturn = rs.getDate("dateOfReturn");
         SubscriptionType subscriptionType = SubscriptionType.valueOf(rs.getString("subscriptionType"));
-        Date dateRented = rs.getDate("dateRented");
-        double price = rs.getDouble("price");
-        boolean billed = rs.getBoolean("billed");
-        boolean billPaid = rs.getBoolean("billPaid");
 
         lease = new Lease();
-        lease.setId(idLease);
+        lease.setIdLease(idLease);
         lease.setDurationMonths(durationMonths);
+        lease.setIdCustomer(idCustomer);
+        lease.setDateOfRent(dateOfRent);
+        lease.setDateOfReturn(dateOfReturn);
         lease.setSubscriptionType(subscriptionType);
-        lease.setDateRented(dateRented);
-        lease.setPrice(price);
-        lease.setBilled(billed);
-        lease.setBillPaid(billPaid);
       }
 
     } catch (Exception e) {
@@ -61,20 +59,18 @@ public class LeaseDAOImpl implements LeaseDAO {
       while (rs.next()) {
         int idLease = rs.getInt("idLease");
         int durationMonths = rs.getInt("durationMonths");
+        int idCustomer = rs.getInt("CustomeridCustomer");
+        Date dateOfRent = rs.getDate("dateOfRent");
+        Date dateOfReturn = rs.getDate("dateOfReturn");
         SubscriptionType subscriptionType = SubscriptionType.valueOf(rs.getString("subscriptionType"));
-        Date dateRented = rs.getDate("dateRented");
-        double price = rs.getDouble("price");
-        boolean billed = rs.getBoolean("billed");
-        boolean billPaid = rs.getBoolean("billPaid");
 
         Lease lease = new Lease();
-        lease.setId(idLease);
+        lease.setIdLease(idLease);
         lease.setDurationMonths(durationMonths);
+        lease.setIdCustomer(idCustomer);
+        lease.setDateOfRent(dateOfRent);
+        lease.setDateOfReturn(dateOfReturn);
         lease.setSubscriptionType(subscriptionType);
-        lease.setDateRented(dateRented);
-        lease.setPrice(price);
-        lease.setBilled(billed);
-        lease.setBillPaid(billPaid);
 
         leases.add(lease);
       }
@@ -88,15 +84,14 @@ public class LeaseDAOImpl implements LeaseDAO {
   @Override
   public boolean save(Lease lease) {
 
-    String sql = "INSERT INTO lease (durationMonths,subscriptionType,dateRented,price,billed,billPaid)VALUES(?,?,?,?,?,?)";
+    String sql = "INSERT INTO lease (durationMonths,CustomeridCustomer,dateofRent,dateofReturn,subscriptionType)VALUES(?,?,?,?,?)";
     try (PreparedStatement psts = conn.prepareStatement(sql)) {
 
       psts.setInt(1, lease.getDurationMonths());
-      psts.setString(2, String.valueOf(lease.getSubscriptionType()));
-      psts.setString(3, String.valueOf(lease.getDateRented()));
-      psts.setDouble(4, lease.getPrice());
-      psts.setBoolean(5, lease.isBilled());
-      psts.setBoolean(6, lease.isBillPaid());
+      psts.setInt(2, lease.getIdCustomer());
+      psts.setString(3, String.valueOf(lease.getDateOfRent()));
+      psts.setString(4, String.valueOf(lease.getDateOfReturn()));
+      psts.setString(5, String.valueOf(lease.getSubscriptionType()));
 
 
       int executeUpdate = psts.executeUpdate();
@@ -114,15 +109,14 @@ public class LeaseDAOImpl implements LeaseDAO {
   @Override
   public boolean update(Lease lease) {
 
-    String sql = "UPDATE lease set durationMonths=?, subscriptionType=?, dateRented=?, price=?, billed=?, billPaid=? WHERE idLease=?;";
+    String sql = "UPDATE lease set durationMonths=?, CustomeridCustomer=?, dateofRent=?, dateofReturn=?, subscriptionType=? WHERE idLease=?;";
     try (PreparedStatement psts = conn.prepareStatement(sql)) {
 
       psts.setInt(1, lease.getDurationMonths());
-      psts.setString(2, String.valueOf(lease.getSubscriptionType()));
-      psts.setString(3, String.valueOf(lease.getDateRented()));
-      psts.setDouble(4, lease.getPrice());
-      psts.setBoolean(5, lease.isBilled());
-      psts.setBoolean(6, lease.isBillPaid());
+      psts.setInt(2, lease.getIdCustomer());
+      psts.setString(3, String.valueOf(lease.getDateOfRent()));
+      psts.setString(4, String.valueOf(lease.getDateOfReturn()));
+      psts.setString(5, String.valueOf(lease.getSubscriptionType()));
 
       int executeUpdate = psts.executeUpdate();
 
@@ -142,12 +136,12 @@ public class LeaseDAOImpl implements LeaseDAO {
     String sql = "DELETE FROM lease WHERE idLease=?;";
     try (PreparedStatement psts = conn.prepareStatement(sql)) {
 
-      psts.setInt(1, lease.getId());
+      psts.setInt(1, lease.getIdLease());
 
       int executeUpdate = psts.executeUpdate();
 
       if (executeUpdate == 1) {
-        System.out.println("Lease with ID " + lease.getId() + " is deleted.::");
+        System.out.println("Lease with ID " + lease.getIdLease() + " is deleted.::");
         return true;
       }
     } catch (Exception e) {

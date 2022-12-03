@@ -3,7 +3,7 @@ package com.srenhrkea.eksamensprojekte22.enums;
 public enum FuelType {
   GASOLINE/*("Benzin")*/,
   DIESEL/*("Diesel")*/,
-  Electric/*("El")*/;
+  ELECTRIC/*("El")*/;
 
 /*  private final String displayName;
 

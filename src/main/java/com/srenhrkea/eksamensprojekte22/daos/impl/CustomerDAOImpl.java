@@ -31,15 +31,19 @@ public class CustomerDAOImpl implements CustomerDAO {
         String givenname = rs.getString("givenname");
         String lastname = rs.getString("lastname");
         String address = rs.getString("address");
+        String city = rs.getString("city");
+        int postalCode = rs.getInt("postalCode");
         String contactNo = rs.getString("contactNo");
         String email = rs.getString("email");
 
         customer = new Customer();
-        customer.setID(idCustomer);
+        customer.setIdCustomer(idCustomer);
         customer.setLicenceNo(licenceNo);
         customer.setGivenname(givenname);
         customer.setLastname(lastname);
         customer.setAddress(address);
+        customer.setCity(city);
+        customer.setPostalCode(postalCode);
         customer.setContactNo(contactNo);
         customer.setEmail(email);
       }
@@ -66,15 +70,19 @@ public class CustomerDAOImpl implements CustomerDAO {
         String givenname = rs.getString("givenname");
         String lastname = rs.getString("lastname");
         String address = rs.getString("address");
+        String city = rs.getString("city");
+        int postalCode = rs.getInt("postalCode");
         String contactNo = rs.getString("contactNo");
         String email = rs.getString("email");
 
         Customer customer = new Customer();
-        customer.setID(idCustomer);
+        customer.setIdCustomer(idCustomer);
         customer.setLicenceNo(licenceNo);
         customer.setGivenname(givenname);
         customer.setLastname(lastname);
         customer.setAddress(address);
+        customer.setCity(city);
+        customer.setPostalCode(postalCode);
         customer.setContactNo(contactNo);
         customer.setEmail(email);
 
@@ -90,15 +98,17 @@ public class CustomerDAOImpl implements CustomerDAO {
   @Override
   public boolean save(Customer customer) {
 
-    String sql = "INSERT INTO customer (licenceNo,givenname,lastname,address,contactNo,email)VALUES(?,?,?,?,?,?)";
+    String sql = "INSERT INTO customer (licenceNo,givenname,lastname,address,city,postalCode,contactNo,email)VALUES(?,?,?,?,?,?,?,?)";
     try (PreparedStatement psts = conn.prepareStatement(sql)) {
 
       psts.setInt(1, customer.getLicenceNo());
       psts.setString(2, customer.getGivenname());
       psts.setString(3, customer.getLastname());
       psts.setString(4, customer.getAddress());
-      psts.setString(5, customer.getContactNo());
-      psts.setString(6, customer.getEmail());
+      psts.setString(5, customer.getCity());
+      psts.setInt(6, customer.getPostalCode());
+      psts.setString(7, customer.getContactNo());
+      psts.setString(8, customer.getEmail());
 
 
       int executeUpdate = psts.executeUpdate();
@@ -116,15 +126,17 @@ public class CustomerDAOImpl implements CustomerDAO {
   @Override
   public boolean update(Customer customer) {
 
-    String sql = "UPDATE customer set licenceNo=?, givenname=?, lastname=?, address=?, contactNo=?, email=? WHERE idCustomer=?;";
+    String sql = "UPDATE customer set licenceNo=?, givenname=?, lastname=?, address=?,city=?,postalCode=?, contactNo=?, email=? WHERE idCustomer=?;";
     try (PreparedStatement psts = conn.prepareStatement(sql)) {
 
       psts.setInt(1, customer.getLicenceNo());
       psts.setString(2, customer.getGivenname());
       psts.setString(3, customer.getLastname());
       psts.setString(4, customer.getAddress());
-      psts.setString(5, customer.getContactNo());
-      psts.setString(6, customer.getEmail());
+      psts.setString(5, customer.getCity());
+      psts.setInt(6, customer.getPostalCode());
+      psts.setString(7, customer.getContactNo());
+      psts.setString(8, customer.getEmail());
 
       int executeUpdate = psts.executeUpdate();
 
@@ -144,12 +156,12 @@ public class CustomerDAOImpl implements CustomerDAO {
     String sql = "DELETE FROM customer WHERE idCustomer=?;";
     try (PreparedStatement psts = conn.prepareStatement(sql)) {
 
-      psts.setInt(1, customer.getID());
+      psts.setInt(1, customer.getIdCustomer());
 
       int executeUpdate = psts.executeUpdate();
 
       if (executeUpdate == 1) {
-        System.out.println("Customer with ID " + customer.getID() + " is deleted.::");
+        System.out.println("Customer with ID " + customer.getIdCustomer() + " is deleted.::");
         return true;
       }
     } catch (Exception e) {

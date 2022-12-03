@@ -1,4 +1,4 @@
-package com.srenhrkea.eksamensprojekte22.daos;
+package com.srenhrkea.eksamensprojekte22.daos.generic;
 
 import java.util.Collection;
 import java.util.Optional;

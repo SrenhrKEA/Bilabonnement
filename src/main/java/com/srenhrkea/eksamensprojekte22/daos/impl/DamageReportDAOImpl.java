@@ -71,6 +71,34 @@ public class DamageReportDAOImpl implements DamageReportDAO {
   }
 
   @Override
+  public Collection<DamageReport> getAllByIdCarVIN(String id) {
+
+    List<DamageReport> damageReports = new ArrayList<>();
+    String sql = "SELECT *FROM damagereport WHERE CaridCarVIN=?";
+    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+      psts.setString(1, id);
+
+      ResultSet rs = psts.executeQuery();
+      while (rs.next()) {
+        int idDamageReport = rs.getInt("idDamageReport");
+        String idCarVIN = rs.getString("CaridCarVIN");
+        Date dateOfReport = rs.getDate("dateOfReport");
+
+        DamageReport damageReport = new DamageReport();
+        damageReport.setIdDamageReport(idDamageReport);
+        damageReport.setIdCarVIN(idCarVIN);
+        damageReport.setDateOfReport(dateOfReport);
+
+        damageReports.add(damageReport);
+      }
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return damageReports;
+  }
+
+  @Override
   public boolean save(DamageReport damageReport) {
 
     String sql = "INSERT INTO damagereport (CaridCarVIN,dateOfReport)VALUES(?,?)";

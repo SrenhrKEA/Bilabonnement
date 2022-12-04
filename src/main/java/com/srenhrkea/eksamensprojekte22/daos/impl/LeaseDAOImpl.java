@@ -83,6 +83,40 @@ public class LeaseDAOImpl implements LeaseDAO {
   }
 
   @Override
+  public Collection<Lease> getAllByIdCustomer(Integer id) {
+
+    List<Lease> leases = new ArrayList<>();
+    String sql = "SELECT *FROM lease WHERE CustomeridCustomer=?";
+    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+      psts.setInt(1, id);
+
+      ResultSet rs = psts.executeQuery();
+      while (rs.next()) {
+        int idLease = rs.getInt("idLease");
+        int durationMonths = rs.getInt("durationMonths");
+        int idCustomer = rs.getInt("CustomeridCustomer");
+        Date dateOfRent = rs.getDate("dateOfRent");
+        Date dateOfReturn = rs.getDate("dateOfReturn");
+        SubscriptionType subscriptionType = SubscriptionType.valueOf(rs.getString("subscriptionType"));
+
+        Lease lease = new Lease();
+        lease.setIdLease(idLease);
+        lease.setDurationMonths(durationMonths);
+        lease.setIdCustomer(idCustomer);
+        lease.setDateOfRent(dateOfRent);
+        lease.setDateOfReturn(dateOfReturn);
+        lease.setSubscriptionType(subscriptionType);
+
+        leases.add(lease);
+      }
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return leases;
+  }
+
+  @Override
   public boolean save(Lease lease) {
 
     String sql = "INSERT INTO lease (durationMonths,CustomeridCustomer,dateofRent,dateofReturn,subscriptionType)VALUES(?,?,?,?,?)";

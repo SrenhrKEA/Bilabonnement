@@ -10,6 +10,7 @@ public interface LeaseService {
 
   List<Lease> getAllLeases();
 
+  List<Lease> getAllLeasesByIdCustomer(int id);
   void saveLease(Lease lease);
 
   void updateLease(Lease lease);

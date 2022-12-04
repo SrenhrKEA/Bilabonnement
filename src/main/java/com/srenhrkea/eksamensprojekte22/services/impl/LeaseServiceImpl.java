@@ -35,6 +35,11 @@ public class LeaseServiceImpl implements LeaseService {
   }
 
   @Override
+  public List<Lease> getAllLeasesByIdCustomer(int id) {
+    return (List<Lease>) leaseDAO.getAllByIdCustomer(id);
+  }
+
+  @Override
   public void saveLease(Lease lease) {
     this.leaseDAO.save(lease);
   }

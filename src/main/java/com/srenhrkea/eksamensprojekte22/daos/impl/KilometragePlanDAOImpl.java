@@ -74,6 +74,64 @@ public class KilometragePlanDAOImpl implements KilometragePlanDAO {
   }
 
   @Override
+  public Collection<KilometragePlan> getAllByIdLease(Integer id) {
+
+    List<KilometragePlan> kilometragePlans = new ArrayList<>();
+    String sql = "SELECT *FROM kilometrageplan WHERE LeaseidLease=?";
+    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+      psts.setInt(1, id);
+
+      ResultSet rs = psts.executeQuery();
+      while (rs.next()) {
+        int idKilometragePlan = rs.getInt("idKilometragePlan");
+        int idKilometragePlanRef = rs.getInt("KilometragePlanRefidKilometragePlanRef");
+        int idLease = rs.getInt("LeaseidLease");
+
+        KilometragePlan kilometragePlan = new KilometragePlan();
+        kilometragePlan.setIdKilometragePlan(idKilometragePlan);
+        kilometragePlan.setIdKilometragePlanRef(idKilometragePlanRef);
+        kilometragePlan.setIdLease(idLease);
+
+
+        kilometragePlans.add(kilometragePlan);
+      }
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return kilometragePlans;
+  }
+
+  @Override
+  public Collection<KilometragePlan> getAllByIdKilometragePlanRef(Integer id) {
+
+    List<KilometragePlan> kilometragePlans = new ArrayList<>();
+    String sql = "SELECT *FROM kilometrageplan WHERE KilometragePlanRefidKilometragePlanRef=?";
+    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+      psts.setInt(1, id);
+
+      ResultSet rs = psts.executeQuery();
+      while (rs.next()) {
+        int idKilometragePlan = rs.getInt("idKilometragePlan");
+        int idKilometragePlanRef = rs.getInt("KilometragePlanRefidKilometragePlanRef");
+        int idLease = rs.getInt("LeaseidLease");
+
+        KilometragePlan kilometragePlan = new KilometragePlan();
+        kilometragePlan.setIdKilometragePlan(idKilometragePlan);
+        kilometragePlan.setIdKilometragePlanRef(idKilometragePlanRef);
+        kilometragePlan.setIdLease(idLease);
+
+
+        kilometragePlans.add(kilometragePlan);
+      }
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return kilometragePlans;
+  }
+
+  @Override
   public boolean save(KilometragePlan kilometragePlan) {
 
     String sql = "INSERT INTO kilometrageplan(LeaseidLease,KilometragePlanRefidKilometragePlanRef)VALUES(?,?)";

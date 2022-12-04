@@ -10,6 +10,10 @@ public interface CarService {
 
   List<Car> getAllCars();
 
+  List<Car> getAllCarsByIdLease(int id);
+
+  List<Car> getAllCarsByIdCarTypeRef(int id);
+
   void saveCar(Car car);
 
   void updateCar(Car car, String id);

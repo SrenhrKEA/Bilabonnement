@@ -35,6 +35,16 @@ public class CarServiceImpl implements CarService {
   }
 
   @Override
+  public List<Car> getAllCarsByIdLease(int id) {
+    return (List<Car>) carDAO.getAllByIdLease(id);
+  }
+
+  @Override
+  public List<Car> getAllCarsByIdCarTypeRef(int id) {
+    return (List<Car>) carDAO.getAllByIdCarTypeRef(id);
+  }
+
+  @Override
   public void saveCar(Car car) {
     this.carDAO.save(car);
   }

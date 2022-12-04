@@ -76,6 +76,64 @@ public class PickupLocationDAOImpl implements PickupLocationDAO {
   }
 
   @Override
+  public Collection<PickupLocation> getAllByIdLease(Integer id) {
+
+    List<PickupLocation> pickupLocations = new ArrayList<>();
+    String sql = "SELECT *FROM pickuplocation WHERE LeaseidLease=?";
+    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+      psts.setInt(1, id);
+
+      ResultSet rs = psts.executeQuery();
+      while (rs.next()) {
+        int idPickupLocation = rs.getInt("idPickupLocation");
+        int idPickupLocationRef = rs.getInt("PickupLocationRefidPickupLocationRef");
+        int idLease = rs.getInt("LeaseidLease");
+
+        PickupLocation pickupLocation = new PickupLocation();
+        pickupLocation.setIdPickupLocation(idPickupLocation);
+        pickupLocation.setIdPickupLocationRef(idPickupLocationRef);
+        pickupLocation.setIdPickupLocation(idLease);
+
+
+        pickupLocations.add(pickupLocation);
+      }
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return pickupLocations;
+  }
+
+  @Override
+  public Collection<PickupLocation> getAllByIdPickupLocationRef(Integer id) {
+
+    List<PickupLocation> pickupLocations = new ArrayList<>();
+    String sql = "SELECT *FROM pickuplocation WHERE PickupLocationRefidPickupLocationRef=?";
+    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+      psts.setInt(1, id);
+
+      ResultSet rs = psts.executeQuery();
+      while (rs.next()) {
+        int idPickupLocation = rs.getInt("idPickupLocation");
+        int idPickupLocationRef = rs.getInt("PickupLocationRefidPickupLocationRef");
+        int idLease = rs.getInt("LeaseidLease");
+
+        PickupLocation pickupLocation = new PickupLocation();
+        pickupLocation.setIdPickupLocation(idPickupLocation);
+        pickupLocation.setIdPickupLocationRef(idPickupLocationRef);
+        pickupLocation.setIdPickupLocation(idLease);
+
+
+        pickupLocations.add(pickupLocation);
+      }
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return pickupLocations;
+  }
+
+  @Override
   public boolean save(PickupLocation pickupLocation) {
 
     String sql = "INSERT INTO pickuplocation(LeaseidLease,PickupLocationRefidPickupLocationRef)VALUES(?,?)";

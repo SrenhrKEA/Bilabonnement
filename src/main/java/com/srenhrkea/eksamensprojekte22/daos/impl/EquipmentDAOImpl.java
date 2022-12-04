@@ -76,6 +76,64 @@ public class EquipmentDAOImpl implements EquipmentDAO {
   }
 
   @Override
+  public Collection<Equipment> getAllByIdLease(Integer id) {
+
+    List<Equipment> equipmentList = new ArrayList<>();
+    String sql = "SELECT *FROM equipment WHERE LeaseidLease=?";
+    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+      psts.setInt(1, id);
+
+      ResultSet rs = psts.executeQuery();
+      while (rs.next()) {
+        int idEquipment = rs.getInt("idEquipment");
+        int idEquipmentRef = rs.getInt("EquipmentRefidEquipmentRef");
+        int idLease = rs.getInt("LeaseidLease");
+
+        Equipment equipment = new Equipment();
+        equipment.setIdEquipment(idEquipment);
+        equipment.setIdEquipmentRef(idEquipmentRef);
+        equipment.setIdLease(idLease);
+
+
+        equipmentList.add(equipment);
+      }
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return equipmentList;
+  }
+
+  @Override
+  public Collection<Equipment> getAllByIdEquipmentRef(Integer id) {
+
+    String sql = "SELECT *FROM equipment WHERE EquipmentRefidEquipmentRef=?";
+    List<Equipment> equipmentList = new ArrayList<>();
+    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+      psts.setInt(1, id);
+
+      ResultSet rs = psts.executeQuery();
+      while (rs.next()) {
+        int idEquipment = rs.getInt("idEquipment");
+        int idEquipmentRef = rs.getInt("EquipmentRefidEquipmentRef");
+        int idLease = rs.getInt("LeaseidLease");
+
+        Equipment equipment = new Equipment();
+        equipment.setIdEquipment(idEquipment);
+        equipment.setIdEquipmentRef(idEquipmentRef);
+        equipment.setIdLease(idLease);
+
+
+        equipmentList.add(equipment);
+      }
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return equipmentList;
+  }
+
+  @Override
   public boolean save(Equipment equipment) {
 
     String sql = "INSERT INTO equipment(LeaseidLease,EquipmentRefidEquipmentRef)VALUES(?,?)";

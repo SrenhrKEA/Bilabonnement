@@ -82,6 +82,38 @@ public class DamageDAOImpl implements DamageDAO {
   }
 
   @Override
+  public Collection<Damage> getAllByIdDamageReport(Integer id) {
+
+    List<Damage> damages = new ArrayList<>();
+    String sql = "SELECT *FROM damage WHERE DamageReportidDamageReport=?";
+    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+      psts.setInt(1, id);
+
+      ResultSet rs = psts.executeQuery();
+      while (rs.next()) {
+        int idDamage = rs.getInt("idDamage");
+        String title = rs.getString("title");
+        String description = rs.getString("´description´");
+        double price = rs.getDouble("price");
+        int idDamageReport = rs.getInt("DamageReportidDamageReport");
+
+        Damage damage = new Damage();
+        damage.setIdDamage(idDamage);
+        damage.setTitle(title);
+        damage.setDescription(description);
+        damage.setPrice(price);
+        damage.setIdDamageReport(idDamageReport);
+
+        damages.add(damage);
+      }
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return damages;
+  }
+
+  @Override
   public boolean save(Damage damage) {
 
     String sql = "INSERT INTO damage (title,´description´,price, DamageReportidDamageReport)VALUES(?,?,?,?)";
@@ -90,7 +122,7 @@ public class DamageDAOImpl implements DamageDAO {
       psts.setString(1, damage.getTitle());
       psts.setString(2, damage.getDescription());
       psts.setDouble(3, damage.getPrice());
-      psts.setDouble(4, damage.getIdDamageReport());
+      psts.setInt(4, damage.getIdDamageReport());
 
 
       int executeUpdate = psts.executeUpdate();
@@ -114,7 +146,7 @@ public class DamageDAOImpl implements DamageDAO {
       psts.setString(1, damage.getTitle());
       psts.setString(2, damage.getDescription());
       psts.setDouble(3, damage.getPrice());
-      psts.setDouble(4, damage.getIdDamageReport());
+      psts.setInt(4, damage.getIdDamageReport());
 
       int executeUpdate = psts.executeUpdate();
 

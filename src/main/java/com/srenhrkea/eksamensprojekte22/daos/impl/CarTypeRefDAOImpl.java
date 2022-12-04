@@ -5,6 +5,7 @@ import com.srenhrkea.eksamensprojekte22.enums.FuelType;
 import com.srenhrkea.eksamensprojekte22.enums.TransmissionType;
 import com.srenhrkea.eksamensprojekte22.models.CarTypeRef;
 import com.srenhrkea.eksamensprojekte22.utilities.DatabaseConnectionManager;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-
+@Repository
 public class CarTypeRefDAOImpl implements CarTypeRefDAO {
   private Connection conn = DatabaseConnectionManager.getConnection();
 
@@ -169,17 +170,17 @@ public class CarTypeRefDAOImpl implements CarTypeRefDAO {
   }
 
   @Override
-  public boolean delete(CarTypeRef carTypeRef) {
+  public boolean delete(Integer id) {
 
     String sql = "DELETE FROM cartyperef WHERE idCarTypeRef=?;";
     try (PreparedStatement psts = conn.prepareStatement(sql)) {
 
-      psts.setInt(1, carTypeRef.getIdCarTypeRef());
+      psts.setInt(1, id);
 
       int executeUpdate = psts.executeUpdate();
 
       if (executeUpdate == 1) {
-        System.out.println("Car Type Reference with ID " + carTypeRef.getIdCarTypeRef() + " is deleted.::");
+        System.out.println("Car Type Reference with ID " + id + " is deleted.::");
         return true;
       }
     } catch (Exception e) {

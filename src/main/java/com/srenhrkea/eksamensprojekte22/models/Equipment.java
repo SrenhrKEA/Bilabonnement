@@ -6,12 +6,18 @@ public class Equipment extends EquipmentRef {
   public Equipment() {
   }
 
-  public Equipment(int idEquipmentRef, String title, String description, double price, int idEquipment, int idEquipmentRef1, int idLease) {
+  public Equipment(int idEquipment, int idEquipmentRef, int idLease) {
+    this.idEquipment = idEquipment;
+    this.idEquipmentRef = idEquipmentRef;
+    this.idLease = idLease;
+  }
+
+/*  public Equipment(int idEquipmentRef, String title, String description, double price, int idEquipment, int idEquipmentRef1, int idLease) {
     super(idEquipmentRef, title, description, price);
     this.idEquipment = idEquipment;
     this.idEquipmentRef = idEquipmentRef1;
     this.idLease = idLease;
-  }
+  }*/
 
   public int getIdEquipment() {
     return idEquipment;

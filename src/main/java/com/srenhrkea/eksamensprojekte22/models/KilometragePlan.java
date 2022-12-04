@@ -6,12 +6,18 @@ public class KilometragePlan extends KilometragePlanRef {
   public KilometragePlan() {
   }
 
-  public KilometragePlan(int idKilometragePlanRef, double kilometrage, double pricePerMonth, int idKilometragePlan, int idKilometragePlanRef1, int idLease) {
+  public KilometragePlan(int idKilometragePlan, int idKilometragePlanRef, int idLease) {
+    this.idKilometragePlan = idKilometragePlan;
+    this.idKilometragePlanRef = idKilometragePlanRef;
+    this.idLease = idLease;
+  }
+
+/*  public KilometragePlan(int idKilometragePlanRef, double kilometrage, double pricePerMonth, int idKilometragePlan, int idKilometragePlanRef1, int idLease) {
     super(idKilometragePlanRef, kilometrage, pricePerMonth);
     this.idKilometragePlan = idKilometragePlan;
     this.idKilometragePlanRef = idKilometragePlanRef1;
     this.idLease = idLease;
-  }
+  }*/
 
   public int getIdKilometragePlan() {
     return idKilometragePlan;

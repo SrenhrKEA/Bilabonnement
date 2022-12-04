@@ -110,7 +110,7 @@ CREATE TABLE PickupLocationRef
 );
 CREATE TABLE User
 (
-    username   int(10)                                              NOT NULL AUTO_INCREMENT,
+    username   varchar(255)                                         NOT NULL,
     ´password´ varchar(255)                                         NOT NULL,
     userType   ENUM ('DATA_REG', 'DAMAGE_REG', 'BUSINESS', 'ADMIN') NOT NULL,
     PRIMARY KEY (username)

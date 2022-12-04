@@ -3,6 +3,7 @@ package com.srenhrkea.eksamensprojekte22.daos.impl;
 import com.srenhrkea.eksamensprojekte22.daos.PickupLocationDAO;
 import com.srenhrkea.eksamensprojekte22.models.PickupLocation;
 import com.srenhrkea.eksamensprojekte22.utilities.DatabaseConnectionManager;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-
+@Repository
 public class PickupLocationDAOImpl implements PickupLocationDAO {
 
   private Connection conn = DatabaseConnectionManager.getConnection();
@@ -117,17 +118,17 @@ public class PickupLocationDAOImpl implements PickupLocationDAO {
   }
 
   @Override
-  public boolean delete(PickupLocation pickupLocation) {
+  public boolean delete(Integer id) {
 
     String sql = "DELETE FROM pickuplocation WHERE idPickupLocation=?;";
     try (PreparedStatement psts = conn.prepareStatement(sql)) {
 
-      psts.setInt(1, pickupLocation.getIdPickupLocation());
+      psts.setInt(1, id);
 
       int executeUpdate = psts.executeUpdate();
 
       if (executeUpdate == 1) {
-        System.out.println("Location with ID " + pickupLocation.getIdPickupLocation() + " is deleted.::");
+        System.out.println("Location with ID " + id + " is deleted.::");
         return true;
       }
     } catch (Exception e) {

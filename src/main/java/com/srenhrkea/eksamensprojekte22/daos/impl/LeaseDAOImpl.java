@@ -4,12 +4,13 @@ import com.srenhrkea.eksamensprojekte22.daos.LeaseDAO;
 import com.srenhrkea.eksamensprojekte22.enums.SubscriptionType;
 import com.srenhrkea.eksamensprojekte22.models.Lease;
 import com.srenhrkea.eksamensprojekte22.utilities.DatabaseConnectionManager;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.*;
-
+@Repository
 public class LeaseDAOImpl implements LeaseDAO {
 
   private Connection conn = DatabaseConnectionManager.getConnection();
@@ -131,17 +132,17 @@ public class LeaseDAOImpl implements LeaseDAO {
   }
 
   @Override
-  public boolean delete(Lease lease) {
+  public boolean delete(Integer id) {
 
     String sql = "DELETE FROM lease WHERE idLease=?;";
     try (PreparedStatement psts = conn.prepareStatement(sql)) {
 
-      psts.setInt(1, lease.getIdLease());
+      psts.setInt(1, id);
 
       int executeUpdate = psts.executeUpdate();
 
       if (executeUpdate == 1) {
-        System.out.println("Lease with ID " + lease.getIdLease() + " is deleted.::");
+        System.out.println("Lease with ID " + id + " is deleted.::");
         return true;
       }
     } catch (Exception e) {

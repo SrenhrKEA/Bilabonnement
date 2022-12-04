@@ -3,6 +3,7 @@ package com.srenhrkea.eksamensprojekte22.daos.impl;
 import com.srenhrkea.eksamensprojekte22.daos.KilometragePlanRefDAO;
 import com.srenhrkea.eksamensprojekte22.models.KilometragePlanRef;
 import com.srenhrkea.eksamensprojekte22.utilities.DatabaseConnectionManager;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-
+@Repository
 public class KilometragePlanRefDAOImpl implements KilometragePlanRefDAO {
   private Connection conn = DatabaseConnectionManager.getConnection();
 
@@ -111,17 +112,17 @@ public class KilometragePlanRefDAOImpl implements KilometragePlanRefDAO {
   }
 
   @Override
-  public boolean delete(KilometragePlanRef kilometragePlanRef) {
+  public boolean delete(Integer id) {
 
     String sql = "DELETE FROM kilometrageplanref WHERE idKilometragePlanRef=?;";
     try (PreparedStatement psts = conn.prepareStatement(sql)) {
 
-      psts.setInt(1, kilometragePlanRef.getIdKilometragePlanRef());
+      psts.setInt(1, id);
 
       int executeUpdate = psts.executeUpdate();
 
       if (executeUpdate == 1) {
-        System.out.println("Kilometrage Plan Reference with ID " + kilometragePlanRef.getIdKilometragePlanRef() + " is deleted.::");
+        System.out.println("Kilometrage Plan Reference with ID " + id + " is deleted.::");
         return true;
       }
     } catch (Exception e) {

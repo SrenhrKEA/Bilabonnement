@@ -13,5 +13,5 @@ public interface GenericDAO<T, ID> {
 
   boolean update(T t);
 
-  boolean delete(T t);
+  boolean delete(ID id);
 }

@@ -4,4 +4,6 @@ import com.srenhrkea.eksamensprojekte22.daos.generic.GenericDAO;
 import com.srenhrkea.eksamensprojekte22.models.Car;
 
 public interface CarDAO extends GenericDAO<Car, String> {
+
+  boolean update(Car car, String idNew);
 }

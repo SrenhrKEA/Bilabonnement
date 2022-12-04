@@ -1,8 +1,5 @@
 package com.srenhrkea.eksamensprojekte22.models;
 
-import com.srenhrkea.eksamensprojekte22.enums.FuelType;
-import com.srenhrkea.eksamensprojekte22.enums.TransmissionType;
-
 public class Car extends CarTypeRef {
   private boolean isAvailable;
   private int idCarType, idLease;
@@ -12,8 +9,7 @@ public class Car extends CarTypeRef {
   public Car() {
   }
 
-  public Car(int idCarTypeRef, int seatingCapacity, double taxableValue, double registrationTax, double fuelConsumption, double emission, double pricePerMonth, String brand, String model, String description, TransmissionType transmissionType, FuelType fuelType, boolean isAvailable, int idCarType, int idLease, double initialKilometrage, String idCarVIN, String regNo) {
-    super(idCarTypeRef, seatingCapacity, taxableValue, registrationTax, fuelConsumption, emission, pricePerMonth, brand, model, description, transmissionType, fuelType);
+  public Car(boolean isAvailable, int idCarType, int idLease, double initialKilometrage, String idCarVIN, String regNo) {
     this.isAvailable = isAvailable;
     this.idCarType = idCarType;
     this.idLease = idLease;
@@ -21,6 +17,16 @@ public class Car extends CarTypeRef {
     this.idCarVIN = idCarVIN;
     this.regNo = regNo;
   }
+
+/*  public Car(int idCarTypeRef, int seatingCapacity, double taxableValue, double registrationTax, double fuelConsumption, double emission, double pricePerMonth, String brand, String model, String description, TransmissionType transmissionType, FuelType fuelType, boolean isAvailable, int idCarType, int idLease, double initialKilometrage, String idCarVIN, String regNo) {
+    super(idCarTypeRef, seatingCapacity, taxableValue, registrationTax, fuelConsumption, emission, pricePerMonth, brand, model, description, transmissionType, fuelType);
+    this.isAvailable = isAvailable;
+    this.idCarType = idCarType;
+    this.idLease = idLease;
+    this.initialKilometrage = initialKilometrage;
+    this.idCarVIN = idCarVIN;
+    this.regNo = regNo;
+  }*/
 
   public boolean isAvailable() {
     return isAvailable;

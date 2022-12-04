@@ -3,6 +3,7 @@ package com.srenhrkea.eksamensprojekte22.daos.impl;
 import com.srenhrkea.eksamensprojekte22.daos.CustomerDAO;
 import com.srenhrkea.eksamensprojekte22.models.Customer;
 import com.srenhrkea.eksamensprojekte22.utilities.DatabaseConnectionManager;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-
+@Repository
 public class CustomerDAOImpl implements CustomerDAO {
 
   private Connection conn = DatabaseConnectionManager.getConnection();
@@ -151,17 +152,17 @@ public class CustomerDAOImpl implements CustomerDAO {
   }
 
   @Override
-  public boolean delete(Customer customer) {
+  public boolean delete(Integer id) {
 
     String sql = "DELETE FROM customer WHERE idCustomer=?;";
     try (PreparedStatement psts = conn.prepareStatement(sql)) {
 
-      psts.setInt(1, customer.getIdCustomer());
+      psts.setInt(1, id);
 
       int executeUpdate = psts.executeUpdate();
 
       if (executeUpdate == 1) {
-        System.out.println("Customer with ID " + customer.getIdCustomer() + " is deleted.::");
+        System.out.println("Customer with ID " + id + " is deleted.::");
         return true;
       }
     } catch (Exception e) {

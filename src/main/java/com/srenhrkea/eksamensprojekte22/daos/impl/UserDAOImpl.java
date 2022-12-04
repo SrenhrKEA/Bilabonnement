@@ -98,14 +98,19 @@ public class UserDAOImpl implements UserDAO {
 
   @Override
   public boolean update(User user) {
+    return false;
+  }
+
+  @Override
+  public boolean update(User user, String idNew) {
 
     String sql = "UPDATE user set username=?, ´password´=?, userType=? WHERE username=?;";
     try (PreparedStatement psts = conn.prepareStatement(sql)) {
 
-      psts.setString(1, user.getUsername());
+      psts.setString(1, idNew);
       psts.setString(2, user.getPassword());
       psts.setString(3, String.valueOf(user.getUserType()));
-
+      psts.setString(4, user.getUsername());
 
       int executeUpdate = psts.executeUpdate();
 
@@ -120,17 +125,17 @@ public class UserDAOImpl implements UserDAO {
   }
 
   @Override
-  public boolean delete(User user) {
+  public boolean delete(String id) {
 
     String sql = "DELETE FROM user WHERE username=?;";
     try (PreparedStatement psts = conn.prepareStatement(sql)) {
 
-      psts.setString(1, user.getUsername());
+      psts.setString(1, id);
 
       int executeUpdate = psts.executeUpdate();
 
       if (executeUpdate == 1) {
-        System.out.println("User with username " + user.getUsername() + " is deleted.::");
+        System.out.println("User with username " + id + " is deleted.::");
         return true;
       }
     } catch (Exception e) {

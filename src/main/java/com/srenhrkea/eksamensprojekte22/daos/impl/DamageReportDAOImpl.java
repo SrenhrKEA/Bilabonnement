@@ -3,12 +3,13 @@ package com.srenhrkea.eksamensprojekte22.daos.impl;
 import com.srenhrkea.eksamensprojekte22.daos.DamageReportDAO;
 import com.srenhrkea.eksamensprojekte22.models.DamageReport;
 import com.srenhrkea.eksamensprojekte22.utilities.DatabaseConnectionManager;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.*;
-
+@Repository
 public class DamageReportDAOImpl implements DamageReportDAO {
 
   private Connection conn = DatabaseConnectionManager.getConnection();
@@ -113,17 +114,17 @@ public class DamageReportDAOImpl implements DamageReportDAO {
   }
 
   @Override
-  public boolean delete(DamageReport damageReport) {
+  public boolean delete(Integer id) {
 
     String sql = "DELETE FROM damagereport WHERE idDamageReport=?;";
     try (PreparedStatement psts = conn.prepareStatement(sql)) {
 
-      psts.setInt(1, damageReport.getIdDamageReport());
+      psts.setInt(1, id);
 
       int executeUpdate = psts.executeUpdate();
 
       if (executeUpdate == 1) {
-        System.out.println("Damage Report with ID " + damageReport.getIdDamageReport() + " is deleted.::");
+        System.out.println("Damage Report with ID " + id + " is deleted.::");
         return true;
       }
     } catch (Exception e) {

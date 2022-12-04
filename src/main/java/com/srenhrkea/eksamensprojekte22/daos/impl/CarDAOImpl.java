@@ -3,6 +3,7 @@ package com.srenhrkea.eksamensprojekte22.daos.impl;
 import com.srenhrkea.eksamensprojekte22.daos.CarDAO;
 import com.srenhrkea.eksamensprojekte22.models.Car;
 import com.srenhrkea.eksamensprojekte22.utilities.DatabaseConnectionManager;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +13,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class CarDAOImpl implements CarDAO {
 
   private Connection conn = DatabaseConnectionManager.getConnection();
@@ -107,19 +109,24 @@ public class CarDAOImpl implements CarDAO {
     }
     return false;
   }
-
   @Override
   public boolean update(Car car) {
+    return false;
+  }
 
-    String sql = "UPDATE car set idCarVIN=?, isAvailable=?, initialKilometrage=?, regNo=?, LeaseidLease=?, CarTypeRefidCarTypeRef=? WHERE idCarVIN=?;";
+  @Override
+  public boolean update(Car car, String idNew) {
+
+    String sql = "UPDATE car set idCarVIN=?,isAvailable=?, initialKilometrage=?, regNo=?, LeaseidLease=?, CarTypeRefidCarTypeRef=? WHERE idCarVIN=?;";
     try (PreparedStatement psts = conn.prepareStatement(sql)) {
 
-      psts.setString(1, car.getIdCarVIN());
+      psts.setString(1, idNew);
       psts.setBoolean(2, car.isAvailable());
       psts.setDouble(3, car.getInitialKilometrage());
       psts.setString(4, car.getRegNo());
       psts.setInt(5, car.getIdLease());
       psts.setInt(6, car.getIdCarType());
+      psts.setString(7, car.getIdCarVIN());
 
       int executeUpdate = psts.executeUpdate();
 
@@ -134,17 +141,17 @@ public class CarDAOImpl implements CarDAO {
   }
 
   @Override
-  public boolean delete(Car car) {
+  public boolean delete(String id) {
 
     String sql = "DELETE FROM car WHERE idCarVIN=?;";
     try (PreparedStatement psts = conn.prepareStatement(sql)) {
 
-      psts.setString(1, car.getIdCarVIN());
+      psts.setString(1, id);
 
       int executeUpdate = psts.executeUpdate();
 
       if (executeUpdate == 1) {
-        System.out.println("Car Type Reference with ID " + car.getIdCarVIN() + " is deleted.::");
+        System.out.println("Car Type Reference with ID " + id + " is deleted.::");
         return true;
       }
     } catch (Exception e) {

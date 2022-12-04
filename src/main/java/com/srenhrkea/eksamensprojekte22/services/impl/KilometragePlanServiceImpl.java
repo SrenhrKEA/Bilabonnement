@@ -35,6 +35,16 @@ public class KilometragePlanServiceImpl implements KilometragePlanService {
   }
 
   @Override
+  public List<KilometragePlan> getAllKilometragePlansByIdLease(int id) {
+    return (List<KilometragePlan>) kilometragePlanDAO.getAllByIdLease(id);
+  }
+
+  @Override
+  public List<KilometragePlan> getAllKilometragePlansByIdKilometragePlan(int id) {
+    return (List<KilometragePlan>) kilometragePlanDAO.getAllByIdKilometragePlanRef(id);
+  }
+
+  @Override
   public void saveKilometragePlan(KilometragePlan kilometragePlan) {
     this.kilometragePlanDAO.save(kilometragePlan);
   }

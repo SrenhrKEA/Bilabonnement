@@ -35,6 +35,16 @@ public class PickupLocationServiceImpl implements PickupLocationService {
   }
 
   @Override
+  public List<PickupLocation> getAllPickupLocationsByIdLease(int id) {
+    return (List<PickupLocation>) pickupLocationDAO.getAllByIdLease(id);
+  }
+
+  @Override
+  public List<PickupLocation> getAllPickupLocationsByIdPickupLocationRef(int id) {
+    return (List<PickupLocation>) pickupLocationDAO.getAllByIdPickupLocationRef(id);
+  }
+
+  @Override
   public void savePickupLocation(PickupLocation pickupLocation) {
     this.pickupLocationDAO.save(pickupLocation);
   }

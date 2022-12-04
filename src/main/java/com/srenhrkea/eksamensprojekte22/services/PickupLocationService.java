@@ -10,6 +10,10 @@ public interface PickupLocationService {
 
   List<PickupLocation> getAllPickupLocations();
 
+  List<PickupLocation> getAllPickupLocationsByIdLease(int id);
+
+  List<PickupLocation> getAllPickupLocationsByIdPickupLocationRef(int id);
+
   void savePickupLocation(PickupLocation pickupLocation);
 
   void updatePickupLocation(PickupLocation pickupLocation);

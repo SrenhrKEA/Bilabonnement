@@ -10,6 +10,10 @@ public interface KilometragePlanService {
 
   List<KilometragePlan> getAllKilometragePlans();
 
+  List<KilometragePlan> getAllKilometragePlansByIdLease(int id);
+
+  List<KilometragePlan> getAllKilometragePlansByIdKilometragePlan(int id);
+
   void saveKilometragePlan(KilometragePlan kilometragePlan);
 
   void updateKilometragePlan(KilometragePlan kilometragePlan);

@@ -10,6 +10,10 @@ public interface EquipmentService {
 
   List<Equipment> getAllEquipment();
 
+  List<Equipment> getAllEquipmentByIdLease(int id);
+
+  List<Equipment> getAllEquipmentByIdEquipmentRef(int id);
+
   void saveEquipment(Equipment equipment);
 
   void updateEquipment(Equipment equipment);

@@ -10,6 +10,8 @@ public interface DamageReportService {
 
   List<DamageReport> getAllDamageReports();
 
+  List<DamageReport> getAllDamageReportsByIdCarVIN(String id);
+
   void saveDamageReport(DamageReport damageReport);
 
   void updateDamageReport(DamageReport damageReport);

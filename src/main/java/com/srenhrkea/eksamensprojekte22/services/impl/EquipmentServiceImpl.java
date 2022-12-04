@@ -35,6 +35,16 @@ public class EquipmentServiceImpl implements EquipmentService {
   }
 
   @Override
+  public List<Equipment> getAllEquipmentByIdLease(int id) {
+    return (List<Equipment>) equipmentDAO.getAllByIdLease(id);
+  }
+
+  @Override
+  public List<Equipment> getAllEquipmentByIdEquipmentRef(int id) {
+    return (List<Equipment>) equipmentDAO.getAllByIdEquipmentRef(id);
+  }
+
+  @Override
   public void saveEquipment(Equipment equipment) {
     this.equipmentDAO.save(equipment);
   }

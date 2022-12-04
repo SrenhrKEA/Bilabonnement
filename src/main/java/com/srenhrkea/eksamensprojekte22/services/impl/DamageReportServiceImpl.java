@@ -35,6 +35,11 @@ public class DamageReportServiceImpl implements DamageReportService {
   }
 
   @Override
+  public List<DamageReport> getAllDamageReportsByIdCarVIN(String id) {
+    return (List<DamageReport>) damageReportDAO.getAllByIdCarVIN(id);
+  }
+
+  @Override
   public void saveDamageReport(DamageReport damageReport) {
     this.damageReportDAO.save(damageReport);
   }

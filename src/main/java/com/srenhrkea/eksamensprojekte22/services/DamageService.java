@@ -10,6 +10,8 @@ public interface DamageService {
 
   List<Damage> getAllDamages();
 
+  List<Damage> getAllDamagesByIdDamageReport(int id);
+
   void saveDamage(Damage damage);
 
   void updateDamage(Damage damage);

@@ -50,13 +50,13 @@ public class CarServiceImpl implements CarService {
   }
 
   @Override
-  public void updateCar(Car car, String id) {
+  public void updateCar(Car car) {
     String idCar = car.getIdCarVIN();
     Optional<Car> optional = carDAO.get(idCar);
     if (optional.isPresent()) {
-      carDAO.update(car, id);
+      carDAO.update(car);
     } else {
-      throw new RuntimeException(" Car with VIN: " + id + " does not exist");
+      throw new RuntimeException(" Car with VIN: " + idCar + " does not exist");
     }
   }
 

@@ -27,7 +27,7 @@ class EksamensprojektE22ApplicationTests {
     carService.saveCar(new Car(true, 2, 1, 1000, "7w23423f", "33422GR"));*/
 /*    System.out.println(carService.getCarById("7w23423f"));
     System.out.println(carService.getAllCars());*/
-    carService.updateCar(new Car(true, 2, 1, 1000, "7w23423f", "33422GR"), "JEGHARRET");
+    /*carService.updateCar(new Car(true, 2, 1, 1000, "7w23423f", "33422GR"), "JEGHARRET");*/
     /*System.out.println(carService.getCarById("JEGHARRET"));*/
     /*carService.deleteCarById("888888DK");*/
   }

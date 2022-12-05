@@ -48,6 +48,35 @@ public class UserDAOImpl implements UserDAO {
   }
 
   @Override
+  public Optional<User> get(String id, String pw) {
+    User user = null;
+    String sql = "SELECT *FROM user WHERE username=? AND ´password´=?";
+    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+
+      psts.setString(1, id);
+      psts.setString(2, pw);
+
+      ResultSet rs = psts.executeQuery();
+      if (rs.next()) {
+        String username = rs.getString("username");
+        String password = rs.getString("´password´");
+        UserType userType = UserType.valueOf(rs.getString("userType"));
+
+        user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setUserType(userType);
+      }
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    assert user != null;
+    return Optional.of(user);
+  }
+
+  @Override
   public Collection<User> getAll() {
 
     List<User> users = new ArrayList<>();

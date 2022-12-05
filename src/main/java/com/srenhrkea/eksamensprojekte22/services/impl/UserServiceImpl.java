@@ -5,6 +5,7 @@ import com.srenhrkea.eksamensprojekte22.models.User;
 import com.srenhrkea.eksamensprojekte22.services.UserService;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,13 +19,13 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public User getUserById(String id) {
+  public User getUserById(String id) throws Exception {
     Optional<User> optional = userDAO.get(id);
     User user;
     if (optional.isPresent()) {
       user = optional.get();
     } else {
-      throw new RuntimeException(" User with username: " + id + " does not exist");
+      throw new Exception(" User with username: " + id + " does not exist");
     }
     return user;
   }
@@ -40,23 +41,35 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public void updateUser(User user, String idNew) {
+  public void updateUser(User user, String idNew) throws Exception {
     String idUser = user.getUsername();
     Optional<User> optional = userDAO.get(idUser);
     if (optional.isPresent()) {
       userDAO.update(user, idNew);
     } else {
-      throw new RuntimeException(" User with username: " + idNew + " does not exist");
+      throw new Exception(" User with username: " + idNew + " does not exist");
     }
   }
 
   @Override
-  public void deleteUserById(String id) {
+  public void deleteUserById(String id) throws Exception {
     Optional<User> optional = userDAO.get(id);
     if (optional.isPresent()) {
       this.userDAO.delete(id);
     } else {
-      throw new RuntimeException(" User with username: " + id + " does not exist");
+      throw new Exception(" User with username: " + id + " does not exist");
     }
+  }
+
+  @Override
+  public User AuthenticateUser(String username, String password) throws Exception {
+    Optional<User> optional = userDAO.get(username,password);
+    User user;
+    if (optional.isPresent()) {
+      user = optional.get();
+    } else {
+      throw new Exception(" User with username: " + username + " does not exist");
+    }
+    return user;
   }
 }

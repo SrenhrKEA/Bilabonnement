@@ -177,24 +177,19 @@ public class CarDAOImpl implements CarDAO {
     }
     return false;
   }
+
   @Override
   public boolean update(Car car) {
-    return false;
-  }
 
-  @Override
-  public boolean update(Car car, String idNew) {
-
-    String sql = "UPDATE car set idCarVIN=?,isAvailable=?, initialKilometrage=?, regNo=?, LeaseidLease=?, CarTypeRefidCarTypeRef=? WHERE idCarVIN=?;";
+    String sql = "UPDATE car set isAvailable=?, initialKilometrage=?, regNo=?, LeaseidLease=?, CarTypeRefidCarTypeRef=? WHERE idCarVIN=?;";
     try (PreparedStatement psts = conn.prepareStatement(sql)) {
 
-      psts.setString(1, idNew);
-      psts.setBoolean(2, car.isAvailable());
-      psts.setDouble(3, car.getInitialKilometrage());
-      psts.setString(4, car.getRegNo());
-      psts.setInt(5, car.getIdLease());
-      psts.setInt(6, car.getIdCarType());
-      psts.setString(7, car.getIdCarVIN());
+      psts.setBoolean(1, car.isAvailable());
+      psts.setDouble(2, car.getInitialKilometrage());
+      psts.setString(3, car.getRegNo());
+      psts.setInt(4, car.getIdLease());
+      psts.setInt(5, car.getIdCarType());
+      psts.setString(6, car.getIdCarVIN());
 
       int executeUpdate = psts.executeUpdate();
 

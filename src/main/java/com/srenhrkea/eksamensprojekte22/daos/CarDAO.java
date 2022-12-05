@@ -7,7 +7,6 @@ import java.util.Collection;
 
 public interface CarDAO extends GenericDAO<Car, String> {
 
-  boolean update(Car car, String idNew);
   Collection<Car> getAllByIdLease(Integer id);
   Collection<Car> getAllByIdCarTypeRef(Integer id);
 }

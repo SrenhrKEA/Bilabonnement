@@ -152,6 +152,7 @@ public class LeaseDAOImpl implements LeaseDAO {
       psts.setString(3, String.valueOf(lease.getDateOfRent()));
       psts.setString(4, String.valueOf(lease.getDateOfReturn()));
       psts.setString(5, String.valueOf(lease.getSubscriptionType()));
+      psts.setInt(6, lease.getIdLease());
 
       int executeUpdate = psts.executeUpdate();
 

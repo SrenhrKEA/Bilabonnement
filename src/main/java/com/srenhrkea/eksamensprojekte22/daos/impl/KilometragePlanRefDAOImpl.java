@@ -98,6 +98,7 @@ public class KilometragePlanRefDAOImpl implements KilometragePlanRefDAO {
 
       psts.setDouble(1, kilometragePlanRef.getKilometrage());
       psts.setDouble(2, kilometragePlanRef.getPricePerMonth());
+      psts.setInt(3, kilometragePlanRef.getIdKilometragePlanRef());
 
       int executeUpdate = psts.executeUpdate();
 

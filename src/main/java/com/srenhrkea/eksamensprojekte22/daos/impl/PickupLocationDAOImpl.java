@@ -162,6 +162,7 @@ public class PickupLocationDAOImpl implements PickupLocationDAO {
 
       psts.setInt(1, pickupLocation.getIdLease());
       psts.setInt(2, pickupLocation.getIdPickupLocationRef());
+      psts.setInt(3, pickupLocation.getIdPickupLocation());
 
       int executeUpdate = psts.executeUpdate();
 

@@ -2,21 +2,22 @@ package com.srenhrkea.eksamensprojekte22.models;
 
 public class Customer {
   private int idCustomer, licenceNo, postalCode;
-  private String givenname, lastname, address, city, contactNo, email;
+  private String firstName, lastName, address, city, contactNo, email, nationality;
 
   public Customer() {
   }
 
-  public Customer(int idCustomer, int licenceNo, int postalCode, String givenname, String lastname, String address, String city, String contactNo, String email) {
+  public Customer(int idCustomer, int licenceNo, int postalCode, String firstName, String lastName, String address, String city, String contactNo, String email, String nationality) {
     this.idCustomer = idCustomer;
     this.licenceNo = licenceNo;
     this.postalCode = postalCode;
-    this.givenname = givenname;
-    this.lastname = lastname;
+    this.firstName = firstName;
+    this.lastName = lastName;
     this.address = address;
     this.city = city;
     this.contactNo = contactNo;
     this.email = email;
+    this.nationality = nationality;
   }
 
   public int getIdCustomer() {
@@ -43,20 +44,20 @@ public class Customer {
     this.postalCode = postalCode;
   }
 
-  public String getGivenname() {
-    return givenname;
+  public String getFirstName() {
+    return firstName;
   }
 
-  public void setGivenname(String givenname) {
-    this.givenname = givenname;
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
   }
 
-  public String getLastname() {
-    return lastname;
+  public String getLastName() {
+    return lastName;
   }
 
-  public void setLastname(String lastname) {
-    this.lastname = lastname;
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
   }
 
   public String getAddress() {
@@ -91,18 +92,27 @@ public class Customer {
     this.email = email;
   }
 
+  public String getNationality() {
+    return nationality;
+  }
+
+  public void setNationality(String nationality) {
+    this.nationality = nationality;
+  }
+
   @Override
   public String toString() {
     return "Customer{" +
         "idCustomer=" + idCustomer +
         ", licenceNo=" + licenceNo +
         ", postalCode=" + postalCode +
-        ", givenname='" + givenname + '\'' +
-        ", lastname='" + lastname + '\'' +
+        ", firstName='" + firstName + '\'' +
+        ", lastName='" + lastName + '\'' +
         ", address='" + address + '\'' +
         ", city='" + city + '\'' +
         ", contactNo='" + contactNo + '\'' +
         ", email='" + email + '\'' +
+        ", nationality='" + nationality + '\'' +
         '}';
   }
 }

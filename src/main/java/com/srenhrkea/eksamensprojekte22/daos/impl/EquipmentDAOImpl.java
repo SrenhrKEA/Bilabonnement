@@ -162,6 +162,7 @@ public class EquipmentDAOImpl implements EquipmentDAO {
 
       psts.setInt(1, equipment.getIdLease());
       psts.setInt(2, equipment.getIdEquipmentRef());
+      psts.setInt(3, equipment.getIdEquipment());
 
       int executeUpdate = psts.executeUpdate();
 

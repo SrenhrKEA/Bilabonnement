@@ -30,12 +30,13 @@ CREATE TABLE Customer
     idCustomer int(10)      NOT NULL AUTO_INCREMENT,
     licenceNo  int(10)      NOT NULL,
     postalCode int(10)      NOT NULL,
-    givenname  varchar(255) NOT NULL,
-    lastname   varchar(255) NOT NULL,
+    firstName  varchar(255) NOT NULL,
+    lastName   varchar(255) NOT NULL,
     address    varchar(255) NOT NULL,
     city       varchar(255) NOT NULL,
     contactNo  varchar(255) NOT NULL,
     email      varchar(255) NOT NULL,
+    nationality      varchar(255) NOT NULL,
     PRIMARY KEY (idCustomer)
 );
 CREATE TABLE Damage

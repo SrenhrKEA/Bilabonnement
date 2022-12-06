@@ -108,6 +108,7 @@ public class EquipmentRefDAOImpl implements EquipmentRefDAO {
       psts.setString(1, equipmentRef.getTitle());
       psts.setString(2, equipmentRef.getDescription());
       psts.setDouble(3, equipmentRef.getPrice());
+      psts.setInt(4, equipmentRef.getIdEquipmentRef());
 
       int executeUpdate = psts.executeUpdate();
 

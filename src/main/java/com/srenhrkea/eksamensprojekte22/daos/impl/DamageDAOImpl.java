@@ -147,6 +147,7 @@ public class DamageDAOImpl implements DamageDAO {
       psts.setString(2, damage.getDescription());
       psts.setDouble(3, damage.getPrice());
       psts.setInt(4, damage.getIdDamageReport());
+      psts.setInt(5, damage.getIdDamage());
 
       int executeUpdate = psts.executeUpdate();
 

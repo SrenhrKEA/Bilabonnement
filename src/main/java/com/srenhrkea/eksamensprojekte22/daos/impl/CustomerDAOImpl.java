@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+
 @Repository
 public class CustomerDAOImpl implements CustomerDAO {
 
@@ -29,24 +30,26 @@ public class CustomerDAOImpl implements CustomerDAO {
       if (rs.next()) {
         int idCustomer = rs.getInt("idCustomer");
         int licenceNo = rs.getInt("licenceNo");
-        String givenname = rs.getString("givenname");
-        String lastname = rs.getString("lastname");
+        String firstName = rs.getString("firstName");
+        String lastName = rs.getString("lastName");
         String address = rs.getString("address");
         String city = rs.getString("city");
         int postalCode = rs.getInt("postalCode");
         String contactNo = rs.getString("contactNo");
         String email = rs.getString("email");
+        String nationality = rs.getString("nationality");
 
         customer = new Customer();
         customer.setIdCustomer(idCustomer);
         customer.setLicenceNo(licenceNo);
-        customer.setGivenname(givenname);
-        customer.setLastname(lastname);
+        customer.setFirstName(firstName);
+        customer.setLastName(lastName);
         customer.setAddress(address);
         customer.setCity(city);
         customer.setPostalCode(postalCode);
         customer.setContactNo(contactNo);
         customer.setEmail(email);
+        customer.setNationality(nationality);
       }
 
     } catch (Exception e) {
@@ -68,24 +71,26 @@ public class CustomerDAOImpl implements CustomerDAO {
       while (rs.next()) {
         int idCustomer = rs.getInt("idCustomer");
         int licenceNo = rs.getInt("licenceNo");
-        String givenname = rs.getString("givenname");
-        String lastname = rs.getString("lastname");
+        String firstName = rs.getString("firstName");
+        String lastName = rs.getString("lastName");
         String address = rs.getString("address");
         String city = rs.getString("city");
         int postalCode = rs.getInt("postalCode");
         String contactNo = rs.getString("contactNo");
         String email = rs.getString("email");
+        String nationality = rs.getString("nationality");
 
         Customer customer = new Customer();
         customer.setIdCustomer(idCustomer);
         customer.setLicenceNo(licenceNo);
-        customer.setGivenname(givenname);
-        customer.setLastname(lastname);
+        customer.setFirstName(firstName);
+        customer.setLastName(lastName);
         customer.setAddress(address);
         customer.setCity(city);
         customer.setPostalCode(postalCode);
         customer.setContactNo(contactNo);
         customer.setEmail(email);
+        customer.setNationality(nationality);
 
         customers.add(customer);
       }
@@ -99,18 +104,18 @@ public class CustomerDAOImpl implements CustomerDAO {
   @Override
   public boolean save(Customer customer) {
 
-    String sql = "INSERT INTO customer (licenceNo,givenname,lastname,address,city,postalCode,contactNo,email)VALUES(?,?,?,?,?,?,?,?)";
+    String sql = "INSERT INTO customer (licenceNo,firstName,lastName,address,city,postalCode,contactNo,email,nationality)VALUES(?,?,?,?,?,?,?,?,?)";
     try (PreparedStatement psts = conn.prepareStatement(sql)) {
 
       psts.setInt(1, customer.getLicenceNo());
-      psts.setString(2, customer.getGivenname());
-      psts.setString(3, customer.getLastname());
+      psts.setString(2, customer.getFirstName());
+      psts.setString(3, customer.getLastName());
       psts.setString(4, customer.getAddress());
       psts.setString(5, customer.getCity());
       psts.setInt(6, customer.getPostalCode());
       psts.setString(7, customer.getContactNo());
       psts.setString(8, customer.getEmail());
-
+      psts.setString(9, customer.getNationality());
 
       int executeUpdate = psts.executeUpdate();
 
@@ -127,17 +132,19 @@ public class CustomerDAOImpl implements CustomerDAO {
   @Override
   public boolean update(Customer customer) {
 
-    String sql = "UPDATE customer set licenceNo=?, givenname=?, lastname=?, address=?,city=?,postalCode=?, contactNo=?, email=? WHERE idCustomer=?;";
+    String sql = "UPDATE customer set licenceNo=?, firstName=?, lastName=?, address=?,city=?,postalCode=?, contactNo=?, email=?, nationality=? WHERE idCustomer=?;";
     try (PreparedStatement psts = conn.prepareStatement(sql)) {
 
       psts.setInt(1, customer.getLicenceNo());
-      psts.setString(2, customer.getGivenname());
-      psts.setString(3, customer.getLastname());
+      psts.setString(2, customer.getFirstName());
+      psts.setString(3, customer.getLastName());
       psts.setString(4, customer.getAddress());
       psts.setString(5, customer.getCity());
       psts.setInt(6, customer.getPostalCode());
       psts.setString(7, customer.getContactNo());
       psts.setString(8, customer.getEmail());
+      psts.setString(9, customer.getNationality());
+      psts.setInt(10, customer.getIdCustomer());
 
       int executeUpdate = psts.executeUpdate();
 

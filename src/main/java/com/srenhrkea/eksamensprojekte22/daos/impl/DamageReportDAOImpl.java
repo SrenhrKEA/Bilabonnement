@@ -128,6 +128,7 @@ public class DamageReportDAOImpl implements DamageReportDAO {
 
       psts.setString(1, damageReport.getIdCarVIN());
       psts.setString(2, String.valueOf(damageReport.getDateOfReport()));
+      psts.setInt(3, damageReport.getIdDamageReport());
 
       int executeUpdate = psts.executeUpdate();
 

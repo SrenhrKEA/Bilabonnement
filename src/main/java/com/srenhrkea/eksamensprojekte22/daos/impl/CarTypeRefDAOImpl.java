@@ -156,6 +156,7 @@ public class CarTypeRefDAOImpl implements CarTypeRefDAO {
       psts.setString(9, carTypeRef.getDescription());
       psts.setString(10, String.valueOf(carTypeRef.getTransmissionType()));
       psts.setString(11, String.valueOf(carTypeRef.getFuelType()));
+      psts.setInt(12, carTypeRef.getIdCarTypeRef());
 
       int executeUpdate = psts.executeUpdate();
 

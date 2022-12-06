@@ -107,6 +107,7 @@ public class PickupLocationRefDAOImpl implements PickupLocationRefDAO {
       psts.setString(1, pickupLocationRef.getAddress());
       psts.setString(2, pickupLocationRef.getCity());
       psts.setInt(3, pickupLocationRef.getPostalCode());
+      psts.setInt(4, pickupLocationRef.getIdPickupLocationRef());
 
       int executeUpdate = psts.executeUpdate();
 

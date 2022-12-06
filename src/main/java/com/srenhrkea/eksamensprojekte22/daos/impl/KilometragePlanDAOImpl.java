@@ -160,6 +160,7 @@ public class KilometragePlanDAOImpl implements KilometragePlanDAO {
 
       psts.setInt(1, kilometragePlan.getIdLease());
       psts.setInt(2, kilometragePlan.getIdKilometragePlanRef());
+      psts.setInt(3, kilometragePlan.getIdKilometragePlan());
 
       int executeUpdate = psts.executeUpdate();
 

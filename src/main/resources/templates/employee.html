@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title class="next-head">Medarbejder Side | Bilabonnement</title>
+    <meta name="description"
+          content="Bilabonnement.dk tilbyder bl.a. Peugeot, Citroën, Opel og Fiat på abonnement med alt inklusiv: Service, forsikring og ejerafgift."
+          class="next-head"/>
+    <link rel="icon"
+          href="https://res.cloudinary.com/digital-interdan-bilabonnement/image/upload/v1578666243/favicon_1_npgufd.ico"
+          class="next-head"/>
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/dashboard/">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/footers/">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/checkout/">
+    <!-- Bootstrap styles-->
+    <link href="/css/dashboard.css" rel="stylesheet">
+    <link href="/css/form-validation.css" rel="stylesheet">
+    JQuery
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#tabs-DR").tabs()
+            $("#tabs-SR").tabs()
+        });
+    </script>
+</head>
+<body>
+<!--TODO: bilabonnement header-->
+<!--<div id="__next">
+    <div class="main-menu___2JQzT">
+        <div class="content___1_CIc"><a class="main-menu-logo___1PC85" title="Bilabonnement" href="/static"><img
+                class="main-menu-logo-image___1Ov1X"
+                src="https://res.cloudinary.com/digital-interdan-bilabonnement/image/upload/c_fit,q_80,w_128/v1/Logos/logo_brands_0922_ltj2wu.svg"
+                alt="Bilabonnement"/></a>
+        </div>
+    </div>
+</div>-->
+
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 navbar-bg-img" href="https://bilabonnement.dk/">Bilabonnement.dk</a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <!--    <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search"
+               aria-label="Search">-->
+    <div class="navbar-nav">
+        <!--TODO: log ud bør afslutte session-->
+        <div class="nav-item text-nowrap">
+            <a class="nav-link px-3" href="/signin"><span data-feather="log-out"></span> Log ud</a>
+            <!--TODO: end session-->
+        </div>
+    </div>
+</header>
+
+<!--Sidebar-->
+<div class="container-fluid">
+    <div class="row">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+            <div class="position-sticky pt-3 sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#dashboard"
+                           onclick='toggleDiv("dashboard")'>
+                            <span data-feather="home" class="align-text-bottom"></span>
+                            DASHBOARD
+                        </a>
+                    </li>
+                    <li class="nav-item" th:if="${session.userType=='DATA_REG'||session.userType=='ADMIN'}">
+                        <a id="data-reg-link" class="nav-link" href="#data-reg" onclick='toggleDiv("data-reg")'>
+                            <span data-feather="file" class="align-text-bottom"></span>
+                            DATAREGISTRERING
+                        </a>
+                    </li>
+                    <li class="nav-item" th:if="${session.userType=='DAMAGE_REG'||session.userType=='ADMIN'}">
+                        <a id="damage-reg-link" class="nav-link" href="#damage-reg" onclick='toggleDiv("damage-reg")'>
+                            <span data-feather="file" class="align-text-bottom"></span>
+                            SKADE OG UDBEDRING
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#customers">
+                            <span data-feather="users" class="align-text-bottom"></span>
+                            KUNDER
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#leases">
+                            <span data-feather="layers" class="align-text-bottom"></span>
+                            LEJEAFTALER
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#cars">
+                            <span data-feather="truck" class="align-text-bottom"></span>
+                            BILER
+                        </a>
+                    </li>
+                    <li class="nav-item" th:if="${session.userType=='BUSINESS'||session.userType=='ADMIN'}">
+                        <a id="reports-link" class="nav-link" href="#reports" onclick='toggleDiv("reports")'>
+                            <span data-feather="bar-chart-2" class="align-text-bottom"></span>
+                            RAPPORTER
+                        </a>
+                    </li>
+
+                </ul>
+
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
+                    <span>Saved reports</span>
+                    <a class="link-secondary" href="#" aria-label="Add a new report">
+                        <span data-feather="plus-circle" class="align-text-bottom"></span>
+                    </a>
+                </h6>
+                <ul class="nav flex-column mb-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="file-text" class="align-text-bottom"></span>
+                            Current month
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="file-text" class="align-text-bottom"></span>
+                            Last quarter
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="file-text" class="align-text-bottom"></span>
+                            Social engagement
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="file-text" class="align-text-bottom"></span>
+                            Year-end sale
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+            <!--            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                            <h1 class="h2">Dashboard</h1>
+                            <div class="btn-toolbar mb-2 mb-md-0">
+                                <div class="btn-group me-2">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                                </div>
+                                <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                                    <span data-feather="calendar" class="align-text-bottom"></span>
+                                    This week
+                                </button>
+                            </div>
+                        </div>-->
+
+            <!--GRAPH-->
+            <div id="dashboard">
+                <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+            </div>
+
+            <div id="data-reg">
+                <h3>Dataregistrering</h3>
+                <div>
+                    <p>
+                        PLACEHOLDER DATAREGISTRERING
+                    </p>
+                    <div id="tabs-DR">
+                        <ul>
+                            <li><a href="#tabs-DR-1">OPRET</a></li>
+                            <li><a href="#tabs-DR-2">OPDATER</a></li>
+                        </ul>
+                        <div id="tabs-DR-1">
+                            <div>
+                                <p>PLACEHOLDER OPRET FORM</p>
+                            </div>
+                            <a  href="#data-reg-form-customer"
+                               th:data-a="${'opret'}" onclick="sendData(this)">
+                            </a>
+                        </div>
+
+                        <div>
+                            <div id="tabs-DR-2">
+                                <p>PLACEHOLDER OPDATER FORM</p>
+                            </div>
+                            <a  href="#data-reg-form-customer"
+                                th:data-a="${'opdater'}" onclick="sendData(this)">
+                            </a>
+                        </div>
+
+                        <!--Dataregistrerings form-->
+                        <div id="data-reg-form-customer" class="row g-5">
+
+                            <div class="col-md-7 col-lg-8">
+                                <h4 class="mb-3">Faktureringsadresse</h4>
+                                <form class="needs-validation" novalidate>
+                                    <div class="row g-3">
+                                        <div class="col-sm-6">
+                                            <label for="firstName" class="form-label">Fornavn</label>
+                                            <input name="firstName" type="text" class="form-control" id="firstName"
+                                                   placeholder=""
+                                                   value="" required>
+                                            <div class="invalid-feedback">
+                                                Valid first name is required.
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <label for="lastName" class="form-label">Efternavn</label>
+                                            <input name="lastName" type="text" class="form-control" id="lastName"
+                                                   placeholder=""
+                                                   value="" required>
+                                            <div class="invalid-feedback">
+                                                Valid last name is required.
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label for="contactNo" class="form-label">Telefonnummer <span
+                                                    class="text-muted">(Optional)</span></label>
+                                            <input name="contactNo" type="tel" class="form-control" id="contactNo"
+                                                   placeholder="+45 12345678">
+                                            <div class="invalid-feedback">
+                                                Valid telephone number is required.
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
+                                            <input name="email" type="email" class="form-control" id="email"
+                                                   placeholder="brugernavn@eksempel.com">
+                                            <div class="invalid-feedback">
+                                                Valid email is required.
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-5">
+                                            <label for="country" class="form-label">Nationalitet</label>
+                                            <select class="form-select country" name="country"
+                                                    id="country">
+                                                <option>Vælg...</option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Please select a valid country.
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label for="address" class="form-label">Adresse</label>
+                                            <input name="address" type="text" class="form-control" id="address"
+                                                   placeholder="1234 Hovedgaden, st th" required>
+                                            <div class="invalid-feedback">
+                                                Valid address is required.
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="city" class="form-label">Bynavn</label>
+                                            <input name="city" type="text" class="form-control" id="city"
+                                                   placeholder="" required>
+                                            <div class="invalid-feedback">
+                                                Valid city name is required.
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label for="postalCode" class="form-label">Postnummer</label>
+                                            <input name="postalCode" type="text" class="form-control" id="postalCode"
+                                                   placeholder=""
+                                                   required>
+                                            <div class="invalid-feedback">
+                                                Valid postal code is required.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <br>
+                                    <h4 class="mb-3">Gyldigt Kørekort</h4>
+                                    <div class="row gy-3">
+                                        <div class="col-sm-6">
+                                            <label for="licenceNo" class="form-label">Kørekortsnummer</label>
+                                            <input name="licenceNo" type="text" class="form-control" id="licenceNo"
+                                                   placeholder=""
+                                                   value="" required>
+                                            <div class="invalid-feedback">
+                                                Valid last name is required.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--TODO:Card info, bruges ikke-->
+                                    <!--                                    <hr class="my-4">
+
+                                                                        <h4 class="mb-3">Payment</h4>
+
+                                                                        <div class="my-3">
+                                                                            <div class="form-check">
+                                                                                <input id="credit" name="paymentMethod" type="radio"
+                                                                                       class="form-check-input" checked required>
+                                                                                <label class="form-check-label" for="credit">Credit card</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input id="debit" name="paymentMethod" type="radio"
+                                                                                       class="form-check-input" required>
+                                                                                <label class="form-check-label" for="debit">Debit card</label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input id="paypal" name="paymentMethod" type="radio"
+                                                                                       class="form-check-input" required>
+                                                                                <label class="form-check-label" for="paypal">PayPal</label>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row gy-3">
+                                                                            <div class="col-md-6">
+                                                                                <label for="cc-name" class="form-label">Name on card</label>
+                                                                                <input type="text" class="form-control" id="cc-name" placeholder=""
+                                                                                       required>
+                                                                                <small class="text-muted">Full name as displayed on card</small>
+                                                                                <div class="invalid-feedback">
+                                                                                    Name on card is required
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-md-6">
+                                                                                <label for="cc-number" class="form-label">Credit card number</label>
+                                                                                <input type="text" class="form-control" id="cc-number" placeholder=""
+                                                                                       required>
+                                                                                <div class="invalid-feedback">
+                                                                                    Credit card number is required
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-md-3">
+                                                                                <label for="cc-expiration" class="form-label">Expiration</label>
+                                                                                <input type="text" class="form-control" id="cc-expiration"
+                                                                                       placeholder="" required>
+                                                                                <div class="invalid-feedback">
+                                                                                    Expiration date required
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-md-3">
+                                                                                <label for="cc-cvv" class="form-label">CVV</label>
+                                                                                <input type="text" class="form-control" id="cc-cvv" placeholder=""
+                                                                                       required>
+                                                                                <div class="invalid-feedback">
+                                                                                    Security code required
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>-->
+
+                                    <hr class="my-4">
+
+                                    <div>
+                                        <button class="w-100 btn btn-primary btn-lg" type="submit">Gem
+                                        </button>
+                                        <button class="w-100 btn btn-primary btn-lg" type="button">Forsæt
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="damage-reg">
+                <h3 th:if="${session.userType=='DAMAGE_REG'||session.userType=='ADMIN'}">Skadesrapport</h3>
+                <div>
+                    <p>
+                        PLACEHOLDER SKADESRAPPORT
+                    </p>
+                    <div id="tabs-SR">
+                        <ul>
+                            <li><a href="#tabs-SR-1">OPRET</a></li>
+                            <li><a href="#tabs-SR-2">OPDATER</a></li>
+                        </ul>
+                        <div id="tabs-SR-1">
+                            <p>PLACEHOLDER OPRET FORM</p>
+                        </div>
+                        <div id="tabs-SR-2">
+                            <p>PLACEHOLDER OPDATER FORM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="customers">
+
+            </div>
+
+            <div id="leases">
+
+            </div>
+
+            <div id="cars">
+
+            </div>
+
+            <div id="reports">
+                <h2>Section title</h2>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Header</th>
+                            <th scope="col">Header</th>
+                            <th scope="col">Header</th>
+                            <th scope="col">Header</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1,001</td>
+                            <td>random</td>
+                            <td>data</td>
+                            <td>placeholder</td>
+                            <td>text</td>
+                        </tr>
+                        <tr>
+                            <td>1,002</td>
+                            <td>placeholder</td>
+                            <td>irrelevant</td>
+                            <td>visual</td>
+                            <td>layout</td>
+                        </tr>
+                        <tr>
+                            <td>1,003</td>
+                            <td>data</td>
+                            <td>rich</td>
+                            <td>dashboard</td>
+                            <td>tabular</td>
+                        </tr>
+                        <tr>
+                            <td>1,003</td>
+                            <td>information</td>
+                            <td>placeholder</td>
+                            <td>illustrative</td>
+                            <td>data</td>
+                        </tr>
+                        <tr>
+                            <td>1,004</td>
+                            <td>text</td>
+                            <td>random</td>
+                            <td>layout</td>
+                            <td>dashboard</td>
+                        </tr>
+                        <tr>
+                            <td>1,005</td>
+                            <td>dashboard</td>
+                            <td>irrelevant</td>
+                            <td>text</td>
+                            <td>placeholder</td>
+                        </tr>
+                        <tr>
+                            <td>1,006</td>
+                            <td>dashboard</td>
+                            <td>illustrative</td>
+                            <td>rich</td>
+                            <td>data</td>
+                        </tr>
+                        <tr>
+                            <td>1,007</td>
+                            <td>placeholder</td>
+                            <td>tabular</td>
+                            <td>information</td>
+                            <td>irrelevant</td>
+                        </tr>
+                        <tr>
+                            <td>1,008</td>
+                            <td>random</td>
+                            <td>data</td>
+                            <td>placeholder</td>
+                            <td>text</td>
+                        </tr>
+                        <tr>
+                            <td>1,009</td>
+                            <td>placeholder</td>
+                            <td>irrelevant</td>
+                            <td>visual</td>
+                            <td>layout</td>
+                        </tr>
+                        <tr>
+                            <td>1,010</td>
+                            <td>data</td>
+                            <td>rich</td>
+                            <td>dashboard</td>
+                            <td>tabular</td>
+                        </tr>
+                        <tr>
+                            <td>1,011</td>
+                            <td>information</td>
+                            <td>placeholder</td>
+                            <td>illustrative</td>
+                            <td>data</td>
+                        </tr>
+                        <tr>
+                            <td>1,012</td>
+                            <td>text</td>
+                            <td>placeholder</td>
+                            <td>layout</td>
+                            <td>dashboard</td>
+                        </tr>
+                        <tr>
+                            <td>1,013</td>
+                            <td>dashboard</td>
+                            <td>irrelevant</td>
+                            <td>text</td>
+                            <td>visual</td>
+                        </tr>
+                        <tr>
+                            <td>1,014</td>
+                            <td>dashboard</td>
+                            <td>illustrative</td>
+                            <td>rich</td>
+                            <td>data</td>
+                        </tr>
+                        <tr>
+                            <td>1,015</td>
+                            <td>random</td>
+                            <td>tabular</td>
+                            <td>information</td>
+                            <td>text</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<div class="container">
+    <footer class="py-3 my-4">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <!--            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>-->
+        </ul>
+        <p class="text-center text-muted">&copy;Knud W. Bruun anno 1914</p>
+    </footer>
+</div>
+
+<!--Bootstrap scripts-->
+<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
+        integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
+        integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
+        crossorigin="anonymous"></script>
+<script src="/js/dashboard.js"></script>
+<script src="/js/form-validation.js"></script>
+<!--Egne scripts-->
+<script src="/js/country-list-api.js"></script>
+<script>
+    /*script det klikker en enkelt gang på udvalgte links med onclick-funktion for at aktivere dem*/
+    $(document).ready(function () {
+        $("#data-reg-link").click();
+        $("#damage-reg-link").click();
+        $("#reports-link").click();
+    });
+</script>
+</body>
+</html>

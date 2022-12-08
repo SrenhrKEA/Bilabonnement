@@ -1,8 +1,7 @@
 package com.srenhrkea.eksamensprojekte22.models.dtos;
 
 public class UserDTO {
-  public String username;
-  public String password;
+  private String username, password;
 
   public String getUsername() {
     return username;

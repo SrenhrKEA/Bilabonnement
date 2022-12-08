@@ -18,39 +18,46 @@
     <!-- Custom styles for this template -->
     <link href="/css/signin.css" rel="stylesheet">
 </head>
-<body class="text-center">
-
-<main class="form-signin w-100 m-auto">
-    <form th:action="@{/signinUser}" method="POST">
-        <img class="mb-4"
-             src="https://res.cloudinary.com/digital-interdan-bilabonnement/image/upload/c_fit,q_80,w_128/v1/Logos/logo_brands_0922_ltj2wu.svg"
-             alt="" width="622" height="78"> <!--width="72" height="57"-->
-        <h1 class="h3 mb-3 fw-normal">Medarbejder Log ind</h1>
-
-        <div class="form-floating">
-            <input name="username" type="text" class="form-control" id="floatingInput" placeholder="navn@eksempel.dk">
-            <label for="floatingInput">Brugernavn</label>
-        </div>
-        <div class="form-floating">
-            <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Kodeord">
-            <label for="floatingPassword">Kodeord</label>
-        </div>
-
-        <div class="checkbox mb-3">
-            <!--TODO: Check box har pt. ingen funktion-->
-            <!--            <label>
-                            <input type="checkbox" value="remember-me"> Husk mig
-                        </label>-->
-        </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Log ind</button>
-        <p class="mt-5 mb-3 text-muted">&copy;Knud W. Bruun anno 1914</p>
-    </form>
-
-    <div th:if="${message!=null}">
+<body class="text-center flex-box" style="flex-direction: column">
+<div class="flex-content">
+    <img
+            src="https://res.cloudinary.com/digital-interdan-bilabonnement/image/upload/c_fit,q_80,w_128/v1/Logos/logo_brands_0922_ltj2wu.svg"
+            alt="" width="622" height="78"> <!--width="72" height="57"-->
+</div>
+<div class="flex-content" style="height: 16px">
+    <br><br>
+    <div class="alert alert-primary" role="alert" th:if="${message!=null}">
         <p th:text="${message}"></p>
     </div>
+</div>
+<main class="form-signin w-100 m-auto">
+    <form th:action="@{/signinUser}" method="POST">
+
+        <div class="flex-content">
+
+            <h1 class="h3 mb-3 fw-normal">Medarbejder Log ind</h1>
+
+            <div class="form-floating">
+                <input name="username" type="text" class="form-control" id="floatingInput"
+                       placeholder="navn@eksempel.dk">
+                <label for="floatingInput">Brugernavn</label>
+            </div>
+            <div class="form-floating">
+                <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Kodeord">
+                <label for="floatingPassword">Kodeord</label>
+            </div>
+
+            <div class="checkbox mb-3">
+                <!--TODO: Check box har pt. ingen funktion-->
+                <!--            <label>
+                                <input type="checkbox" value="remember-me"> Husk mig
+                            </label>-->
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Log ind</button>
+        </div>
+    </form>
 </main>
 
-
+<p class="mt-5 mb-3 text-muted">&copy;Knud W. Bruun anno 1914</p>
 </body>
 </html>

@@ -2,182 +2,331 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Test</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+    <title>Bootstrap Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 </head>
 <body>
-<!--Dataregistrerings form-->
+<!--SECTION: Dataregistrerings forms-->
 <div id="data-reg-form-customer" class="row g-5">
 
-    <div class="col-md-7 col-lg-8">
-        <h4 class="mb-3">Faktureringsadresse</h4>
-        <form class="needs-validation" novalidate>
-            <div class="row g-3">
-                <div class="col-sm-6">
-                    <label for="firstName" class="form-label">Fornavn</label>
-                    <input name="firstName" type="text" class="form-control" id="firstName"
-                           placeholder=""
-                           value="" required>
-                    <div class="invalid-feedback">
-                        Valid first name is required.
-                    </div>
-                </div>
-
-                <div class="col-sm-6">
-                    <label for="lastName" class="form-label">Efternavn</label>
-                    <input name="lastName" type="text" class="form-control" id="lastName"
-                           placeholder=""
-                           value="" required>
-                    <div class="invalid-feedback">
-                        Valid last name is required.
-                    </div>
-                </div>
-
-                <div class="col-12">
-                    <label for="contactNo" class="form-label">Telefonnummer <span
-                            class="text-muted">(Optional)</span></label>
-                    <input name="contactNo" type="tel" class="form-control" id="contactNo"
-                           placeholder="+45 12345678">
-                    <div class="invalid-feedback">
-                        Valid telephone number is required.
-                    </div>
-                </div>
-
-                <div class="col-12">
-                    <label for="email" class="form-label">Email <span
-                            class="text-muted">(Optional)</span></label>
-                    <input name="email" type="email" class="form-control" id="email"
-                           placeholder="brugernavn@eksempel.com">
-                    <div class="invalid-feedback">
-                        Valid email is required.
-                    </div>
-                </div>
-
-                <div class="col-md-5">
-                    <label for="country" class="form-label">Nationalitet</label>
-                    <select class="form-select country" name="country"
-                            id="country">
-                        <option>Vælg...</option>
-                    </select>
-                    <div class="invalid-feedback">
-                        Please select a valid country.
-                    </div>
-                </div>
-
-                <div class="col-12">
-                    <label for="address" class="form-label">Adresse</label>
-                    <input name="address" type="text" class="form-control" id="address"
-                           placeholder="1234 Hovedgaden, st th" required>
-                    <div class="invalid-feedback">
-                        Valid address is required.
-                    </div>
-                </div>
-                <div class="col-12">
-                    <label for="city" class="form-label">Bynavn</label>
-                    <input name="city" type="text" class="form-control" id="city"
-                           placeholder="" required>
-                    <div class="invalid-feedback">
-                        Valid city name is required.
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <label for="postalCode" class="form-label">Postnummer</label>
-                    <input name="postalCode" type="text" class="form-control" id="postalCode"
-                           placeholder=""
-                           required>
-                    <div class="invalid-feedback">
-                        Valid postal code is required.
-                    </div>
-                </div>
-            </div>
-
-            <br>
-            <h4 class="mb-3">Gyldigt Kørekort</h4>
-            <div class="row gy-3">
-                <div class="col-sm-6">
-                    <label for="licenceNo" class="form-label">Kørekortsnummer</label>
-                    <input name="licenceNo" type="text" class="form-control" id="licenceNo"
-                           placeholder=""
-                           value="" required>
-                    <div class="invalid-feedback">
-                        Valid last name is required.
-                    </div>
-                </div>
-            </div>
-
-            <!--TODO:Card info, bruges ikke-->
-            <!--                                    <hr class="my-4">
-
-                                                <h4 class="mb-3">Payment</h4>
-
-                                                <div class="my-3">
-                                                    <div class="form-check">
-                                                        <input id="credit" name="paymentMethod" type="radio"
-                                                               class="form-check-input" checked required>
-                                                        <label class="form-check-label" for="credit">Credit card</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input id="debit" name="paymentMethod" type="radio"
-                                                               class="form-check-input" required>
-                                                        <label class="form-check-label" for="debit">Debit card</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input id="paypal" name="paymentMethod" type="radio"
-                                                               class="form-check-input" required>
-                                                        <label class="form-check-label" for="paypal">PayPal</label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row gy-3">
-                                                    <div class="col-md-6">
-                                                        <label for="cc-name" class="form-label">Name on card</label>
-                                                        <input type="text" class="form-control" id="cc-name" placeholder=""
-                                                               required>
-                                                        <small class="text-muted">Full name as displayed on card</small>
-                                                        <div class="invalid-feedback">
-                                                            Name on card is required
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <label for="cc-number" class="form-label">Credit card number</label>
-                                                        <input type="text" class="form-control" id="cc-number" placeholder=""
-                                                               required>
-                                                        <div class="invalid-feedback">
-                                                            Credit card number is required
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-3">
-                                                        <label for="cc-expiration" class="form-label">Expiration</label>
-                                                        <input type="text" class="form-control" id="cc-expiration"
-                                                               placeholder="" required>
-                                                        <div class="invalid-feedback">
-                                                            Expiration date required
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-3">
-                                                        <label for="cc-cvv" class="form-label">CVV</label>
-                                                        <input type="text" class="form-control" id="cc-cvv" placeholder=""
-                                                               required>
-                                                        <div class="invalid-feedback">
-                                                            Security code required
-                                                        </div>
-                                                    </div>
-                                                </div>-->
-
-            <hr class="my-4">
-
-            <div>
-                <button class="w-100 btn btn-primary btn-lg" type="submit">Gem
+    <!--SECTION: Accordian-->
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button id="form_create_customer" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                        aria-expanded="false" aria-controls="collapseOne">
+                    <strong>Kunde</strong>
                 </button>
-                <button class="w-100 btn btn-primary btn-lg" type="button">Forsæt
-                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <!--SECTION: Customer form-->
+                    <div class="col-md-7 col-lg-8">
+                        <h4 class="mb-3">Faktureringsadresse</h4>
+                        <form method="post" action="/form-create-customer" class="needs-validation" novalidate>
+                            <div class="row g-3">
+                                <div class="col-sm-6">
+                                    <label for="firstName" class="form-label">Fornavn <span
+                                            class="text-muted">(Required)</span></label>
+                                    <input name="firstName" type="text" class="form-control" id="firstName"
+                                           placeholder="eg. Jens"
+                                           value="" required>
+                                    <div class="invalid-feedback">
+                                        Valid first name is required.
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="lastName" class="form-label">Efternavn <span
+                                            class="text-muted">(Required)</span></label>
+                                    <input name="lastName" type="text" class="form-control" id="lastName"
+                                           placeholder="eg. Jensen"
+                                           value="" required>
+                                    <div class="invalid-feedback">
+                                        Valid last name is required.
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="contactNo" class="form-label">Telefonnummer <span
+                                            class="text-muted">(Required)</span></label>
+                                    <input name="contactNo" type="tel" class="form-control" id="contactNo"
+                                           placeholder="eg. +45 12345678" required>
+                                    <div class="invalid-feedback">
+                                        Valid telephone number is required.
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="email" class="form-label">Email <span
+                                            class="text-muted">(Required)</span></label>
+                                    <input name="email" type="email" class="form-control" id="email"
+                                           placeholder="eg. brugernavn@eksempel.com" required>
+                                    <div class="invalid-feedback">
+                                        Valid email is required.
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="country" class="form-label">Nationalitet <span
+                                            class="text-muted">(Required)</span></label>
+                                    <select class="form-select country" name="country"
+                                            id="country" required>
+                                        <option disabled selected value>Vælg nationalitet...</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Please select a valid country.
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="address" class="form-label">Adresse <span
+                                            class="text-muted">(Required)</span></label>
+                                    <input name="address" type="text" class="form-control" id="address"
+                                           placeholder="eg. 1234 Hovedgaden, st th" required>
+                                    <div class="invalid-feedback">
+                                        Valid address is required.
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="city" class="form-label">Bynavn <span
+                                            class="text-muted">(Required)</span></label>
+                                    <input name="city" type="text" class="form-control" id="city"
+                                           placeholder="eg. København" required>
+                                    <div class="invalid-feedback">
+                                        Valid city name is required.
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="postalCode" class="form-label">Postnummer <span
+                                            class="text-muted">(Required)</span></label>
+                                    <input name="postalCode" type="text" class="form-control" id="postalCode"
+                                           placeholder="eg. 1234"
+                                           required>
+                                    <div class="invalid-feedback">
+                                        Valid postal code is required.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br>
+                            <h4 class="mb-3">Gyldigt Kørekort</h4>
+                            <div class="row gy-3">
+                                <div class="col-12">
+                                    <label for="licenceNo" class="form-label">Kørekortsnummer <span
+                                            class="text-muted">(Required)</span></label>
+                                    <input name="licenceNo" type="text" class="form-control" id="licenceNo"
+                                           placeholder="eg. 12345678"
+                                           value="" required>
+                                    <div class="invalid-feedback">
+                                        Valid last name is required.
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div>
+                                <button class="w-100 btn btn-primary btn-lg" type="submit">Forsæt
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-        </form>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button id="form_create_lease" class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <strong>Lejeaftale</strong>
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <!--SECTION: Lease form-->
+                    <div class="col-md-7 col-lg-8">
+                        <h4 class="mb-3">Lejeaftale</h4>
+                        <form class="needs-validation" novalidate>
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label for="subscriptionType" class="form-label">Abonnements type <span
+                                            class="text-muted">(Required)</span></label>
+                                    <select class="form-select" name="subscriptionType"
+                                            id="subscriptionType" required>
+                                        <option value="LIMITED">LIMITED</option>
+                                        <option value="UNLIMITED">UNLIMITED</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Please select a valid subscription type.
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="durationMonths" class="form-label">Antal måneder <span
+                                            class="text-muted">(Required)</span></label>
+                                    <input name="durationMonths" type="text" class="form-control" id="durationMonths"
+                                           placeholder="eg. 10 måneder" required>
+                                    <div class="invalid-feedback">
+                                        Valid number of months is required.
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="dateOfRent" class="form-label">Dato for lejestart <span
+                                            class="text-muted">(Required)</span></label>
+                                    <input name="dateOfRent" type="date" class="form-control" id="dateOfRent"
+                                           placeholder="eg. yyyy-mm-dd" required value="0000-00-00"
+                                           min="0000-00-00" max="9999-99-99">
+                                    <div class="invalid-feedback">
+                                        Valid date is required.
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div>
+                                <button class="w-100 btn btn-primary btn-lg" type="submit">Forsæt
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+                <button id="form_create_KLPL" class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    <strong>Kilometerplan og afhentningssted</strong>
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <!--SECTION: Equipment, KilomtragePlan & PickupLocation form-->
+                    <div class="col-md-7 col-lg-8">
+                        <h4 class="mb-3">Valg af kilometerplan</h4>
+                        <form class="needs-validation" novalidate>
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label for="idKilometragePlanRef" class="form-label">Kilometertilkøb <span
+                                            class="text-muted">(Required)</span></label>
+                                    <select class="form-select" name="idKilometragePlanRef"
+                                            id="idKilometragePlanRef" required>
+                                        <option disabled selected value>Vælg kilometerpakke...</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Please select a kilometrage plan.
+                                    </div>
+                                </div>
+                                <br>
+                                <h4 class="mb-3">Valf af afhentningssted</h4>
+                                <div class="col-12">
+                                    <label for="idPickupLocationRef" class="form-label">Afhentningssted <span
+                                            class="text-muted">(Required)</span></label>
+                                    <select class="form-select" name="idPickupLocationRef"
+                                            id="idPickupLocationRef" required>
+                                        <option disabled selected value>Vælg lokation...</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Please select a pickup location.
+                                    </div>
+                                </div>
+                                <br>
+                                <div>
+                                    <button class="w-100 btn btn-primary btn-lg" type="submit">Forsæt
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFour">
+                <button id="form_create_car" class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    <strong>Bil</strong>
+                </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <!--SECTION: Car form-->
+                    <div class="col-md-7 col-lg-8">
+                        <h4 class="mb-3">Valg af bil</h4>
+                        <form class="needs-validation" novalidate>
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label for="idCarType" class="form-label">Bil <span
+                                            class="text-muted">(Required)</span></label>
+                                    <select class="form-select" name="idCarType"
+                                            id="idCarType" required>
+                                        <option disabled selected value>Vælg bil...</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Please select a car.
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="initialKilometrage" class="form-label">Antal kørte km <span
+                                            class="text-muted">(Required)</span></label>
+                                    <input name="initialKilometrage" type="text" class="form-control" id="initialKilometrage"
+                                           placeholder="eg. 100000 km" required>
+                                    <div class="invalid-feedback">
+                                        Valid number of kilometers is required.
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="idCarVIN" class="form-label">Stelnummer <span
+                                            class="text-muted">(Required)</span></label>
+                                    <input name="idCarVIN" type="text" class="form-control" id="idCarVIN"
+                                           placeholder="eg. xxx123xx3456x789x" required>
+                                    <div class="invalid-feedback">
+                                        Valid VIN is required.
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="regNo" class="form-label">Registeringsnummer <span
+                                            class="text-muted">(Required)</span></label>
+                                    <input name="regNo" type="text" class="form-control" id="regNo"
+                                           placeholder="eg. XX 12 345" required>
+                                    <div class="invalid-feedback">
+                                        Valid registration number is required.
+                                    </div>
+                                </div>
+                                <br>
+                                <div>
+                                    <button class="w-100 btn btn-primary btn-lg" type="submit">Gem
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
 </div>
+<script>
+$(document).ready(function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const myParam = urlParams.get('step');
+    if (myParam==='form_create_lease'){
+        $("#"+myParam).click();
+    }
+});
+</script>
 </body>
 </html>
 

@@ -1,8 +1,16 @@
 package com.srenhrkea.eksamensprojekte22.models.dtos;
 
 public class CustomerDTO {
-  private int  postalCode;
+  private int  idCustomer, postalCode;
   private String firstName, lastName, address, city, contactNo, email, nationality, licenceNo;
+
+  public int getIdCustomer() {
+    return idCustomer;
+  }
+
+  public void setIdCustomer(int idCustomer) {
+    this.idCustomer = idCustomer;
+  }
 
   public int getPostalCode() {
     return postalCode;

@@ -91,7 +91,7 @@
             <div id="customer-form" th:if="${session.userType=='DATA_REG'||session.userType=='ADMIN'}">
                 <!--Tabs-->
                 <nav>
-                    <div class="nav nav-tabs" id="nav-tabs-damage-reg" role="tablist">
+                    <div class="nav nav-tabs" id="nav-tab-customer-forms" role="tablist">
                         <button class="nav-link active" id="nav-customer-create-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-customer-create" type="button" role="tab"
                                 aria-controls="nav-customer-create"
@@ -219,18 +219,33 @@
                             </form>
                         </div>
                     </div>
-                    <div class="tab-pane fade show active p-3" id="nav-customer-update" role="tabpanel"
+                    <div class="tab-pane fade show p-3" id="nav-customer-update" role="tabpanel"
                          aria-labelledby="nav-customer-update-tab">
                         <!--Customer update form-->
                         <div class="col-md-7 col-lg-8">
-
                             <h4 class="mb-3">Faktureringsadresse</h4>
-                            <form method="post" action="/customer-form-create" class="needs-validation" novalidate>
+                            <form method="post" action="/customer-form-update" class="needs-validation" novalidate>
                                 <div class="row g-3">
+                                    <div class="col-12">
+                                        <label for="choose-customer" class="form-label">Kunde <span
+                                                class="text-muted">(Required)</span></label>
+                                        <select class="form-select" name="idCustomer"
+                                                id="choose-customer" required>
+                                            <option disabled selected value>Vælg kunde...</option>
+                                            <option th:each="customer: ${customers}"
+                                                    th:value="${customer.idCustomer}"
+                                                    th:text="${customer.firstName+' '+customer.lastName+'; DLN: '+customer.licenceNo}"></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a valid customer.
+                                        </div>
+                                    </div>
+
                                     <div class="col-sm-6">
                                         <label for="firstNameUpdate" class="form-label">Fornavn <span
                                                 class="text-muted">(Required)</span></label>
-                                        <input name="firstName" type="text" class="form-control" id="firstNameUpdate"
+                                        <input name="firstName" type="text" class="form-control"
+                                               id="firstNameUpdate"
                                                placeholder="eg. Jens"
                                                value="" required>
                                         <div class="invalid-feedback">
@@ -303,7 +318,8 @@
                                     <div class="col-sm-6">
                                         <label for="postalCodeUpdate" class="form-label">Postnummer <span
                                                 class="text-muted">(Required)</span></label>
-                                        <input name="postalCode" type="text" class="form-control" id="postalCodeUpdate"
+                                        <input name="postalCode" type="text" class="form-control"
+                                               id="postalCodeUpdate"
                                                placeholder="eg. 1234" required>
                                         <div class="invalid-feedback">
                                             Valid postal code is required.

@@ -107,8 +107,25 @@ public class employeeController {
   }
 
   @PostMapping("customer-form-update")
-  public String customerFormUpdate() {
-    return "redirect:customer-form";
+  public String customerFormUpdate(Model model, @ModelAttribute CustomerDTO customerDTO, RedirectAttributes redirectAttributes) {
+    Customer customer = new Customer();
+    customer.setIdCustomer(customerDTO.getIdCustomer());
+    customer.setFirstName(customerDTO.getFirstName());
+    customer.setLastName(customerDTO.getLastName());
+    customer.setAddress(customerDTO.getAddress());
+    customer.setCity(customerDTO.getCity());
+    customer.setPostalCode(customerDTO.getPostalCode());
+    customer.setNationality(customerDTO.getNationality());
+    customer.setContactNo(customerDTO.getContactNo());
+    customer.setEmail(customerDTO.getEmail());
+    customer.setLicenceNo(customerDTO.getLicenceNo());
+    try {
+      customerService.updateCustomer(customer);
+      redirectAttributes.addFlashAttribute("message", "Kunden er gemt.");
+    } catch (SQLException e) {
+      redirectAttributes.addFlashAttribute("message", "Kunden kunne ikke gemmes.");
+    }
+    return "redirect:customer-form"; //?step=form_create_lease
   }
 
   @GetMapping("/car-form")

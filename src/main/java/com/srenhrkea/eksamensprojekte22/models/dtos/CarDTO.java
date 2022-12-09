@@ -2,7 +2,7 @@ package com.srenhrkea.eksamensprojekte22.models.dtos;
 
 public class CarDTO {
   private boolean isAvailable;
-  private int idCarType, idLease;
+  private int idCarType;
   private double initialKilometrage;
   private String idCarVIN, regNo;
 
@@ -20,14 +20,6 @@ public class CarDTO {
 
   public void setIdCarType(int idCarType) {
     this.idCarType = idCarType;
-  }
-
-  public int getIdLease() {
-    return idLease;
-  }
-
-  public void setIdLease(int idLease) {
-    this.idLease = idLease;
   }
 
   public double getInitialKilometrage() {

@@ -45,6 +45,12 @@ public class signinController {
     }
   }
 
+  @GetMapping("/signoutUser")
+  public String signout(HttpSession session) {
+    session.invalidate();
+    return"redirect:/signin";
+  }
+
   private void setLoginSessionAttributes(HttpSession session, User user) {
     session.setAttribute("username", user.getUsername());
     session.setAttribute("userType", String.valueOf(user.getUserType()));

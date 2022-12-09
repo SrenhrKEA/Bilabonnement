@@ -1,27 +1,14 @@
-package com.srenhrkea.eksamensprojekte22.models;
+package com.srenhrkea.eksamensprojekte22.models.dtos;
 
 import com.srenhrkea.eksamensprojekte22.enums.SubscriptionType;
 
 import java.util.Date;
 
-public class Lease {
+public class LeaseDTO {
   private int idLease, durationMonths, idCustomer;
   private Date dateOfRent, DateOfReturn;
   private SubscriptionType subscriptionType;
   private String idCarVIN;
-
-  public Lease() {
-  }
-
-  public Lease(int idLease, String idCarVIN, int durationMonths, int idCustomer, Date dateOfRent, Date dateOfReturn, SubscriptionType subscriptionType) {
-    this.idLease = idLease;
-    this.idCarVIN = idCarVIN;
-    this.durationMonths = durationMonths;
-    this.idCustomer = idCustomer;
-    this.dateOfRent = dateOfRent;
-    DateOfReturn = dateOfReturn;
-    this.subscriptionType = subscriptionType;
-  }
 
   public int getIdLease() {
     return idLease;
@@ -29,14 +16,6 @@ public class Lease {
 
   public void setIdLease(int idLease) {
     this.idLease = idLease;
-  }
-
-  public String getIdCarVIN() {
-    return idCarVIN;
-  }
-
-  public void setIdCarVIN(String idCarVIN) {
-    this.idCarVIN = idCarVIN;
   }
 
   public int getDurationMonths() {
@@ -79,16 +58,11 @@ public class Lease {
     this.subscriptionType = subscriptionType;
   }
 
-  @Override
-  public String toString() {
-    return "Lease{" +
-        "idLease=" + idLease +
-        ", idCarVIN=" + idCarVIN +
-        ", durationMonths=" + durationMonths +
-        ", idCustomer=" + idCustomer +
-        ", dateOfRent=" + dateOfRent +
-        ", DateOfReturn=" + DateOfReturn +
-        ", subscriptionType=" + subscriptionType +
-        '}';
+  public String getIdCarVIN() {
+    return idCarVIN;
+  }
+
+  public void setIdCarVIN(String idCarVIN) {
+    this.idCarVIN = idCarVIN;
   }
 }

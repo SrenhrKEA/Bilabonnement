@@ -33,7 +33,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="navbar-nav">
-        <!--Log ud-->
+        <!--Ved log ud afsluttes session-->
         <div class="nav-item text-nowrap">
             <a class="nav-link px-3" href="/signoutUser"><span data-feather="log-out"></span> Log ud</a>
         </div>
@@ -60,7 +60,7 @@
                         </a>
                     </li>
                     <li class="nav-item" th:if="${session.userType=='DATA_REG'||session.userType=='ADMIN'}">
-                        <a id="cars-link" class="nav-link" href="/car-form">
+                        <a id="cars-link" class="nav-link" href="#car-form">
                             <span data-feather="truck" class="align-text-bottom"></span>
                             BILER
                         </a>
@@ -77,17 +77,46 @@
                             SKADESRAPPORTER
                         </a>
                     </li>
-
                 </ul>
             </div>
         </nav>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
+
             <div class="alert alert-primary" role="alert" th:if="${message!=null}">
                 <p th:text="${message}"></p>
             </div>
 
+            <div id="car-form" th:if="${session.userType=='DATA_REG'||session.userType=='ADMIN'}">
+                <!--TODO: omdøb ids-->
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tabs-damage-reg" role="tablist">
+                        <button class="nav-link active" id="nav-create-SR-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-create-SR" type="button" role="tab"
+                                aria-controls="nav-create-SR"
+                                aria-selected="true">
+                            OPRET SKADESRAPPORT
+                        </button>
+                        <button class="nav-link" id="nav-alter-SR-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-alter-SR" type="button" role="tab" aria-controls="nav-alter-SR"
+                                aria-selected="false">
+                            OPDATER SKADESRAPPORT
+                        </button>
+                    </div>
+                </nav>
+
+                <div class="tab-content" id="nav-tabContent-SR">
+                    <div class="tab-pane fade show active p-3" id="nav-create-SR" role="tabpanel"
+                         aria-labelledby="nav-create-SR-tab">
+                        <p>PLACEHOLDER OPRET FORM</p>
+                    </div>
+                    <div class="tab-pane fade show active p-3" id="nav-alter-SR" role="tabpanel"
+                         aria-labelledby="nav-alter-SR-tab">
+                        <p>PLACEHOLDER OPDATER FORM</p>
+                    </div>
+                </div>
+            </div>
 
 
         </main>
@@ -112,19 +141,5 @@
         crossorigin="anonymous"></script>
 <script src="/js/dashboard.js"></script>
 <script src="/js/form-validation.js"></script>
-<!--Egne scripts-->
-<script src="/js/toggleDiv.js"></script>
-<script src="/js/country-list-api.js"></script>
-<!--<script>
-    /*script det klikker en enkelt gang på udvalgte links med onclick-funktion for at aktivere dem*/
-    $(document).ready(function () {
-        $('#data-reg-link').click();
-        $('#damage-reg-link').click();
-        $('#customers-link').click();
-        $('#leases-link').click();
-        $('#cars-link').click();
-        $('#reports-link').click();
-    });
-</script>-->
 </body>
 </html>

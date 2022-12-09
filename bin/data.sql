@@ -64,6 +64,9 @@ INSERT INTO Car
 VALUES ('888888DK', 0, 2000, 'MINKADET', 2, 2);*/
 
 /*PickupLocationRef*/
+INSERT INTO pickuplocationref
+(address, city, postalCode)
+VALUES ()
 
 /*EquipmentRef*/
 

@@ -2,22 +2,23 @@ package com.srenhrkea.eksamensprojekte22.services;
 
 import com.srenhrkea.eksamensprojekte22.models.Equipment;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface EquipmentService {
 
-  Equipment getEquipmentById(int id);
+  Equipment getEquipmentById(int id) throws Exception;
 
-  List<Equipment> getAllEquipment();
+  List<Equipment> getAllEquipment() throws SQLException;
 
-  List<Equipment> getAllEquipmentByIdLease(int id);
+  List<Equipment> getAllEquipmentByIdLease(int id) throws SQLException;
 
-  List<Equipment> getAllEquipmentByIdEquipmentRef(int id);
+  List<Equipment> getAllEquipmentByIdEquipmentRef(int id) throws SQLException;
 
-  void saveEquipment(Equipment equipment);
+  boolean saveEquipment(Equipment equipment) throws SQLException;
 
-  void updateEquipment(Equipment equipment);
+  boolean updateEquipment(Equipment equipment) throws SQLException;
 
-  void deleteEquipmentById(int id);
+  boolean deleteEquipmentById(int id) throws SQLException;
 
 }

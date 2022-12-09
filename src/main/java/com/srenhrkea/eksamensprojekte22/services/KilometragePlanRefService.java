@@ -2,18 +2,19 @@ package com.srenhrkea.eksamensprojekte22.services;
 
 import com.srenhrkea.eksamensprojekte22.models.KilometragePlanRef;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface KilometragePlanRefService {
 
-  KilometragePlanRef getKilometragePlanRefById(int id);
+  KilometragePlanRef getKilometragePlanRefById(int id) throws Exception;
 
-  List<KilometragePlanRef> getAllKilometragePlanRefs();
+  List<KilometragePlanRef> getAllKilometragePlanRefs() throws SQLException;
 
-  void saveKilometragePlanRef(KilometragePlanRef kilometragePlanRef);
+  boolean saveKilometragePlanRef(KilometragePlanRef kilometragePlanRef) throws SQLException;
 
-  void updateKilometragePlanRef(KilometragePlanRef kilometragePlanRef);
+  boolean updateKilometragePlanRef(KilometragePlanRef kilometragePlanRef) throws SQLException;
 
-  void deleteKilometragePlanRefById(int id);
+  boolean deleteKilometragePlanRefById(int id) throws SQLException;
 
 }

@@ -20,56 +20,36 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public User getUserById(String id) throws Exception {
-    Optional<User> optional = userDAO.get(id);
-    User user;
-    if (optional.isPresent()) {
-      user = optional.get();
-    } else {
-      throw new Exception(" User with username: " + id + " does not exist");
-    }
-    return user;
+    Optional<User> user = userDAO.get(id);
+    return user.orElseThrow(
+        () -> new Exception("An user with ID: " + id + ", does not exist."));
   }
 
   @Override
-  public List<User> getAllUsers() {
+  public List<User> getAllUsers() throws SQLException {
     return (List<User>) userDAO.getAll();
   }
 
   @Override
-  public void saveUser(User user) {
-    this.userDAO.save(user);
+  public boolean saveUser(User user) throws SQLException {
+    return userDAO.save(user);
   }
 
   @Override
-  public void updateUser(User user, String idNew) throws Exception {
-    String idUser = user.getUsername();
-    Optional<User> optional = userDAO.get(idUser);
-    if (optional.isPresent()) {
-      userDAO.update(user, idNew);
-    } else {
-      throw new Exception(" User with username: " + idNew + " does not exist");
-    }
+  public boolean updateUser(User user, String idNew) throws SQLException {
+    return userDAO.update(user, idNew);
+
   }
 
   @Override
-  public void deleteUserById(String id) throws Exception {
-    Optional<User> optional = userDAO.get(id);
-    if (optional.isPresent()) {
-      this.userDAO.delete(id);
-    } else {
-      throw new Exception(" User with username: " + id + " does not exist");
-    }
+  public boolean deleteUserById(String id) throws SQLException {
+    return userDAO.delete(id);
   }
 
   @Override
   public User AuthenticateUser(String username, String password) throws Exception {
-    Optional<User> optional = userDAO.get(username,password);
-    User user;
-    if (optional.isPresent()) {
-      user = optional.get();
-    } else {
-      throw new Exception(" User with username: " + username + " does not exist");
-    }
-    return user;
+    Optional<User> user = userDAO.get(username, password);
+    return user.orElseThrow(
+        () -> new Exception("An user with ID: " + username + " and password:" + password + " does not exist."));
   }
 }

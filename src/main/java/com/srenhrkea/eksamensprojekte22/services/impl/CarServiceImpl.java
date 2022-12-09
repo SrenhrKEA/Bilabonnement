@@ -5,6 +5,7 @@ import com.srenhrkea.eksamensprojekte22.models.Car;
 import com.srenhrkea.eksamensprojekte22.services.CarService;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,55 +19,34 @@ public class CarServiceImpl implements CarService {
   }
 
   @Override
-  public Car getCarById(String id) {
-    Optional<Car> optional = carDAO.get(id);
-    Car car;
-    if (optional.isPresent()) {
-      car = optional.get();
-    } else {
-      throw new RuntimeException(" Car with VIN: " + id + " does not exist");
-    }
-    return car;
+  public Car getCarById(String id) throws Exception {
+    Optional<Car> car = carDAO.get(id);
+    return car.orElseThrow(
+        () -> new Exception("A car with ID: " + id + ", does not exist."));
   }
 
   @Override
-  public List<Car> getAllCars() {
+  public List<Car> getAllCars() throws SQLException {
     return (List<Car>) carDAO.getAll();
   }
 
   @Override
-  public List<Car> getAllCarsByIdLease(int id) {
-    return (List<Car>) carDAO.getAllByIdLease(id);
-  }
-
-  @Override
-  public List<Car> getAllCarsByIdCarTypeRef(int id) {
+  public List<Car> getAllCarsByIdCarTypeRef(int id) throws SQLException {
     return (List<Car>) carDAO.getAllByIdCarTypeRef(id);
   }
 
   @Override
-  public void saveCar(Car car) {
-    this.carDAO.save(car);
+  public boolean saveCar(Car car) throws SQLException {
+    return carDAO.save(car);
   }
 
   @Override
-  public void updateCar(Car car) {
-    String idCar = car.getIdCarVIN();
-    Optional<Car> optional = carDAO.get(idCar);
-    if (optional.isPresent()) {
-      carDAO.update(car);
-    } else {
-      throw new RuntimeException(" Car with VIN: " + idCar + " does not exist");
-    }
+  public boolean updateCar(Car car) throws SQLException {
+    return carDAO.update(car);
   }
 
   @Override
-  public void deleteCarById(String id) {
-    Optional<Car> optional = carDAO.get(id);
-    if (optional.isPresent()) {
-      this.carDAO.delete(id);
-    } else {
-      throw new RuntimeException(" Car with VIN: " + id + " does not exist");
-    }
+  public boolean deleteCarById(String id) throws SQLException {
+    return carDAO.delete(id);
   }
 }

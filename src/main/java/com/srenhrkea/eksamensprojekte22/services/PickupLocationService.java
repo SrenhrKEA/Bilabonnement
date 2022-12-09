@@ -2,22 +2,23 @@ package com.srenhrkea.eksamensprojekte22.services;
 
 import com.srenhrkea.eksamensprojekte22.models.PickupLocation;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface PickupLocationService {
 
-  PickupLocation getPickupLocationById(int id);
+  PickupLocation getPickupLocationById(int id) throws Exception;
 
-  List<PickupLocation> getAllPickupLocations();
+  List<PickupLocation> getAllPickupLocations() throws SQLException;
 
-  List<PickupLocation> getAllPickupLocationsByIdLease(int id);
+  List<PickupLocation> getAllPickupLocationsByIdLease(int id) throws SQLException;
 
-  List<PickupLocation> getAllPickupLocationsByIdPickupLocationRef(int id);
+  List<PickupLocation> getAllPickupLocationsByIdPickupLocationRef(int id) throws SQLException;
 
-  void savePickupLocation(PickupLocation pickupLocation);
+  boolean savePickupLocation(PickupLocation pickupLocation) throws SQLException;
 
-  void updatePickupLocation(PickupLocation pickupLocation);
+  boolean updatePickupLocation(PickupLocation pickupLocation) throws SQLException;
 
-  void deletePickupLocationById(int id);
+  boolean deletePickupLocationById(int id) throws SQLException;
 
 }

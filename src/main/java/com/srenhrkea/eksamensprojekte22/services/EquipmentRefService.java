@@ -2,18 +2,19 @@ package com.srenhrkea.eksamensprojekte22.services;
 
 import com.srenhrkea.eksamensprojekte22.models.EquipmentRef;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface EquipmentRefService {
 
-  EquipmentRef getEquipmentRefById(int id);
+  EquipmentRef getEquipmentRefById(int id) throws Exception;
 
-  List<EquipmentRef> getAllEquipmentRefs();
+  List<EquipmentRef> getAllEquipmentRefs() throws SQLException;
 
-  void saveEquipmentRef(EquipmentRef equipmentRef);
+  boolean saveEquipmentRef(EquipmentRef equipmentRef) throws SQLException;
 
-  void updateEquipmentRef(EquipmentRef equipmentRef);
+  boolean updateEquipmentRef(EquipmentRef equipmentRef) throws SQLException;
 
-  void deleteEquipmentRefById(int id);
+  boolean deleteEquipmentRefById(int id) throws SQLException;
 
 }

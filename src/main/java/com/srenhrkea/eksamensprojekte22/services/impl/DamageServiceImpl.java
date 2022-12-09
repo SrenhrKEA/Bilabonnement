@@ -5,6 +5,7 @@ import com.srenhrkea.eksamensprojekte22.models.Damage;
 import com.srenhrkea.eksamensprojekte22.services.DamageService;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,50 +19,34 @@ public class DamageServiceImpl implements DamageService {
   }
 
   @Override
-  public Damage getDamageById(int id) {
-    Optional<Damage> optional = damageDAO.get(id);
-    Damage damage;
-    if (optional.isPresent()) {
-      damage = optional.get();
-    } else {
-      throw new RuntimeException(" Damage with ID: " + id + " does not exist");
-    }
-    return damage;
+  public Damage getDamageById(int id) throws Exception {
+    Optional<Damage> damage = damageDAO.get(id);
+    return damage.orElseThrow(
+        () -> new Exception("A damage with ID: " + id + ", does not exist."));
   }
 
   @Override
-  public List<Damage> getAllDamages() {
+  public List<Damage> getAllDamages() throws SQLException {
     return (List<Damage>) damageDAO.getAll();
   }
 
   @Override
-  public List<Damage> getAllDamagesByIdDamageReport(int id) {
+  public List<Damage> getAllDamagesByIdDamageReport(int id) throws SQLException {
     return (List<Damage>) damageDAO.getAllByIdDamageReport(id);
   }
 
   @Override
-  public void saveDamage(Damage damage) {
-    this.damageDAO.save(damage);
+  public boolean saveDamage(Damage damage) throws SQLException {
+    return damageDAO.save(damage);
   }
 
   @Override
-  public void updateDamage(Damage damage) {
-    int idDamage = damage.getIdDamage();
-    Optional<Damage> optional = damageDAO.get(idDamage);
-    if (optional.isPresent()) {
-      damageDAO.update(damage);
-    } else {
-      throw new RuntimeException(" Damage with ID: " + idDamage + " does not exist");
-    }
+  public boolean updateDamage(Damage damage) throws SQLException {
+    return damageDAO.update(damage);
   }
 
   @Override
-  public void deleteDamageById(int id) {
-    Optional<Damage> optional = damageDAO.get(id);
-    if (optional.isPresent()) {
-      this.damageDAO.delete(id);
-    } else {
-      throw new RuntimeException(" Damage with ID: " + id + " does not exist");
-    }
+  public boolean deleteDamageById(int id) throws SQLException {
+    return damageDAO.delete(id);
   }
 }

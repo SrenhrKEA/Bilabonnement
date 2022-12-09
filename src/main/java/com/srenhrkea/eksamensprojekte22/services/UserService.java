@@ -9,13 +9,13 @@ public interface UserService {
 
   User getUserById(String username) throws Exception;
 
-  List<User> getAllUsers();
+  List<User> getAllUsers() throws SQLException;
 
-  void saveUser(User user);
+  boolean saveUser(User user) throws SQLException;
 
-  void updateUser(User user, String username) throws Exception;
+  boolean updateUser(User user, String username) throws SQLException;
 
-  void deleteUserById(String username) throws Exception;
+  boolean deleteUserById(String username) throws SQLException;
 
   User AuthenticateUser(String username, String password) throws Exception;
 

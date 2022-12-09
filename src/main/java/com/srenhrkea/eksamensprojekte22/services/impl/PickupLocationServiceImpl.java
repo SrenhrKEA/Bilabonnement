@@ -5,6 +5,7 @@ import com.srenhrkea.eksamensprojekte22.models.PickupLocation;
 import com.srenhrkea.eksamensprojekte22.services.PickupLocationService;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,55 +19,39 @@ public class PickupLocationServiceImpl implements PickupLocationService {
   }
 
   @Override
-  public PickupLocation getPickupLocationById(int id) {
-    Optional<PickupLocation> optional = pickupLocationDAO.get(id);
-    PickupLocation pickupLocation;
-    if (optional.isPresent()) {
-      pickupLocation = optional.get();
-    } else {
-      throw new RuntimeException(" PickupLocation with ID: " + id + " does not exist");
-    }
-    return pickupLocation;
+  public PickupLocation getPickupLocationById(int id) throws Exception {
+    Optional<PickupLocation> pickupLocation = pickupLocationDAO.get(id);
+    return pickupLocation.orElseThrow(
+        () -> new Exception("A pickupLocation with ID: " + id + ", does not exist."));
   }
 
   @Override
-  public List<PickupLocation> getAllPickupLocations() {
+  public List<PickupLocation> getAllPickupLocations() throws SQLException {
     return (List<PickupLocation>) pickupLocationDAO.getAll();
   }
 
   @Override
-  public List<PickupLocation> getAllPickupLocationsByIdLease(int id) {
+  public List<PickupLocation> getAllPickupLocationsByIdLease(int id) throws SQLException {
     return (List<PickupLocation>) pickupLocationDAO.getAllByIdLease(id);
   }
 
   @Override
-  public List<PickupLocation> getAllPickupLocationsByIdPickupLocationRef(int id) {
+  public List<PickupLocation> getAllPickupLocationsByIdPickupLocationRef(int id) throws SQLException {
     return (List<PickupLocation>) pickupLocationDAO.getAllByIdPickupLocationRef(id);
   }
 
   @Override
-  public void savePickupLocation(PickupLocation pickupLocation) {
-    this.pickupLocationDAO.save(pickupLocation);
+  public boolean savePickupLocation(PickupLocation pickupLocation) throws SQLException {
+    return pickupLocationDAO.save(pickupLocation);
   }
 
   @Override
-  public void updatePickupLocation(PickupLocation pickupLocation) {
-    int idPickupLocation = pickupLocation.getIdPickupLocation();
-    Optional<PickupLocation> optional = pickupLocationDAO.get(idPickupLocation);
-    if (optional.isPresent()) {
-      pickupLocationDAO.update(pickupLocation);
-    } else {
-      throw new RuntimeException(" PickupLocation with ID: " + idPickupLocation + " does not exist");
-    }
+  public boolean updatePickupLocation(PickupLocation pickupLocation) throws SQLException {
+    return pickupLocationDAO.update(pickupLocation);
   }
 
   @Override
-  public void deletePickupLocationById(int id) {
-    Optional<PickupLocation> optional = pickupLocationDAO.get(id);
-    if (optional.isPresent()) {
-      this.pickupLocationDAO.delete(id);
-    } else {
-      throw new RuntimeException(" PickupLocation with ID: " + id + " does not exist");
-    }
+  public boolean deletePickupLocationById(int id) throws SQLException {
+    return pickupLocationDAO.delete(id);
   }
 }

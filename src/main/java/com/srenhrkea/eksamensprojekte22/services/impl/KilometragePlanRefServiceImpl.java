@@ -5,6 +5,7 @@ import com.srenhrkea.eksamensprojekte22.models.KilometragePlanRef;
 import com.srenhrkea.eksamensprojekte22.services.KilometragePlanRefService;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,45 +19,29 @@ public class KilometragePlanRefServiceImpl implements KilometragePlanRefService 
   }
 
   @Override
-  public KilometragePlanRef getKilometragePlanRefById(int id) {
-    Optional<KilometragePlanRef> optional = kilometragePlanRefDAO.get(id);
-    KilometragePlanRef kilometragePlanRef;
-    if (optional.isPresent()) {
-      kilometragePlanRef = optional.get();
-    } else {
-      throw new RuntimeException(" KilometragePlanRef with ID: " + id + " does not exist");
-    }
-    return kilometragePlanRef;
+  public KilometragePlanRef getKilometragePlanRefById(int id) throws Exception {
+    Optional<KilometragePlanRef> kilometragePlanRef = kilometragePlanRefDAO.get(id);
+    return kilometragePlanRef.orElseThrow(
+        () -> new Exception("A kilometragePlanRef with ID: " + id + ", does not exist."));
   }
 
   @Override
-  public List<KilometragePlanRef> getAllKilometragePlanRefs() {
+  public List<KilometragePlanRef> getAllKilometragePlanRefs() throws SQLException {
     return (List<KilometragePlanRef>) kilometragePlanRefDAO.getAll();
   }
 
   @Override
-  public void saveKilometragePlanRef(KilometragePlanRef kilometragePlanRef) {
-    this.kilometragePlanRefDAO.save(kilometragePlanRef);
+  public boolean saveKilometragePlanRef(KilometragePlanRef kilometragePlanRef) throws SQLException {
+    return kilometragePlanRefDAO.save(kilometragePlanRef);
   }
 
   @Override
-  public void updateKilometragePlanRef(KilometragePlanRef kilometragePlanRef) {
-    int idKilometragePlanRef = kilometragePlanRef.getIdKilometragePlanRef();
-    Optional<KilometragePlanRef> optional = kilometragePlanRefDAO.get(idKilometragePlanRef);
-    if (optional.isPresent()) {
-      kilometragePlanRefDAO.update(kilometragePlanRef);
-    } else {
-      throw new RuntimeException(" KilometragePlanRef with ID: " + idKilometragePlanRef + " does not exist");
-    }
+  public boolean updateKilometragePlanRef(KilometragePlanRef kilometragePlanRef) throws SQLException {
+    return kilometragePlanRefDAO.update(kilometragePlanRef);
   }
 
   @Override
-  public void deleteKilometragePlanRefById(int id) {
-    Optional<KilometragePlanRef> optional = kilometragePlanRefDAO.get(id);
-    if (optional.isPresent()) {
-      this.kilometragePlanRefDAO.delete(id);
-    } else {
-      throw new RuntimeException(" KilometragePlanRef with ID: " + id + " does not exist");
-    }
+  public boolean deleteKilometragePlanRefById(int id) throws SQLException {
+    return kilometragePlanRefDAO.delete(id);
   }
 }

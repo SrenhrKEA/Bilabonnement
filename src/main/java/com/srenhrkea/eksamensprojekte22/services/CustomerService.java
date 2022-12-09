@@ -2,18 +2,19 @@ package com.srenhrkea.eksamensprojekte22.services;
 
 import com.srenhrkea.eksamensprojekte22.models.Customer;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface CustomerService {
 
-  Customer getCustomerById(int id);
+  Customer getCustomerById(int id) throws Exception;
 
-  List<Customer> getAllCustomers();
+  List<Customer> getAllCustomers() throws SQLException;
 
-  void saveCustomer(Customer customer);
+  boolean saveCustomer(Customer customer) throws SQLException;
 
-  void updateCustomer(Customer customer);
+  boolean updateCustomer(Customer customer) throws SQLException;
 
-  void deleteCustomerById(int id);
+  boolean deleteCustomerById(int id) throws SQLException;
 
 }

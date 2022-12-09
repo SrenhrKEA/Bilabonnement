@@ -2,22 +2,23 @@ package com.srenhrkea.eksamensprojekte22.services;
 
 import com.srenhrkea.eksamensprojekte22.models.KilometragePlan;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface KilometragePlanService {
 
-  KilometragePlan getKilometragePlanById(int id);
+  KilometragePlan getKilometragePlanById(int id) throws Exception;
 
-  List<KilometragePlan> getAllKilometragePlans();
+  List<KilometragePlan> getAllKilometragePlans() throws SQLException;
 
-  List<KilometragePlan> getAllKilometragePlansByIdLease(int id);
+  List<KilometragePlan> getAllKilometragePlansByIdLease(int id) throws SQLException;
 
-  List<KilometragePlan> getAllKilometragePlansByIdKilometragePlan(int id);
+  List<KilometragePlan> getAllKilometragePlansByIdKilometragePlan(int id) throws SQLException;
 
-  void saveKilometragePlan(KilometragePlan kilometragePlan);
+  boolean saveKilometragePlan(KilometragePlan kilometragePlan) throws SQLException;
 
-  void updateKilometragePlan(KilometragePlan kilometragePlan);
+  boolean updateKilometragePlan(KilometragePlan kilometragePlan) throws SQLException;
 
-  void deleteKilometragePlanById(int id);
+  boolean deleteKilometragePlanById(int id) throws SQLException;
 
 }

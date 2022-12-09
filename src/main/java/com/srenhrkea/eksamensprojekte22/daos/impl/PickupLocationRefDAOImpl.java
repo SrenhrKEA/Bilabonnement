@@ -8,39 +8,39 @@ import org.springframework.stereotype.Repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+
 @Repository
 public class PickupLocationRefDAOImpl implements PickupLocationRefDAO {
 
   private Connection conn = DatabaseConnectionManager.getConnection();
 
   @Override
-  public Optional<PickupLocationRef> get(Integer id) {
+  public Optional<PickupLocationRef> get(Integer id) throws SQLException {
     PickupLocationRef pickupLocationRef = null;
     String sql = "SELECT *FROM pickuplocationref WHERE idPickupLocationRef=?";
-    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+    PreparedStatement psts = conn.prepareStatement(sql);
 
-      psts.setInt(1, id);
+    psts.setInt(1, id);
 
-      ResultSet rs = psts.executeQuery();
-      if (rs.next()) {
-        int idPickupLocationRef = rs.getInt("idPickupLocationRef");
-        String address = rs.getString("address");
-        String city = rs.getString("city");
-        int postalCode = rs.getInt("postalCode");
+    ResultSet rs = psts.executeQuery();
+    if (rs.next()) {
+      int idPickupLocationRef = rs.getInt("idPickupLocationRef");
+      String address = rs.getString("address");
+      String city = rs.getString("city");
+      int postalCode = rs.getInt("postalCode");
+      String title = rs.getString("title");
 
-        pickupLocationRef = new PickupLocationRef();
-        pickupLocationRef.setIdPickupLocationRef(idPickupLocationRef);
-        pickupLocationRef.setAddress(address);
-        pickupLocationRef.setCity(city);
-        pickupLocationRef.setPostalCode(postalCode);
-      }
-
-    } catch (Exception e) {
-      e.printStackTrace();
+      pickupLocationRef = new PickupLocationRef();
+      pickupLocationRef.setIdPickupLocationRef(idPickupLocationRef);
+      pickupLocationRef.setAddress(address);
+      pickupLocationRef.setCity(city);
+      pickupLocationRef.setPostalCode(postalCode);
+      pickupLocationRef.setTitle(title);
     }
 
     assert pickupLocationRef != null;
@@ -48,95 +48,89 @@ public class PickupLocationRefDAOImpl implements PickupLocationRefDAO {
   }
 
   @Override
-  public Collection<PickupLocationRef> getAll() {
+  public Collection<PickupLocationRef> getAll() throws SQLException {
 
     List<PickupLocationRef> pickupLocationRefs = new ArrayList<>();
     String sql = "SELECT *FROM pickuplocationref";
-    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+    PreparedStatement psts = conn.prepareStatement(sql);
 
-      ResultSet rs = psts.executeQuery();
-      while (rs.next()) {
-        int idPickupLocationRef = rs.getInt("idPickupLocationRef");
-        String address = rs.getString("address");
-        String city = rs.getString("city");
-        int postalCode = rs.getInt("postalCode");
+    ResultSet rs = psts.executeQuery();
+    while (rs.next()) {
+      int idPickupLocationRef = rs.getInt("idPickupLocationRef");
+      String address = rs.getString("address");
+      String city = rs.getString("city");
+      int postalCode = rs.getInt("postalCode");
+      String title = rs.getString("title");
 
-        PickupLocationRef pickupLocationRef = new PickupLocationRef();
-        pickupLocationRef.setIdPickupLocationRef(idPickupLocationRef);
-        pickupLocationRef.setAddress(address);
-        pickupLocationRef.setCity(city);
-        pickupLocationRef.setPostalCode(postalCode);
+      PickupLocationRef pickupLocationRef = new PickupLocationRef();
+      pickupLocationRef.setIdPickupLocationRef(idPickupLocationRef);
+      pickupLocationRef.setAddress(address);
+      pickupLocationRef.setCity(city);
+      pickupLocationRef.setPostalCode(postalCode);
+      pickupLocationRef.setTitle(title);
 
-        pickupLocationRefs.add(pickupLocationRef);
-      }
-
-    } catch (Exception e) {
-      e.printStackTrace();
+      pickupLocationRefs.add(pickupLocationRef);
     }
+
     return pickupLocationRefs;
   }
 
   @Override
-  public boolean save(PickupLocationRef pickupLocationRef) {
+  public boolean save(PickupLocationRef pickupLocationRef) throws SQLException {
 
-    String sql = "INSERT INTO pickuplocationref(address,city,postalCode)VALUES(?,?,?)";
-    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+    String sql = "INSERT INTO pickuplocationref(address,city,postalCode, title)VALUES(?,?,?,?)";
+    PreparedStatement psts = conn.prepareStatement(sql);
 
-      psts.setString(1, pickupLocationRef.getAddress());
-      psts.setString(2, pickupLocationRef.getCity());
-      psts.setInt(3, pickupLocationRef.getPostalCode());
+    psts.setString(1, pickupLocationRef.getAddress());
+    psts.setString(2, pickupLocationRef.getCity());
+    psts.setInt(3, pickupLocationRef.getPostalCode());
+    psts.setString(4, pickupLocationRef.getTitle());
 
-      int executeUpdate = psts.executeUpdate();
+    int executeUpdate = psts.executeUpdate();
 
-      if (executeUpdate == 1) {
-        System.out.println("Location Reference is saved.");
-        return true;
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
+    if (executeUpdate == 1) {
+      System.out.println("Location Reference is saved.");
+      return true;
     }
+
     return false;
   }
 
   @Override
-  public boolean update(PickupLocationRef pickupLocationRef) {
+  public boolean update(PickupLocationRef pickupLocationRef) throws SQLException {
 
-    String sql = "UPDATE pickuplocationref set address=?, city=?, postalCode=? WHERE idPickupLocationRef=?;";
-    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+    String sql = "UPDATE pickuplocationref set address=?, city=?, postalCode=?, title=? WHERE idPickupLocationRef=?;";
+    PreparedStatement psts = conn.prepareStatement(sql);
 
-      psts.setString(1, pickupLocationRef.getAddress());
-      psts.setString(2, pickupLocationRef.getCity());
-      psts.setInt(3, pickupLocationRef.getPostalCode());
-      psts.setInt(4, pickupLocationRef.getIdPickupLocationRef());
+    psts.setString(1, pickupLocationRef.getAddress());
+    psts.setString(2, pickupLocationRef.getCity());
+    psts.setInt(3, pickupLocationRef.getPostalCode());
+    psts.setString(4, pickupLocationRef.getTitle());
+    psts.setInt(5, pickupLocationRef.getIdPickupLocationRef());
 
-      int executeUpdate = psts.executeUpdate();
+    int executeUpdate = psts.executeUpdate();
 
-      if (executeUpdate == 1) {
-        System.out.println("Location Reference is updated.");
-        return true;
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
+    if (executeUpdate == 1) {
+      System.out.println("Location Reference is updated.");
+      return true;
     }
+
     return false;
   }
 
   @Override
-  public boolean delete(Integer id) {
+  public boolean delete(Integer id) throws SQLException {
 
     String sql = "DELETE FROM pickuplocation WHERE idPickupLocation=?;";
-    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+    PreparedStatement psts = conn.prepareStatement(sql);
 
-      psts.setInt(1, id);
+    psts.setInt(1, id);
 
-      int executeUpdate = psts.executeUpdate();
+    int executeUpdate = psts.executeUpdate();
 
-      if (executeUpdate == 1) {
-        System.out.println("Location Reference with ID " + id + " is deleted.::");
-        return true;
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
+    if (executeUpdate == 1) {
+      System.out.println("Location Reference with ID " + id + " is deleted.::");
+      return true;
     }
 
     return false;

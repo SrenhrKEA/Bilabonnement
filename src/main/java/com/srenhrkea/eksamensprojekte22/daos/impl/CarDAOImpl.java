@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -19,33 +20,27 @@ public class CarDAOImpl implements CarDAO {
   private Connection conn = DatabaseConnectionManager.getConnection();
 
   @Override
-  public Optional<Car> get(String id) {
+  public Optional<Car> get(String id) throws SQLException {
     Car car = null;
     String sql = "SELECT *FROM car WHERE idCarVIN=?";
-    try (PreparedStatement psts = conn.prepareStatement(sql)) {
 
-      psts.setString(1, id);
+    PreparedStatement psts = conn.prepareStatement(sql);
+    psts.setString(1, id);
 
-      ResultSet rs = psts.executeQuery();
-      if (rs.next()) {
-        String idCarVIN = rs.getString("idCarVIN");
-        boolean isAvailable = rs.getBoolean("isAvailable");
-        double initialKilometrage = rs.getDouble("initialKilometrage");
-        String regNo = rs.getString("regNo");
-        int idLease = rs.getInt("LeaseidLease");
-        int idCarType = rs.getInt("CarTypeRefidCarTypeRef");
+    ResultSet rs = psts.executeQuery();
+    if (rs.next()) {
+      String idCarVIN = rs.getString("idCarVIN");
+      boolean isAvailable = rs.getBoolean("isAvailable");
+      double initialKilometrage = rs.getDouble("initialKilometrage");
+      String regNo = rs.getString("regNo");
+      int idCarType = rs.getInt("CarTypeRefidCarTypeRef");
 
-        car = new Car();
-        car.setIdCarVIN(idCarVIN);
-        car.setAvailable(isAvailable);
-        car.setInitialKilometrage(initialKilometrage);
-        car.setRegNo(regNo);
-        car.setIdLease(idLease);
-        car.setIdCarType(idCarType);
-      }
-
-    } catch (Exception e) {
-      e.printStackTrace();
+      car = new Car();
+      car.setIdCarVIN(idCarVIN);
+      car.setAvailable(isAvailable);
+      car.setInitialKilometrage(initialKilometrage);
+      car.setRegNo(regNo);
+      car.setIdCarType(idCarType);
     }
 
     assert car != null;
@@ -53,173 +48,119 @@ public class CarDAOImpl implements CarDAO {
   }
 
   @Override
-  public Collection<Car> getAll() {
+  public Collection<Car> getAll() throws SQLException {
 
     List<Car> cars = new ArrayList<>();
     String sql = "SELECT *FROM car";
-    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+    PreparedStatement psts = conn.prepareStatement(sql);
+    ResultSet rs = psts.executeQuery();
+    while (rs.next()) {
+      String idCarVIN = rs.getString("idCarVIN");
+      boolean isAvailable = rs.getBoolean("isAvailable");
+      double initialKilometrage = rs.getDouble("initialKilometrage");
+      String regNo = rs.getString("regNo");
+      int idCarType = rs.getInt("CarTypeRefidCarTypeRef");
 
-      ResultSet rs = psts.executeQuery();
-      while (rs.next()) {
-        String idCarVIN = rs.getString("idCarVIN");
-        boolean isAvailable = rs.getBoolean("isAvailable");
-        double initialKilometrage = rs.getDouble("initialKilometrage");
-        String regNo = rs.getString("regNo");
-        int idLease = rs.getInt("LeaseidLease");
-        int idCarType = rs.getInt("CarTypeRefidCarTypeRef");
+      Car car = new Car();
+      car.setIdCarVIN(idCarVIN);
+      car.setAvailable(isAvailable);
+      car.setInitialKilometrage(initialKilometrage);
+      car.setRegNo(regNo);
+      car.setIdCarType(idCarType);
 
-        Car car = new Car();
-        car.setIdCarVIN(idCarVIN);
-        car.setAvailable(isAvailable);
-        car.setInitialKilometrage(initialKilometrage);
-        car.setRegNo(regNo);
-        car.setIdLease(idLease);
-        car.setIdCarType(idCarType);
-
-        cars.add(car);
-      }
-
-    } catch (Exception e) {
-      e.printStackTrace();
+      cars.add(car);
     }
+
     return cars;
   }
 
   @Override
-  public Collection<Car> getAllByIdLease(Integer id) {
-
-    List<Car> cars = new ArrayList<>();
-    String sql = "SELECT *FROM car WHERE LeaseidLease=?";
-    try (PreparedStatement psts = conn.prepareStatement(sql)) {
-      psts.setInt(1, id);
-
-      ResultSet rs = psts.executeQuery();
-      while (rs.next()) {
-        String idCarVIN = rs.getString("idCarVIN");
-        boolean isAvailable = rs.getBoolean("isAvailable");
-        double initialKilometrage = rs.getDouble("initialKilometrage");
-        String regNo = rs.getString("regNo");
-        int idLease = rs.getInt("LeaseidLease");
-        int idCarType = rs.getInt("CarTypeRefidCarTypeRef");
-
-        Car car = new Car();
-        car.setIdCarVIN(idCarVIN);
-        car.setAvailable(isAvailable);
-        car.setInitialKilometrage(initialKilometrage);
-        car.setRegNo(regNo);
-        car.setIdLease(idLease);
-        car.setIdCarType(idCarType);
-
-        cars.add(car);
-      }
-
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return cars;
-  }
-
-  @Override
-  public Collection<Car> getAllByIdCarTypeRef(Integer id) {
+  public Collection<Car> getAllByIdCarTypeRef(Integer id) throws SQLException {
 
     List<Car> cars = new ArrayList<>();
     String sql = "SELECT *FROM car WHERE idCarVIN=?";
-    try (PreparedStatement psts = conn.prepareStatement(sql)) {
-      psts.setInt(1, id);
+    PreparedStatement psts = conn.prepareStatement(sql);
+    psts.setInt(1, id);
 
-      ResultSet rs = psts.executeQuery();
-      while (rs.next()) {
-        String idCarVIN = rs.getString("idCarVIN");
-        boolean isAvailable = rs.getBoolean("isAvailable");
-        double initialKilometrage = rs.getDouble("initialKilometrage");
-        String regNo = rs.getString("regNo");
-        int idLease = rs.getInt("LeaseidLease");
-        int idCarType = rs.getInt("CarTypeRefidCarTypeRef");
+    ResultSet rs = psts.executeQuery();
+    while (rs.next()) {
+      String idCarVIN = rs.getString("idCarVIN");
+      boolean isAvailable = rs.getBoolean("isAvailable");
+      double initialKilometrage = rs.getDouble("initialKilometrage");
+      String regNo = rs.getString("regNo");
+      int idCarType = rs.getInt("CarTypeRefidCarTypeRef");
 
-        Car car = new Car();
-        car.setIdCarVIN(idCarVIN);
-        car.setAvailable(isAvailable);
-        car.setInitialKilometrage(initialKilometrage);
-        car.setRegNo(regNo);
-        car.setIdLease(idLease);
-        car.setIdCarType(idCarType);
+      Car car = new Car();
+      car.setIdCarVIN(idCarVIN);
+      car.setAvailable(isAvailable);
+      car.setInitialKilometrage(initialKilometrage);
+      car.setRegNo(regNo);
+      car.setIdCarType(idCarType);
 
-        cars.add(car);
-      }
-
-    } catch (Exception e) {
-      e.printStackTrace();
+      cars.add(car);
     }
     return cars;
   }
 
   @Override
-  public boolean save(Car car) {
+  public boolean save(Car car) throws SQLException {
 
-    String sql = "INSERT INTO car (idCarVIN, isAvailable,initialKilometrage,regNo,LeaseidLease,CarTypeRefidCarTypeRef)VALUES(?,?,?,?,?,?)";
-    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+    String sql = "INSERT INTO car (idCarVIN, isAvailable,initialKilometrage,regNo,CarTypeRefidCarTypeRef)VALUES(?,?,?,?,?)";
+    PreparedStatement psts = conn.prepareStatement(sql);
 
-      psts.setString(1, car.getIdCarVIN());
-      psts.setBoolean(2, car.isAvailable());
-      psts.setDouble(3, car.getInitialKilometrage());
-      psts.setString(4, car.getRegNo());
-      psts.setInt(5, car.getIdLease());
-      psts.setInt(6, car.getIdCarType());
+    psts.setString(1, car.getIdCarVIN());
+    psts.setBoolean(2, car.isAvailable());
+    psts.setDouble(3, car.getInitialKilometrage());
+    psts.setString(4, car.getRegNo());
+    psts.setInt(5, car.getIdCarTypeRef());
 
-      int executeUpdate = psts.executeUpdate();
+    int executeUpdate = psts.executeUpdate();
 
-      if (executeUpdate == 1) {
-        System.out.println("Car is saved.");
-        return true;
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
+    if (executeUpdate == 1) {
+      System.out.println("Car is saved.");
+      return true;
     }
+
     return false;
   }
 
   @Override
-  public boolean update(Car car) {
+  public boolean update(Car car) throws SQLException {
 
-    String sql = "UPDATE car set isAvailable=?, initialKilometrage=?, regNo=?, LeaseidLease=?, CarTypeRefidCarTypeRef=? WHERE idCarVIN=?;";
-    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+    String sql = "UPDATE car set isAvailable=?, initialKilometrage=?, regNo=?, CarTypeRefidCarTypeRef=? WHERE idCarVIN=?;";
+    PreparedStatement psts = conn.prepareStatement(sql);
 
-      psts.setBoolean(1, car.isAvailable());
-      psts.setDouble(2, car.getInitialKilometrage());
-      psts.setString(3, car.getRegNo());
-      psts.setInt(4, car.getIdLease());
-      psts.setInt(5, car.getIdCarType());
-      psts.setString(6, car.getIdCarVIN());
+    psts.setBoolean(1, car.isAvailable());
+    psts.setDouble(2, car.getInitialKilometrage());
+    psts.setString(3, car.getRegNo());
+    psts.setInt(4, car.getIdCarTypeRef());
+    psts.setString(5, car.getIdCarVIN());
 
-      int executeUpdate = psts.executeUpdate();
+    int executeUpdate = psts.executeUpdate();
 
-      if (executeUpdate == 1) {
-        System.out.println("Car is updated.");
-        return true;
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
+    if (executeUpdate == 1) {
+      System.out.println("Car is updated.");
+      return true;
     }
+
     return false;
   }
 
   @Override
-  public boolean delete(String id) {
+  public boolean delete(String id) throws SQLException {
 
     String sql = "DELETE FROM car WHERE idCarVIN=?;";
-    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+    PreparedStatement psts = conn.prepareStatement(sql);
 
-      psts.setString(1, id);
+    psts.setString(1, id);
 
-      int executeUpdate = psts.executeUpdate();
+    int executeUpdate = psts.executeUpdate();
 
-      if (executeUpdate == 1) {
-        System.out.println("Car Type Reference with ID " + id + " is deleted.::");
-        return true;
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
+    if (executeUpdate == 1) {
+      System.out.println("Car Type Reference with ID " + id + " is deleted.::");
+      return true;
     }
+
 
     return false;
   }

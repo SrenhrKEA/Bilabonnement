@@ -2,14 +2,15 @@ package com.srenhrkea.eksamensprojekte22.models;
 
 public class PickupLocationRef {
   private int idPickupLocationRef, postalCode;
-  private String address, city;
+  private String title, address, city;
 
   public PickupLocationRef() {
   }
 
-  public PickupLocationRef(int idPickupLocationRef, int postalCode, String address, String city) {
+  public PickupLocationRef(int idPickupLocationRef, int postalCode, String title, String address, String city) {
     this.idPickupLocationRef = idPickupLocationRef;
     this.postalCode = postalCode;
+    this.title = title;
     this.address = address;
     this.city = city;
   }
@@ -28,6 +29,14 @@ public class PickupLocationRef {
 
   public void setPostalCode(int postalCode) {
     this.postalCode = postalCode;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
   }
 
   public String getAddress() {
@@ -51,6 +60,7 @@ public class PickupLocationRef {
     return "PickupLocationRef{" +
         "idPickupLocationRef=" + idPickupLocationRef +
         ", postalCode=" + postalCode +
+        ", title='" + title + '\'' +
         ", address='" + address + '\'' +
         ", city='" + city + '\'' +
         '}';

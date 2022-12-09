@@ -33,14 +33,14 @@ public class signinController {
       user = userService.AuthenticateUser(userDTO.getUsername(), userDTO.getPassword());
     } catch (Exception e) {
       System.out.println(e.getMessage());
-      redirectAttributes.addFlashAttribute("message", "Login failed. Invalid username or password");
+      redirectAttributes.addFlashAttribute("message", "Log ind fejlede. Dit brugernavn eller kodeord er angivet forkert");
       return "redirect:/signin";
     }
     if (user != null) {
       setLoginSessionAttributes(session, user);
       return "redirect:/employee";
     } else {
-      redirectAttributes.addFlashAttribute("message", "Login failed. Invalid username or password");
+      redirectAttributes.addFlashAttribute("message", "Log ind fejlede. Dit brugernavn eller kodeord er angivet forkert");
       return "redirect:/signin";
     }
   }

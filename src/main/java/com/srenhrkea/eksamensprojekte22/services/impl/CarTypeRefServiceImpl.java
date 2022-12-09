@@ -5,6 +5,7 @@ import com.srenhrkea.eksamensprojekte22.models.CarTypeRef;
 import com.srenhrkea.eksamensprojekte22.services.CarTypeRefService;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,45 +20,29 @@ public class CarTypeRefServiceImpl implements CarTypeRefService {
 
 
   @Override
-  public CarTypeRef getCarTypeRefById(int id) {
-    Optional<CarTypeRef> optional = carTypeRefDAO.get(id);
-    CarTypeRef carTypeRef;
-    if (optional.isPresent()) {
-      carTypeRef = optional.get();
-    } else {
-      throw new RuntimeException(" CarTypeRef with ID: " + id + " does not exist");
-    }
-    return carTypeRef;
+  public CarTypeRef getCarTypeRefById(int id) throws Exception {
+    Optional<CarTypeRef> carTypeRef = carTypeRefDAO.get(id);
+    return carTypeRef.orElseThrow(
+        () -> new Exception("A carTypeRef with ID: " + id + ", does not exist."));
   }
 
   @Override
-  public List<CarTypeRef> getAllCarTypeRefs() {
+  public List<CarTypeRef> getAllCarTypeRefs() throws SQLException {
     return (List<CarTypeRef>) carTypeRefDAO.getAll();
   }
 
   @Override
-  public void saveCarTypeRef(CarTypeRef carTypeRef) {
-    this.carTypeRefDAO.save(carTypeRef);
+  public boolean saveCarTypeRef(CarTypeRef carTypeRef) throws SQLException {
+    return carTypeRefDAO.save(carTypeRef);
   }
 
   @Override
-  public void updateCarTypeRef(CarTypeRef carTypeRef) {
-    int idCarTypeRef = carTypeRef.getIdCarTypeRef();
-    Optional<CarTypeRef> optional = carTypeRefDAO.get(idCarTypeRef);
-    if (optional.isPresent()) {
-      carTypeRefDAO.update(carTypeRef);
-    } else {
-      throw new RuntimeException(" CarTypeRef with ID: " + idCarTypeRef + " does not exist");
-    }
+  public boolean updateCarTypeRef(CarTypeRef carTypeRef) throws SQLException {
+    return carTypeRefDAO.update(carTypeRef);
   }
 
   @Override
-  public void deleteCarTypeRefById(int id) {
-    Optional<CarTypeRef> optional = carTypeRefDAO.get(id);
-    if (optional.isPresent()) {
-      this.carTypeRefDAO.delete(id);
-    } else {
-      throw new RuntimeException(" CarTypeRef with ID: " + id + " does not exist");
-    }
+  public boolean deleteCarTypeRefById(int id) throws SQLException {
+    return carTypeRefDAO.delete(id);
   }
 }

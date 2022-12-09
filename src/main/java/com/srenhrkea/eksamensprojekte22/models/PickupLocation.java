@@ -12,13 +12,6 @@ public class PickupLocation extends PickupLocationRef {
     this.idLease = idLease;
   }
 
-/*  public PickupLocation(int idPickupLocationRef, int postalCode, String address, String city, int idPickupLocation, int idPickupLocationRef1, int idLease) {
-    super(idPickupLocationRef, postalCode, address, city);
-    this.idPickupLocation = idPickupLocation;
-    this.idPickupLocationRef = idPickupLocationRef1;
-    this.idLease = idLease;
-  }*/
-
   public int getIdPickupLocation() {
     return idPickupLocation;
   }

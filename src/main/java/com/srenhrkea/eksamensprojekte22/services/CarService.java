@@ -2,22 +2,21 @@ package com.srenhrkea.eksamensprojekte22.services;
 
 import com.srenhrkea.eksamensprojekte22.models.Car;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface CarService {
 
-  Car getCarById(String id);
+  Car getCarById(String id) throws Exception;
 
-  List<Car> getAllCars();
+  List<Car> getAllCars() throws SQLException;
 
-  List<Car> getAllCarsByIdLease(int id);
+  List<Car> getAllCarsByIdCarTypeRef(int id) throws SQLException;
 
-  List<Car> getAllCarsByIdCarTypeRef(int id);
+  boolean saveCar(Car car) throws SQLException;
 
-  void saveCar(Car car);
+  boolean updateCar(Car car) throws SQLException;
 
-  void updateCar(Car car);
-
-  void deleteCarById(String id);
+  boolean deleteCarById(String id) throws SQLException;
 
 }

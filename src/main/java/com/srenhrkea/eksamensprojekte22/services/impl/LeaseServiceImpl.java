@@ -5,6 +5,7 @@ import com.srenhrkea.eksamensprojekte22.models.Lease;
 import com.srenhrkea.eksamensprojekte22.services.LeaseService;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,50 +19,34 @@ public class LeaseServiceImpl implements LeaseService {
   }
 
   @Override
-  public Lease getLeaseById(int id) {
-    Optional<Lease> optional = leaseDAO.get(id);
-    Lease lease;
-    if (optional.isPresent()) {
-      lease = optional.get();
-    } else {
-      throw new RuntimeException(" Lease with ID: " + id + " does not exist");
-    }
-    return lease;
+  public Lease getLeaseById(int id) throws Exception {
+    Optional<Lease> lease = leaseDAO.get(id);
+    return lease.orElseThrow(
+        () -> new Exception("A lease with ID: " + id + ", does not exist."));
   }
 
   @Override
-  public List<Lease> getAllLeases() {
+  public List<Lease> getAllLeases() throws SQLException {
     return (List<Lease>) leaseDAO.getAll();
   }
 
   @Override
-  public List<Lease> getAllLeasesByIdCustomer(int id) {
+  public List<Lease> getAllLeasesByIdCustomer(int id) throws SQLException {
     return (List<Lease>) leaseDAO.getAllByIdCustomer(id);
   }
 
   @Override
-  public void saveLease(Lease lease) {
-    this.leaseDAO.save(lease);
+  public boolean saveLease(Lease lease) throws SQLException {
+    return leaseDAO.save(lease);
   }
 
   @Override
-  public void updateLease(Lease lease) {
-    int idLease = lease.getIdLease();
-    Optional<Lease> optional = leaseDAO.get(idLease);
-    if (optional.isPresent()) {
-      leaseDAO.update(lease);
-    } else {
-      throw new RuntimeException(" Lease with ID: " + idLease + " does not exist");
-    }
+  public boolean updateLease(Lease lease) throws SQLException {
+    return leaseDAO.update(lease);
   }
 
   @Override
-  public void deleteLeaseById(int id) {
-    Optional<Lease> optional = leaseDAO.get(id);
-    if (optional.isPresent()) {
-      this.leaseDAO.delete(id);
-    } else {
-      throw new RuntimeException(" Lease with ID: " + id + " does not exist");
-    }
+  public boolean deleteLeaseById(int id) throws SQLException {
+    return leaseDAO.delete(id);
   }
 }

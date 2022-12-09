@@ -2,20 +2,21 @@ package com.srenhrkea.eksamensprojekte22.services;
 
 import com.srenhrkea.eksamensprojekte22.models.DamageReport;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface DamageReportService {
 
-  DamageReport getDamageReportById(int id);
+  DamageReport getDamageReportById(int id) throws Exception;
 
-  List<DamageReport> getAllDamageReports();
+  List<DamageReport> getAllDamageReports() throws SQLException;
 
-  List<DamageReport> getAllDamageReportsByIdCarVIN(String id);
+  List<DamageReport> getAllDamageReportsByIdCarVIN(String id) throws SQLException;
 
-  void saveDamageReport(DamageReport damageReport);
+  boolean saveDamageReport(DamageReport damageReport) throws SQLException;
 
-  void updateDamageReport(DamageReport damageReport);
+  boolean updateDamageReport(DamageReport damageReport) throws SQLException;
 
-  void deleteDamageReportById(int id);
+  boolean deleteDamageReportById(int id) throws SQLException;
 
 }

@@ -1,15 +1,14 @@
 package com.srenhrkea.eksamensprojekte22.models;
 
 public class Customer {
-  private int idCustomer, licenceNo, postalCode;
-  private String firstName, lastName, address, city, contactNo, email, nationality;
+  private int idCustomer, postalCode;
+  private String firstName, lastName, address, city, contactNo, email, nationality, licenceNo;
 
   public Customer() {
   }
 
-  public Customer(int idCustomer, int licenceNo, int postalCode, String firstName, String lastName, String address, String city, String contactNo, String email, String nationality) {
+  public Customer(int idCustomer, int postalCode, String firstName, String lastName, String address, String city, String contactNo, String email, String nationality, String licenceNo) {
     this.idCustomer = idCustomer;
-    this.licenceNo = licenceNo;
     this.postalCode = postalCode;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -18,6 +17,7 @@ public class Customer {
     this.contactNo = contactNo;
     this.email = email;
     this.nationality = nationality;
+    this.licenceNo = licenceNo;
   }
 
   public int getIdCustomer() {
@@ -26,14 +26,6 @@ public class Customer {
 
   public void setIdCustomer(int idCustomer) {
     this.idCustomer = idCustomer;
-  }
-
-  public int getLicenceNo() {
-    return licenceNo;
-  }
-
-  public void setLicenceNo(int licenceNo) {
-    this.licenceNo = licenceNo;
   }
 
   public int getPostalCode() {
@@ -100,11 +92,18 @@ public class Customer {
     this.nationality = nationality;
   }
 
+  public String getLicenceNo() {
+    return licenceNo;
+  }
+
+  public void setLicenceNo(String licenceNo) {
+    this.licenceNo = licenceNo;
+  }
+
   @Override
   public String toString() {
     return "Customer{" +
         "idCustomer=" + idCustomer +
-        ", licenceNo=" + licenceNo +
         ", postalCode=" + postalCode +
         ", firstName='" + firstName + '\'' +
         ", lastName='" + lastName + '\'' +
@@ -113,6 +112,7 @@ public class Customer {
         ", contactNo='" + contactNo + '\'' +
         ", email='" + email + '\'' +
         ", nationality='" + nationality + '\'' +
+        ", licenceNo='" + licenceNo + '\'' +
         '}';
   }
 }

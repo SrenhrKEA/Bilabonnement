@@ -9,11 +9,14 @@ public class Lease {
   private Date dateOfRent, DateOfReturn;
   private SubscriptionType subscriptionType;
 
+  private String idCarVIN;
+
   public Lease() {
   }
 
-  public Lease(int idLease, int durationMonths, int idCustomer, Date dateOfRent, Date dateOfReturn, SubscriptionType subscriptionType) {
+  public Lease(int idLease, String idCarVIN, int durationMonths, int idCustomer, Date dateOfRent, Date dateOfReturn, SubscriptionType subscriptionType) {
     this.idLease = idLease;
+    this.idCarVIN = idCarVIN;
     this.durationMonths = durationMonths;
     this.idCustomer = idCustomer;
     this.dateOfRent = dateOfRent;
@@ -27,6 +30,14 @@ public class Lease {
 
   public void setIdLease(int idLease) {
     this.idLease = idLease;
+  }
+
+  public String getIdCarVIN() {
+    return idCarVIN;
+  }
+
+  public void setIdCarVIN(String idCarVIN) {
+    this.idCarVIN = idCarVIN;
   }
 
   public int getDurationMonths() {
@@ -73,6 +84,7 @@ public class Lease {
   public String toString() {
     return "Lease{" +
         "idLease=" + idLease +
+        ", idCarVIN=" + idCarVIN +
         ", durationMonths=" + durationMonths +
         ", idCustomer=" + idCustomer +
         ", dateOfRent=" + dateOfRent +

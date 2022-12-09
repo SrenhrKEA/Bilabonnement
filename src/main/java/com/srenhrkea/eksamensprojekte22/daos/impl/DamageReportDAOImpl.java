@@ -8,156 +8,142 @@ import org.springframework.stereotype.Repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
+
 @Repository
 public class DamageReportDAOImpl implements DamageReportDAO {
 
   private Connection conn = DatabaseConnectionManager.getConnection();
 
   @Override
-  public Optional<DamageReport> get(Integer id) {
+  public Optional<DamageReport> get(Integer id) throws SQLException {
     DamageReport damageReport = null;
     String sql = "SELECT *FROM damagereport WHERE idDamageReport=?";
-    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+    PreparedStatement psts = conn.prepareStatement(sql);
 
-      psts.setInt(1, id);
+    psts.setInt(1, id);
 
-      ResultSet rs = psts.executeQuery();
-      if (rs.next()) {
-        int idDamageReport = rs.getInt("idDamageReport");
-        String idCarVIN = rs.getString("CaridCarVIN");
-        Date dateOfReport = rs.getDate("dateOfReport");
+    ResultSet rs = psts.executeQuery();
+    if (rs.next()) {
+      int idDamageReport = rs.getInt("idDamageReport");
+      String idCarVIN = rs.getString("CaridCarVIN");
+      Date dateOfReport = rs.getDate("dateOfReport");
 
-        damageReport = new DamageReport();
-        damageReport.setIdDamageReport(idDamageReport);
-        damageReport.setIdCarVIN(idCarVIN);
-        damageReport.setDateOfReport(dateOfReport);
+      damageReport = new DamageReport();
+      damageReport.setIdDamageReport(idDamageReport);
+      damageReport.setIdCarVIN(idCarVIN);
+      damageReport.setDateOfReport(dateOfReport);
 
-      }
-
-    } catch (Exception e) {
-      e.printStackTrace();
     }
+
 
     assert damageReport != null;
     return Optional.of(damageReport);
   }
 
   @Override
-  public Collection<DamageReport> getAll() {
+  public Collection<DamageReport> getAll() throws SQLException {
 
     List<DamageReport> damageReports = new ArrayList<>();
     String sql = "SELECT *FROM damagereport";
-    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+    PreparedStatement psts = conn.prepareStatement(sql);
 
-      ResultSet rs = psts.executeQuery();
-      while (rs.next()) {
-        int idDamageReport = rs.getInt("idDamageReport");
-        String idCarVIN = rs.getString("CaridCarVIN");
-        Date dateOfReport = rs.getDate("dateOfReport");
+    ResultSet rs = psts.executeQuery();
+    while (rs.next()) {
+      int idDamageReport = rs.getInt("idDamageReport");
+      String idCarVIN = rs.getString("CaridCarVIN");
+      Date dateOfReport = rs.getDate("dateOfReport");
 
-        DamageReport damageReport = new DamageReport();
-        damageReport.setIdDamageReport(idDamageReport);
-        damageReport.setIdCarVIN(idCarVIN);
-        damageReport.setDateOfReport(dateOfReport);
+      DamageReport damageReport = new DamageReport();
+      damageReport.setIdDamageReport(idDamageReport);
+      damageReport.setIdCarVIN(idCarVIN);
+      damageReport.setDateOfReport(dateOfReport);
 
-        damageReports.add(damageReport);
-      }
-
-    } catch (Exception e) {
-      e.printStackTrace();
+      damageReports.add(damageReport);
     }
+
     return damageReports;
   }
 
   @Override
-  public Collection<DamageReport> getAllByIdCarVIN(String id) {
+  public Collection<DamageReport> getAllByIdCarVIN(String id) throws SQLException {
 
     List<DamageReport> damageReports = new ArrayList<>();
     String sql = "SELECT *FROM damagereport WHERE CaridCarVIN=?";
-    try (PreparedStatement psts = conn.prepareStatement(sql)) {
-      psts.setString(1, id);
+    PreparedStatement psts = conn.prepareStatement(sql);
+    psts.setString(1, id);
 
-      ResultSet rs = psts.executeQuery();
-      while (rs.next()) {
-        int idDamageReport = rs.getInt("idDamageReport");
-        String idCarVIN = rs.getString("CaridCarVIN");
-        Date dateOfReport = rs.getDate("dateOfReport");
+    ResultSet rs = psts.executeQuery();
+    while (rs.next()) {
+      int idDamageReport = rs.getInt("idDamageReport");
+      String idCarVIN = rs.getString("CaridCarVIN");
+      Date dateOfReport = rs.getDate("dateOfReport");
 
-        DamageReport damageReport = new DamageReport();
-        damageReport.setIdDamageReport(idDamageReport);
-        damageReport.setIdCarVIN(idCarVIN);
-        damageReport.setDateOfReport(dateOfReport);
+      DamageReport damageReport = new DamageReport();
+      damageReport.setIdDamageReport(idDamageReport);
+      damageReport.setIdCarVIN(idCarVIN);
+      damageReport.setDateOfReport(dateOfReport);
 
-        damageReports.add(damageReport);
-      }
-
-    } catch (Exception e) {
-      e.printStackTrace();
+      damageReports.add(damageReport);
     }
+
     return damageReports;
   }
 
   @Override
-  public boolean save(DamageReport damageReport) {
+  public boolean save(DamageReport damageReport) throws SQLException {
 
     String sql = "INSERT INTO damagereport (CaridCarVIN,dateOfReport)VALUES(?,?)";
-    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+    PreparedStatement psts = conn.prepareStatement(sql);
 
-      psts.setString(1, damageReport.getIdCarVIN());
-      psts.setString(2, String.valueOf(damageReport.getDateOfReport()));
+    psts.setString(1, damageReport.getIdCarVIN());
+    psts.setString(2, String.valueOf(damageReport.getDateOfReport()));
 
 
-      int executeUpdate = psts.executeUpdate();
+    int executeUpdate = psts.executeUpdate();
 
-      if (executeUpdate == 1) {
-        System.out.println("Damage Report is saved.");
-        return true;
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
+    if (executeUpdate == 1) {
+      System.out.println("Damage Report is saved.");
+      return true;
     }
+
     return false;
   }
 
   @Override
-  public boolean update(DamageReport damageReport) {
+  public boolean update(DamageReport damageReport) throws SQLException {
 
     String sql = "UPDATE damagereport set CaridCarVIN=?, dateOfReport=? WHERE idDamageReport=?;";
-    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+    PreparedStatement psts = conn.prepareStatement(sql);
 
-      psts.setString(1, damageReport.getIdCarVIN());
-      psts.setString(2, String.valueOf(damageReport.getDateOfReport()));
-      psts.setInt(3, damageReport.getIdDamageReport());
+    psts.setString(1, damageReport.getIdCarVIN());
+    psts.setString(2, String.valueOf(damageReport.getDateOfReport()));
+    psts.setInt(3, damageReport.getIdDamageReport());
 
-      int executeUpdate = psts.executeUpdate();
+    int executeUpdate = psts.executeUpdate();
 
-      if (executeUpdate == 1) {
-        System.out.println("Damage Report is updated.");
-        return true;
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
+    if (executeUpdate == 1) {
+      System.out.println("Damage Report is updated.");
+      return true;
     }
+
     return false;
   }
 
   @Override
-  public boolean delete(Integer id) {
+  public boolean delete(Integer id) throws SQLException {
 
     String sql = "DELETE FROM damagereport WHERE idDamageReport=?;";
-    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+    PreparedStatement psts = conn.prepareStatement(sql);
 
-      psts.setInt(1, id);
+    psts.setInt(1, id);
 
-      int executeUpdate = psts.executeUpdate();
+    int executeUpdate = psts.executeUpdate();
 
-      if (executeUpdate == 1) {
-        System.out.println("Damage Report with ID " + id + " is deleted.::");
-        return true;
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
+    if (executeUpdate == 1) {
+      System.out.println("Damage Report with ID " + id + " is deleted.::");
+      return true;
     }
 
     return false;

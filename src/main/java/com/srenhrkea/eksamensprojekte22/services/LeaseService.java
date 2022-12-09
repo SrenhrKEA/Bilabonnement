@@ -2,19 +2,21 @@ package com.srenhrkea.eksamensprojekte22.services;
 
 import com.srenhrkea.eksamensprojekte22.models.Lease;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface LeaseService {
 
-  Lease getLeaseById(int id);
+  Lease getLeaseById(int id) throws Exception;
 
-  List<Lease> getAllLeases();
+  List<Lease> getAllLeases() throws SQLException;
 
-  List<Lease> getAllLeasesByIdCustomer(int id);
-  void saveLease(Lease lease);
+  List<Lease> getAllLeasesByIdCustomer(int id) throws SQLException;
 
-  void updateLease(Lease lease);
+  boolean saveLease(Lease lease) throws SQLException;
 
-  void deleteLeaseById(int id);
+  boolean updateLease(Lease lease) throws SQLException;
+
+  boolean deleteLeaseById(int id) throws SQLException;
 
 }

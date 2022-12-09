@@ -2,18 +2,19 @@ package com.srenhrkea.eksamensprojekte22.services;
 
 import com.srenhrkea.eksamensprojekte22.models.PickupLocationRef;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface PickupLocationRefService {
 
-  PickupLocationRef getPickupLocationRefById(int id);
+  PickupLocationRef getPickupLocationRefById(int id) throws Exception;
 
-  List<PickupLocationRef> getAllPickupLocationRefs();
+  List<PickupLocationRef> getAllPickupLocationRefs() throws SQLException;
 
-  void savePickupLocationRef(PickupLocationRef pickupLocationRef);
+  boolean savePickupLocationRef(PickupLocationRef pickupLocationRef) throws SQLException;
 
-  void updatePickupLocationRef(PickupLocationRef pickupLocationRef);
+  boolean updatePickupLocationRef(PickupLocationRef pickupLocationRef) throws SQLException;
 
-  void deletePickupLocationRefById(int id);
+  boolean deletePickupLocationRefById(int id) throws SQLException;
 
 }

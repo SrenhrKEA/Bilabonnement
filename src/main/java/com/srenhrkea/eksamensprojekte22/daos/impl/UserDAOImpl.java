@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -20,27 +21,23 @@ public class UserDAOImpl implements UserDAO {
   private Connection conn = DatabaseConnectionManager.getConnection();
 
   @Override
-  public Optional<User> get(String id) {
+  public Optional<User> get(String id) throws SQLException {
     User user = null;
     String sql = "SELECT *FROM user WHERE username=?";
-    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+    PreparedStatement psts = conn.prepareStatement(sql);
 
-      psts.setString(1, id);
+    psts.setString(1, id);
 
-      ResultSet rs = psts.executeQuery();
-      if (rs.next()) {
-        String username = rs.getString("username");
-        String password = rs.getString("´password´");
-        UserType userType = UserType.valueOf(rs.getString("userType"));
+    ResultSet rs = psts.executeQuery();
+    if (rs.next()) {
+      String username = rs.getString("username");
+      String password = rs.getString("´password´");
+      UserType userType = UserType.valueOf(rs.getString("userType"));
 
-        user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setUserType(userType);
-      }
-
-    } catch (Exception e) {
-      e.printStackTrace();
+      user = new User();
+      user.setUsername(username);
+      user.setPassword(password);
+      user.setUserType(userType);
     }
 
     assert user != null;
@@ -48,28 +45,24 @@ public class UserDAOImpl implements UserDAO {
   }
 
   @Override
-  public Optional<User> get(String id, String pw) {
+  public Optional<User> get(String id, String pw) throws SQLException {
     User user = null;
     String sql = "SELECT *FROM user WHERE username=? AND ´password´=?";
-    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+    PreparedStatement psts = conn.prepareStatement(sql);
 
-      psts.setString(1, id);
-      psts.setString(2, pw);
+    psts.setString(1, id);
+    psts.setString(2, pw);
 
-      ResultSet rs = psts.executeQuery();
-      if (rs.next()) {
-        String username = rs.getString("username");
-        String password = rs.getString("´password´");
-        UserType userType = UserType.valueOf(rs.getString("userType"));
+    ResultSet rs = psts.executeQuery();
+    if (rs.next()) {
+      String username = rs.getString("username");
+      String password = rs.getString("´password´");
+      UserType userType = UserType.valueOf(rs.getString("userType"));
 
-        user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setUserType(userType);
-      }
-
-    } catch (Exception e) {
-      e.printStackTrace();
+      user = new User();
+      user.setUsername(username);
+      user.setPassword(password);
+      user.setUserType(userType);
     }
 
     assert user != null;
@@ -77,51 +70,46 @@ public class UserDAOImpl implements UserDAO {
   }
 
   @Override
-  public Collection<User> getAll() {
+  public Collection<User> getAll() throws SQLException {
 
     List<User> users = new ArrayList<>();
     String sql = "SELECT *FROM user";
-    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+    PreparedStatement psts = conn.prepareStatement(sql);
 
-      ResultSet rs = psts.executeQuery();
-      while (rs.next()) {
-        String username = rs.getString("username");
-        String password = rs.getString("´password´");
-        UserType userType = UserType.valueOf(rs.getString("userType"));
+    ResultSet rs = psts.executeQuery();
+    while (rs.next()) {
+      String username = rs.getString("username");
+      String password = rs.getString("´password´");
+      UserType userType = UserType.valueOf(rs.getString("userType"));
 
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setUserType(userType);
+      User user = new User();
+      user.setUsername(username);
+      user.setPassword(password);
+      user.setUserType(userType);
 
-        users.add(user);
-      }
-
-    } catch (Exception e) {
-      e.printStackTrace();
+      users.add(user);
     }
+
     return users;
   }
 
   @Override
-  public boolean save(User user) {
+  public boolean save(User user) throws SQLException {
 
     String sql = "INSERT INTO user(username,´password´,userType)VALUES(?,?,?)";
-    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+    PreparedStatement psts = conn.prepareStatement(sql);
 
-      psts.setString(1, user.getUsername());
-      psts.setString(2, user.getPassword());
-      psts.setString(3, String.valueOf(user.getUserType()));
+    psts.setString(1, user.getUsername());
+    psts.setString(2, user.getPassword());
+    psts.setString(3, String.valueOf(user.getUserType()));
 
-      int executeUpdate = psts.executeUpdate();
+    int executeUpdate = psts.executeUpdate();
 
-      if (executeUpdate == 1) {
-        System.out.println("User is saved.");
-        return true;
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
+    if (executeUpdate == 1) {
+      System.out.println("User is saved.");
+      return true;
     }
+
     return false;
   }
 
@@ -131,44 +119,39 @@ public class UserDAOImpl implements UserDAO {
   }
 
   @Override
-  public boolean update(User user, String idNew) {
+  public boolean update(User user, String idNew) throws SQLException {
 
     String sql = "UPDATE user set username=?, ´password´=?, userType=? WHERE username=?;";
-    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+    PreparedStatement psts = conn.prepareStatement(sql);
 
-      psts.setString(1, idNew);
-      psts.setString(2, user.getPassword());
-      psts.setString(3, String.valueOf(user.getUserType()));
-      psts.setString(4, user.getUsername());
+    psts.setString(1, idNew);
+    psts.setString(2, user.getPassword());
+    psts.setString(3, String.valueOf(user.getUserType()));
+    psts.setString(4, user.getUsername());
 
-      int executeUpdate = psts.executeUpdate();
+    int executeUpdate = psts.executeUpdate();
 
-      if (executeUpdate == 1) {
-        System.out.println("User is updated.");
-        return true;
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
+    if (executeUpdate == 1) {
+      System.out.println("User is updated.");
+      return true;
     }
+
     return false;
   }
 
   @Override
-  public boolean delete(String id) {
+  public boolean delete(String id) throws SQLException {
 
     String sql = "DELETE FROM user WHERE username=?;";
-    try (PreparedStatement psts = conn.prepareStatement(sql)) {
+    PreparedStatement psts = conn.prepareStatement(sql);
 
-      psts.setString(1, id);
+    psts.setString(1, id);
 
-      int executeUpdate = psts.executeUpdate();
+    int executeUpdate = psts.executeUpdate();
 
-      if (executeUpdate == 1) {
-        System.out.println("User with username " + id + " is deleted.::");
-        return true;
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
+    if (executeUpdate == 1) {
+      System.out.println("User with username " + id + " is deleted.::");
+      return true;
     }
 
     return false;

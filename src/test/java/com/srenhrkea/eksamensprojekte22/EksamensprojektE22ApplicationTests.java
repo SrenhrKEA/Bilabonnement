@@ -35,7 +35,7 @@ class EksamensprojektE22ApplicationTests {
   @Test
   void daoMethodeTest () {
     /*System.out.println(leaseDAO.getAll(1));*/
-    System.out.println(leaseDAO.getAll());
+    /*System.out.println(leaseDAO.getAll());*/
   }
 
 }

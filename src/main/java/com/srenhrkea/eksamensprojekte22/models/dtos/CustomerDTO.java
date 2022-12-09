@@ -1,16 +1,8 @@
 package com.srenhrkea.eksamensprojekte22.models.dtos;
 
 public class CustomerDTO {
-  private int licenceNo, postalCode;
-  private String firstName, lastName, address, city, contactNo, email, nationality;
-
-  public int getLicenceNo() {
-    return licenceNo;
-  }
-
-  public void setLicenceNo(int licenceNo) {
-    this.licenceNo = licenceNo;
-  }
+  private int  postalCode;
+  private String firstName, lastName, address, city, contactNo, email, nationality, licenceNo;
 
   public int getPostalCode() {
     return postalCode;
@@ -74,5 +66,13 @@ public class CustomerDTO {
 
   public void setNationality(String nationality) {
     this.nationality = nationality;
+  }
+
+  public String getLicenceNo() {
+    return licenceNo;
+  }
+
+  public void setLicenceNo(String licenceNo) {
+    this.licenceNo = licenceNo;
   }
 }

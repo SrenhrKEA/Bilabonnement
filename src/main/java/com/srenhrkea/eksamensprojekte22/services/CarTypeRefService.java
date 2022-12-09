@@ -2,18 +2,19 @@ package com.srenhrkea.eksamensprojekte22.services;
 
 import com.srenhrkea.eksamensprojekte22.models.CarTypeRef;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface CarTypeRefService {
 
-  CarTypeRef getCarTypeRefById(int id);
+  CarTypeRef getCarTypeRefById(int id) throws Exception;
 
-  List<CarTypeRef> getAllCarTypeRefs();
+  List<CarTypeRef> getAllCarTypeRefs() throws SQLException;
 
-  void saveCarTypeRef(CarTypeRef carTypeRef);
+  boolean saveCarTypeRef(CarTypeRef carTypeRef) throws SQLException;
 
-  void updateCarTypeRef(CarTypeRef carTypeRef);
+  boolean updateCarTypeRef(CarTypeRef carTypeRef) throws SQLException;
 
-  void deleteCarTypeRefById(int id);
+  boolean deleteCarTypeRefById(int id) throws SQLException;
 
 }

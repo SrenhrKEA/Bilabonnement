@@ -5,6 +5,7 @@ import com.srenhrkea.eksamensprojekte22.models.Customer;
 import com.srenhrkea.eksamensprojekte22.services.CustomerService;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,45 +19,29 @@ public class CustomerServiceImpl implements CustomerService {
   }
 
   @Override
-  public Customer getCustomerById(int id) {
-    Optional<Customer> optional = customerDAO.get(id);
-    Customer customer;
-    if (optional.isPresent()) {
-      customer = optional.get();
-    } else {
-      throw new RuntimeException(" Customer with ID: " + id + " does not exist");
-    }
-    return customer;
+  public Customer getCustomerById(int id) throws Exception {
+    Optional<Customer> customer = customerDAO.get(id);
+    return customer.orElseThrow(
+        () -> new Exception("A customer with ID: " + id + ", does not exist."));
   }
 
   @Override
-  public List<Customer> getAllCustomers() {
+  public List<Customer> getAllCustomers() throws SQLException {
     return (List<Customer>) customerDAO.getAll();
   }
 
   @Override
-  public void saveCustomer(Customer customer) {
-    this.customerDAO.save(customer);
+  public boolean saveCustomer(Customer customer) throws SQLException {
+    return customerDAO.save(customer);
   }
 
   @Override
-  public void updateCustomer(Customer customer) {
-    int idCustomer = customer.getIdCustomer();
-    Optional<Customer> optional = customerDAO.get(idCustomer);
-    if (optional.isPresent()) {
-      customerDAO.update(customer);
-    } else {
-      throw new RuntimeException(" Customer with ID: " + idCustomer + " does not exist");
-    }
+  public boolean updateCustomer(Customer customer) throws SQLException {
+    return customerDAO.update(customer);
   }
 
   @Override
-  public void deleteCustomerById(int id) {
-    Optional<Customer> optional = customerDAO.get(id);
-    if (optional.isPresent()) {
-      this.customerDAO.delete(id);
-    } else {
-      throw new RuntimeException(" Customer with ID: " + id + " does not exist");
-    }
+  public boolean deleteCustomerById(int id) throws SQLException {
+    return customerDAO.delete(id);
   }
 }

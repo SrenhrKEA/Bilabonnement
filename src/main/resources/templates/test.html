@@ -8,6 +8,8 @@
     <title>Bootstrap Example</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <link href="/css/form-validation.css" rel="stylesheet">
+
 </head>
 <body>
 <!--SECTION: Dataregistrerings forms-->
@@ -25,117 +27,7 @@
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
                  data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <!--SECTION: Customer form-->
-                    <div class="col-md-7 col-lg-8">
-                        <h4 class="mb-3">Faktureringsadresse</h4>
-                        <form method="post" action="/form-create-customer" class="needs-validation" novalidate>
-                            <div class="row g-3">
-                                <div class="col-sm-6">
-                                    <label for="firstName" class="form-label">Fornavn <span
-                                            class="text-muted">(Required)</span></label>
-                                    <input name="firstName" type="text" class="form-control" id="firstName"
-                                           placeholder="eg. Jens"
-                                           value="" required>
-                                    <div class="invalid-feedback">
-                                        Valid first name is required.
-                                    </div>
-                                </div>
 
-                                <div class="col-sm-6">
-                                    <label for="lastName" class="form-label">Efternavn <span
-                                            class="text-muted">(Required)</span></label>
-                                    <input name="lastName" type="text" class="form-control" id="lastName"
-                                           placeholder="eg. Jensen"
-                                           value="" required>
-                                    <div class="invalid-feedback">
-                                        Valid last name is required.
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <label for="contactNo" class="form-label">Telefonnummer <span
-                                            class="text-muted">(Required)</span></label>
-                                    <input name="contactNo" type="tel" class="form-control" id="contactNo"
-                                           placeholder="eg. +45 12345678" required>
-                                    <div class="invalid-feedback">
-                                        Valid telephone number is required.
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <label for="email" class="form-label">Email <span
-                                            class="text-muted">(Required)</span></label>
-                                    <input name="email" type="email" class="form-control" id="email"
-                                           placeholder="eg. brugernavn@eksempel.com" required>
-                                    <div class="invalid-feedback">
-                                        Valid email is required.
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <label for="country" class="form-label">Nationalitet <span
-                                            class="text-muted">(Required)</span></label>
-                                    <select class="form-select country" name="country"
-                                            id="country" required>
-                                        <option disabled selected value>Vælg nationalitet...</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        Please select a valid country.
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <label for="address" class="form-label">Adresse <span
-                                            class="text-muted">(Required)</span></label>
-                                    <input name="address" type="text" class="form-control" id="address"
-                                           placeholder="eg. 1234 Hovedgaden, st th" required>
-                                    <div class="invalid-feedback">
-                                        Valid address is required.
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <label for="city" class="form-label">Bynavn <span
-                                            class="text-muted">(Required)</span></label>
-                                    <input name="city" type="text" class="form-control" id="city"
-                                           placeholder="eg. København" required>
-                                    <div class="invalid-feedback">
-                                        Valid city name is required.
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <label for="postalCode" class="form-label">Postnummer <span
-                                            class="text-muted">(Required)</span></label>
-                                    <input name="postalCode" type="text" class="form-control" id="postalCode"
-                                           placeholder="eg. 1234"
-                                           required>
-                                    <div class="invalid-feedback">
-                                        Valid postal code is required.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <br>
-                            <h4 class="mb-3">Gyldigt Kørekort</h4>
-                            <div class="row gy-3">
-                                <div class="col-12">
-                                    <label for="licenceNo" class="form-label">Kørekortsnummer <span
-                                            class="text-muted">(Required)</span></label>
-                                    <input name="licenceNo" type="text" class="form-control" id="licenceNo"
-                                           placeholder="eg. 12345678"
-                                           value="" required>
-                                    <div class="invalid-feedback">
-                                        Valid last name is required.
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <div>
-                                <button class="w-100 btn btn-primary btn-lg" type="submit">Forsæt
-                                </button>
-                            </div>
-                        </form>
-                    </div>
                 </div>
             </div>
         </div>
@@ -171,7 +63,7 @@
                                     <label for="durationMonths" class="form-label">Antal måneder <span
                                             class="text-muted">(Required)</span></label>
                                     <input name="durationMonths" type="text" class="form-control" id="durationMonths"
-                                           placeholder="eg. 10 måneder" required>
+                                           placeholder="eg. 10" required>
                                     <div class="invalid-feedback">
                                         Valid number of months is required.
                                     </div>
@@ -279,7 +171,7 @@
                                     <label for="initialKilometrage" class="form-label">Antal kørte km <span
                                             class="text-muted">(Required)</span></label>
                                     <input name="initialKilometrage" type="text" class="form-control" id="initialKilometrage"
-                                           placeholder="eg. 100000 km" required>
+                                           placeholder="eg. 100000" required>
                                     <div class="invalid-feedback">
                                         Valid number of kilometers is required.
                                     </div>
@@ -318,6 +210,10 @@
     </div>
 
 </div>
+<script src="/js/country-list-api.js"></script>
+<script src="/js/form-validation.js"></script>
+<script src="/js/accordianDisable.js"></script>
+
 <script>
 $(document).ready(function () {
     const urlParams = new URLSearchParams(window.location.search);

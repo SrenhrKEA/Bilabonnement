@@ -5,6 +5,7 @@ import com.srenhrkea.eksamensprojekte22.models.DamageReport;
 import com.srenhrkea.eksamensprojekte22.services.DamageReportService;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,50 +19,34 @@ public class DamageReportServiceImpl implements DamageReportService {
   }
 
   @Override
-  public DamageReport getDamageReportById(int id) {
-    Optional<DamageReport> optional = damageReportDAO.get(id);
-    DamageReport damageReport;
-    if (optional.isPresent()) {
-      damageReport = optional.get();
-    } else {
-      throw new RuntimeException(" DamageReport with ID: " + id + " does not exist");
-    }
-    return damageReport;
+  public DamageReport getDamageReportById(int id) throws Exception {
+    Optional<DamageReport> damageReport = damageReportDAO.get(id);
+    return damageReport.orElseThrow(
+        () -> new Exception("A damageReport with ID: " + id + ", does not exist."));
   }
 
   @Override
-  public List<DamageReport> getAllDamageReports() {
+  public List<DamageReport> getAllDamageReports() throws SQLException {
     return (List<DamageReport>) damageReportDAO.getAll();
   }
 
   @Override
-  public List<DamageReport> getAllDamageReportsByIdCarVIN(String id) {
+  public List<DamageReport> getAllDamageReportsByIdCarVIN(String id) throws SQLException {
     return (List<DamageReport>) damageReportDAO.getAllByIdCarVIN(id);
   }
 
   @Override
-  public void saveDamageReport(DamageReport damageReport) {
-    this.damageReportDAO.save(damageReport);
+  public boolean saveDamageReport(DamageReport damageReport) throws SQLException {
+    return damageReportDAO.save(damageReport);
   }
 
   @Override
-  public void updateDamageReport(DamageReport damageReport) {
-    int idDamageReport = damageReport.getIdDamageReport();
-    Optional<DamageReport> optional = damageReportDAO.get(idDamageReport);
-    if (optional.isPresent()) {
-      damageReportDAO.update(damageReport);
-    } else {
-      throw new RuntimeException(" DamageReport with ID: " + idDamageReport + " does not exist");
-    }
+  public boolean updateDamageReport(DamageReport damageReport) throws SQLException {
+    return damageReportDAO.update(damageReport);
   }
 
   @Override
-  public void deleteDamageReportById(int id) {
-    Optional<DamageReport> optional = damageReportDAO.get(id);
-    if (optional.isPresent()) {
-      this.damageReportDAO.delete(id);
-    } else {
-      throw new RuntimeException(" DamageReport with ID: " + id + " does not exist");
-    }
+  public boolean deleteDamageReportById(int id) throws SQLException {
+    return damageReportDAO.delete(id);
   }
 }

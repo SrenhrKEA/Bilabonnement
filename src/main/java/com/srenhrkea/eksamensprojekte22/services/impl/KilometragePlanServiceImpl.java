@@ -5,6 +5,7 @@ import com.srenhrkea.eksamensprojekte22.models.KilometragePlan;
 import com.srenhrkea.eksamensprojekte22.services.KilometragePlanService;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,55 +19,39 @@ public class KilometragePlanServiceImpl implements KilometragePlanService {
   }
 
   @Override
-  public KilometragePlan getKilometragePlanById(int id) {
-    Optional<KilometragePlan> optional = kilometragePlanDAO.get(id);
-    KilometragePlan kilometragePlan;
-    if (optional.isPresent()) {
-      kilometragePlan = optional.get();
-    } else {
-      throw new RuntimeException(" KilometragePlan with ID: " + id + " does not exist");
-    }
-    return kilometragePlan;
+  public KilometragePlan getKilometragePlanById(int id) throws Exception {
+    Optional<KilometragePlan> kilometragePlan = kilometragePlanDAO.get(id);
+    return kilometragePlan.orElseThrow(
+        () -> new Exception("A kilometragePlan with ID: " + id + ", does not exist."));
   }
 
   @Override
-  public List<KilometragePlan> getAllKilometragePlans() {
+  public List<KilometragePlan> getAllKilometragePlans() throws SQLException {
     return (List<KilometragePlan>) kilometragePlanDAO.getAll();
   }
 
   @Override
-  public List<KilometragePlan> getAllKilometragePlansByIdLease(int id) {
+  public List<KilometragePlan> getAllKilometragePlansByIdLease(int id) throws SQLException {
     return (List<KilometragePlan>) kilometragePlanDAO.getAllByIdLease(id);
   }
 
   @Override
-  public List<KilometragePlan> getAllKilometragePlansByIdKilometragePlan(int id) {
+  public List<KilometragePlan> getAllKilometragePlansByIdKilometragePlan(int id) throws SQLException {
     return (List<KilometragePlan>) kilometragePlanDAO.getAllByIdKilometragePlanRef(id);
   }
 
   @Override
-  public void saveKilometragePlan(KilometragePlan kilometragePlan) {
-    this.kilometragePlanDAO.save(kilometragePlan);
+  public boolean saveKilometragePlan(KilometragePlan kilometragePlan) throws SQLException {
+    return kilometragePlanDAO.save(kilometragePlan);
   }
 
   @Override
-  public void updateKilometragePlan(KilometragePlan kilometragePlan) {
-    int idKilometragePlan = kilometragePlan.getIdKilometragePlan();
-    Optional<KilometragePlan> optional = kilometragePlanDAO.get(idKilometragePlan);
-    if (optional.isPresent()) {
-      kilometragePlanDAO.update(kilometragePlan);
-    } else {
-      throw new RuntimeException(" KilometragePlan with ID: " + idKilometragePlan + " does not exist");
-    }
+  public boolean updateKilometragePlan(KilometragePlan kilometragePlan) throws SQLException {
+    return kilometragePlanDAO.update(kilometragePlan);
   }
 
   @Override
-  public void deleteKilometragePlanById(int id) {
-    Optional<KilometragePlan> optional = kilometragePlanDAO.get(id);
-    if (optional.isPresent()) {
-      this.kilometragePlanDAO.delete(id);
-    } else {
-      throw new RuntimeException(" KilometragePlan with ID: " + id + " does not exist");
-    }
+  public boolean deleteKilometragePlanById(int id) throws SQLException {
+    return kilometragePlanDAO.delete(id);
   }
 }

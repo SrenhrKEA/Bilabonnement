@@ -76,9 +76,7 @@ public class KilometragePlanServiceImpl implements KilometragePlanService {
     List<KilometragePlan> kilometragePlans = new ArrayList<>();
     for (Car car : cars) {
       String idCarVin = car.getIdCarVIN();
-      System.out.println(car);
       leases.addAll(leaseDAO.getAllByIdCar(idCarVin));
-      System.out.println(leases);
       for (Lease lease : leases) {
         int idLease = lease.getIdLease();
         kilometragePlans.addAll( kilometragePlanDAO.getAllByIdLease(idLease));

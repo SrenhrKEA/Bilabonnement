@@ -4,7 +4,6 @@ import com.srenhrkea.eksamensprojekte22.daos.impl.CarDAOImpl;
 import com.srenhrkea.eksamensprojekte22.daos.impl.CarTypeRefDAOImpl;
 import com.srenhrkea.eksamensprojekte22.models.Car;
 import com.srenhrkea.eksamensprojekte22.models.CarTypeRef;
-import com.srenhrkea.eksamensprojekte22.models.KilometragePlan;
 import com.srenhrkea.eksamensprojekte22.services.CarService;
 import org.springframework.stereotype.Service;
 

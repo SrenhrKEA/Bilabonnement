@@ -1,3 +1,4 @@
+/*Bootstrap - Dashboard*/
 body {
   font-size: .875rem;
 }
@@ -48,7 +49,7 @@ body {
 }
 
 .sidebar .nav-link.active {
-  color: #2470dc;
+  color: #1892c3;
 }
 
 .sidebar .nav-link:hover .feather,

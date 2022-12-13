@@ -1,0 +1,23 @@
+.btn-primary {
+    background-color: #1892c3;
+}
+
+.btn-primary:hover {
+    background-color: #1478a1;
+}
+
+.nav-link {
+    color: #1892c3;
+}
+
+.nav-link:hover {
+    color: #1478a1;
+}
+
+.accordion-button:not(.collapsed){
+    color: #1892c3;
+}
+
+.accordion-button{
+    color: #1478a1;
+}

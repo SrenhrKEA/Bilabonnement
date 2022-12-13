@@ -18,6 +18,8 @@
     <link href="/css/dashboard.css" rel="stylesheet">
     <link href="/css/form-validation.css" rel="stylesheet">
     <link href="/css/employee.css" rel="stylesheet">
+    <link href="/css/dashboard-boxes.css" rel="stylesheet">
+    <link href="/css/buttons.css" rel="stylesheet">
     <!--JQuery-->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 </head>
@@ -86,150 +88,56 @@
             <div class="alert alert-primary" role="alert" th:if="${message!=null}">
                 <p th:text="${message}"></p>
             </div>
-            <div id="kpi" th:if="${session.userType=='BUSINESS'||session.userType=='ADMIN'}">
-                <div><span>antal udlejede biler</span><span th:text="${carsLeased.size()}"></span></div>
-                <div><span>indkomst fra biler</span><span th:text="${carIncome}"></span></div>
-                <div><span>indkomst fra kilometerpakker</span><span th:text="${kpIncome}"></span></div>
-            </div>
-            <!--Graph-->
-<!--            <div id="dashboard" th:if="${session.userType=='BUSINESS'||session.userType=='ADMIN'}">
-                <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
-            </div>-->
-            <!--Tables-->
-<!--
-            <div id="reports" th:if="${session.userType=='BUSINESS'||session.userType=='ADMIN'}">
-                <h2>Section title</h2>
-                <div class="table-responsive">
-                    <table class="table table-striped table-sm">
-                        <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Header</th>
-                            <th scope="col">Header</th>
-                            <th scope="col">Header</th>
-                            <th scope="col">Header</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>1,001</td>
-                            <td>random</td>
-                            <td>data</td>
-                            <td>placeholder</td>
-                            <td>text</td>
-                        </tr>
-                        <tr>
-                            <td>1,002</td>
-                            <td>placeholder</td>
-                            <td>irrelevant</td>
-                            <td>visual</td>
-                            <td>layout</td>
-                        </tr>
-                        <tr>
-                            <td>1,003</td>
-                            <td>data</td>
-                            <td>rich</td>
-                            <td>dashboard</td>
-                            <td>tabular</td>
-                        </tr>
-                        <tr>
-                            <td>1,003</td>
-                            <td>information</td>
-                            <td>placeholder</td>
-                            <td>illustrative</td>
-                            <td>data</td>
-                        </tr>
-                        <tr>
-                            <td>1,004</td>
-                            <td>text</td>
-                            <td>random</td>
-                            <td>layout</td>
-                            <td>dashboard</td>
-                        </tr>
-                        <tr>
-                            <td>1,005</td>
-                            <td>dashboard</td>
-                            <td>irrelevant</td>
-                            <td>text</td>
-                            <td>placeholder</td>
-                        </tr>
-                        <tr>
-                            <td>1,006</td>
-                            <td>dashboard</td>
-                            <td>illustrative</td>
-                            <td>rich</td>
-                            <td>data</td>
-                        </tr>
-                        <tr>
-                            <td>1,007</td>
-                            <td>placeholder</td>
-                            <td>tabular</td>
-                            <td>information</td>
-                            <td>irrelevant</td>
-                        </tr>
-                        <tr>
-                            <td>1,008</td>
-                            <td>random</td>
-                            <td>data</td>
-                            <td>placeholder</td>
-                            <td>text</td>
-                        </tr>
-                        <tr>
-                            <td>1,009</td>
-                            <td>placeholder</td>
-                            <td>irrelevant</td>
-                            <td>visual</td>
-                            <td>layout</td>
-                        </tr>
-                        <tr>
-                            <td>1,010</td>
-                            <td>data</td>
-                            <td>rich</td>
-                            <td>dashboard</td>
-                            <td>tabular</td>
-                        </tr>
-                        <tr>
-                            <td>1,011</td>
-                            <td>information</td>
-                            <td>placeholder</td>
-                            <td>illustrative</td>
-                            <td>data</td>
-                        </tr>
-                        <tr>
-                            <td>1,012</td>
-                            <td>text</td>
-                            <td>placeholder</td>
-                            <td>layout</td>
-                            <td>dashboard</td>
-                        </tr>
-                        <tr>
-                            <td>1,013</td>
-                            <td>dashboard</td>
-                            <td>irrelevant</td>
-                            <td>text</td>
-                            <td>visual</td>
-                        </tr>
-                        <tr>
-                            <td>1,014</td>
-                            <td>dashboard</td>
-                            <td>illustrative</td>
-                            <td>rich</td>
-                            <td>data</td>
-                        </tr>
-                        <tr>
-                            <td>1,015</td>
-                            <td>random</td>
-                            <td>tabular</td>
-                            <td>information</td>
-                            <td>text</td>
-                        </tr>
-                        </tbody>
-                    </table>
+            <div id="dashboard" th:if="${session.userType=='BUSINESS'||session.userType=='ADMIN'}">
+
+                <div class="blocks wrapper row g-6">
+
+                    <div class="block black col-sm-6 shadow">
+                        <div class="heading">
+                            Antal udlejede biler
+                        </div>
+                        <br>
+                        <div class="num" th:text="${carsLeased.size()}"></div>
+                    </div>
+
+                    <div class="block black col-sm-6 shadow">
+                        <div class="heading">
+                            Antal ledige biler
+                        </div>
+                        <br>
+                        <div class="num" th:text="${carsParked.size()}"></div>
+                    </div>
+
+                </div>
+                <div class="blocks wrapper row g-6">
+
+                    <div class="block black col-sm-3 shadow">
+                        <div class="heading">
+                            Indkomst fra biler per måned
+                        </div>
+                        <br>
+                        <div class="num" th:text="${carIncome+' kr'}"></div>
+                    </div>
+
+                    <div class="block black col-sm-3 shadow">
+                        <div class="heading">
+                            Indkomst fra kilometerpakker per måned
+                        </div>
+                        <br>
+                        <div class="num" th:text="${kpIncome+' kr'}"></div>
+                    </div>
+
+                    <div class="block black col-sm-3 shadow">
+                        <div class="heading">
+                            Indkomst i alt per måned
+                        </div>
+                        <br>
+                        <div class="num" th:text="${kpIncome+carIncome+' kr'}"></div>
+                    </div>
                 </div>
             </div>
--->
-        </main>
-    </div>
+    </main>
+</div>
 </div>
 
 <div class="container">

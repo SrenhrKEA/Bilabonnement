@@ -4,8 +4,6 @@ import com.srenhrkea.eksamensprojekte22.daos.impl.DamageDAOImpl;
 import com.srenhrkea.eksamensprojekte22.daos.impl.DamageReportDAOImpl;
 import com.srenhrkea.eksamensprojekte22.models.Damage;
 import com.srenhrkea.eksamensprojekte22.models.DamageReport;
-import com.srenhrkea.eksamensprojekte22.models.KilometragePlan;
-import com.srenhrkea.eksamensprojekte22.models.PickupLocation;
 import com.srenhrkea.eksamensprojekte22.services.DamageReportService;
 import org.springframework.stereotype.Service;
 

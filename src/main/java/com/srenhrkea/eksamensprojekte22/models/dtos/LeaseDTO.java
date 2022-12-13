@@ -4,7 +4,6 @@ import com.srenhrkea.eksamensprojekte22.enums.SubscriptionType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class LeaseDTO {
   private int idLease, durationMonths, idCustomer;

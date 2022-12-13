@@ -3,7 +3,6 @@ package com.srenhrkea.eksamensprojekte22.models;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class DamageReport {
   private int idDamageReport;

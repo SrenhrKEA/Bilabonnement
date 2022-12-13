@@ -18,6 +18,7 @@
     <link href="/css/dashboard.css" rel="stylesheet">
     <link href="/css/form-validation.css" rel="stylesheet">
     <link href="/css/employee.css" rel="stylesheet">
+    <link href="/css/buttons.css" rel="stylesheet">
     <!--JQuery-->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 </head>
@@ -47,14 +48,14 @@
             <div class="position-sticky pt-3 sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/dashboard"
+                        <a class="nav-link" href="/dashboard"
                            th:if="${session.userType=='BUSINESS'||session.userType=='ADMIN'}">
                             <span data-feather="bar-chart-2" class="align-text-bottom"></span>
                             DASHBOARD
                         </a>
                     </li>
                     <li class="nav-item" th:if="${session.userType=='DATA_REG'||session.userType=='ADMIN'}">
-                        <a id="customers-link" class="nav-link" href="#customer-form">
+                        <a id="customers-link" class="nav-link active" aria-current="page" href="#customer-form">
                             <span data-feather="users" class="align-text-bottom"></span>
                             KUNDER
                         </a>

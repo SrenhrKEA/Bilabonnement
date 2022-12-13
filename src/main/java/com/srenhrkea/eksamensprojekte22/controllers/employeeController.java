@@ -368,6 +368,8 @@ public class employeeController {
     try {
       List<Car> carsLeased = carService.getAllCarsByIsNotAvailable();
       model.addAttribute("carsLeased", carsLeased);
+      List<Car> carsParked = carService.getAllCarsByIsAvailable();
+      model.addAttribute("carsParked", carsParked);
       double carIncome = carService.GetIncomePerMonth();
       model.addAttribute("carIncome", carIncome);
       double kpIncome = kilometragePlanService.GetIncomePerMonth();

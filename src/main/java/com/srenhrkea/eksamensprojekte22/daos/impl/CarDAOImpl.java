@@ -33,14 +33,14 @@ public class CarDAOImpl implements CarDAO {
       boolean isAvailable = rs.getBoolean("isAvailable");
       double initialKilometrage = rs.getDouble("initialKilometrage");
       String regNo = rs.getString("regNo");
-      int idCarType = rs.getInt("CarTypeRefidCarTypeRef");
+      int idCarTypeRef = rs.getInt("CarTypeRefidCarTypeRef");
 
       car = new Car();
       car.setIdCarVIN(idCarVIN);
       car.setAvailable(isAvailable);
       car.setInitialKilometrage(initialKilometrage);
       car.setRegNo(regNo);
-      car.setIdCarType(idCarType);
+      car.setIdCarTypeRef(idCarTypeRef);
     }
 
     assert car != null;
@@ -59,14 +59,14 @@ public class CarDAOImpl implements CarDAO {
       boolean isAvailable = rs.getBoolean("isAvailable");
       double initialKilometrage = rs.getDouble("initialKilometrage");
       String regNo = rs.getString("regNo");
-      int idCarType = rs.getInt("CarTypeRefidCarTypeRef");
+      int idCarTypeRef = rs.getInt("CarTypeRefidCarTypeRef");
 
       Car car = new Car();
       car.setIdCarVIN(idCarVIN);
       car.setAvailable(isAvailable);
       car.setInitialKilometrage(initialKilometrage);
       car.setRegNo(regNo);
-      car.setIdCarType(idCarType);
+      car.setIdCarTypeRef(idCarTypeRef);
 
       cars.add(car);
     }
@@ -88,14 +88,41 @@ public class CarDAOImpl implements CarDAO {
       boolean isAvailable = rs.getBoolean("isAvailable");
       double initialKilometrage = rs.getDouble("initialKilometrage");
       String regNo = rs.getString("regNo");
-      int idCarType = rs.getInt("CarTypeRefidCarTypeRef");
+      int idCarTypeRef = rs.getInt("CarTypeRefidCarTypeRef");
 
       Car car = new Car();
       car.setIdCarVIN(idCarVIN);
       car.setAvailable(isAvailable);
       car.setInitialKilometrage(initialKilometrage);
       car.setRegNo(regNo);
-      car.setIdCarType(idCarType);
+      car.setIdCarTypeRef(idCarTypeRef);
+
+      cars.add(car);
+    }
+    return cars;
+  }
+
+  @Override
+  public Collection<Car> getAllByIsAvailable() throws SQLException {
+
+    List<Car> cars = new ArrayList<>();
+    String sql = "SELECT *FROM car WHERE isAvailable=1";
+    PreparedStatement psts = conn.prepareStatement(sql);
+
+    ResultSet rs = psts.executeQuery();
+    while (rs.next()) {
+      String idCarVIN = rs.getString("idCarVIN");
+      boolean isAvailable = rs.getBoolean("isAvailable");
+      double initialKilometrage = rs.getDouble("initialKilometrage");
+      String regNo = rs.getString("regNo");
+      int idCarTypeRef = rs.getInt("CarTypeRefidCarTypeRef");
+
+      Car car = new Car();
+      car.setIdCarVIN(idCarVIN);
+      car.setAvailable(isAvailable);
+      car.setInitialKilometrage(initialKilometrage);
+      car.setRegNo(regNo);
+      car.setIdCarTypeRef(idCarTypeRef);
 
       cars.add(car);
     }

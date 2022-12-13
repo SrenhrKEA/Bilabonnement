@@ -1,26 +1,29 @@
 package com.srenhrkea.eksamensprojekte22.models;
 
 import com.srenhrkea.eksamensprojekte22.enums.SubscriptionType;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Lease {
   private int idLease, durationMonths, idCustomer;
-  private Date dateOfRent, DateOfReturn;
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  private LocalDate dateOfRent, dateOfReturn;
   private SubscriptionType subscriptionType;
   private String idCarVIN;
 
   public Lease() {
   }
 
-  public Lease(int idLease, String idCarVIN, int durationMonths, int idCustomer, Date dateOfRent, Date dateOfReturn, SubscriptionType subscriptionType) {
+  public Lease(int idLease, int durationMonths, int idCustomer, LocalDate dateOfRent, LocalDate dateOfReturn, SubscriptionType subscriptionType, String idCarVIN) {
     this.idLease = idLease;
-    this.idCarVIN = idCarVIN;
     this.durationMonths = durationMonths;
     this.idCustomer = idCustomer;
     this.dateOfRent = dateOfRent;
-    DateOfReturn = dateOfReturn;
+    this.dateOfReturn = dateOfReturn;
     this.subscriptionType = subscriptionType;
+    this.idCarVIN = idCarVIN;
   }
 
   public int getIdLease() {
@@ -55,20 +58,20 @@ public class Lease {
     this.idCustomer = idCustomer;
   }
 
-  public Date getDateOfRent() {
+  public LocalDate getDateOfRent() {
     return dateOfRent;
   }
 
-  public void setDateOfRent(Date dateOfRent) {
+  public void setDateOfRent(LocalDate dateOfRent) {
     this.dateOfRent = dateOfRent;
   }
 
-  public Date getDateOfReturn() {
-    return DateOfReturn;
+  public LocalDate getDateOfReturn() {
+    return dateOfReturn;
   }
 
-  public void setDateOfReturn(Date dateOfReturn) {
-    DateOfReturn = dateOfReturn;
+  public void setDateOfReturn(LocalDate dateOfReturn) {
+    this.dateOfReturn = dateOfReturn;
   }
 
   public SubscriptionType getSubscriptionType() {
@@ -87,7 +90,7 @@ public class Lease {
         ", durationMonths=" + durationMonths +
         ", idCustomer=" + idCustomer +
         ", dateOfRent=" + dateOfRent +
-        ", DateOfReturn=" + DateOfReturn +
+        ", dateOfReturn=" + dateOfReturn +
         ", subscriptionType=" + subscriptionType +
         '}';
   }

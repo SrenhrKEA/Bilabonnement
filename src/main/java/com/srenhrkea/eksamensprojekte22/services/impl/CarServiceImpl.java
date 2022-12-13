@@ -36,6 +36,11 @@ public class CarServiceImpl implements CarService {
   }
 
   @Override
+  public List<Car> getAllCarsByIsAvailable() throws SQLException {
+    return (List<Car>) carDAO.getAllByIsAvailable();
+  }
+
+  @Override
   public boolean saveCar(Car car) throws SQLException {
     return carDAO.save(car);
   }

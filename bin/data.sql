@@ -8,25 +8,6 @@ VALUES ('Jesus', '123', 'DATA_REG');
 INSERT INTO user (username, ´password´, userType)
 VALUES ('Bob', '123', 'BUSINESS');
 
-/*Customer*/
-/*INSERT INTO Customer
-(licenceNo, postalCode, givenname, lastname, address, city, contactNo, email)
-VALUES (55560, 2990, 'John', 'Johnson', 'Stationsvej 9', 'Nivå', '+4512345678', 'John@kea.dk');
-INSERT INTO Customer
-(licenceNo, postalCode, givenname, lastname, address, city, contactNo, email)
-VALUES (55578, 2400, 'Nanna', 'Mortensen', 'Emdrup Torv 10', 'Emdrup', '+4523456789', 'Nanna@kea.dk');
-INSERT INTO Customer
-(licenceNo, postalCode, givenname, lastname, address, city, contactNo, email)
-VALUES (55578, 2400, 'Ludvig', 'Rasmussen', 'Emdrup Torv 10', 'Emdrup', '+4523456789', 'Ludvig@kea.dk');*/
-
-/*Lease*/
-/*INSERT INTO Lease
-(durationMonths, dateOfRent, DateOfReturn, subscriptionType, CustomeridCustomer)
-VALUES (5, '2022-12-04', '2022-12-05', 'LIMITED', '1');
-INSERT INTO Lease
-(durationMonths, dateOfRent, DateOfReturn, subscriptionType, CustomeridCustomer)
-VALUES (12, '2022-12-05', '2022-12-06', 'UNLIMITED', '2');*/
-
 /*CarTypeRef*/
 INSERT INTO CarTypeRef
 (seatingCapacity, taxableValue, registrationTax, fuelConsumption, emission, pricePerMonth, brand, model,
@@ -55,22 +36,46 @@ VALUES (4, 151992, 37998, 18.9, 125, 3799, 'Peugeot', '208 Active+ 100 HK',
         Udstyret med: LED kørelys, læderrat, 2-zoner klimaanlæg, fartpilot og Apple Carplay',
         'MANUAL', 'GASOLINE');
 
-/*Car*/
-/*INSERT INTO Car
-(idCarVIN, isAvailable, initialKilometrage, regNo, LeaseidLease, CarTypeRefidCarTypeRef)
-VALUES ('666666DK', 1, 1000, 'MINDYT69', 1, 1);
-INSERT INTO Car
-(idCarVIN, isAvailable, initialKilometrage, regNo, LeaseidLease, CarTypeRefidCarTypeRef)
-VALUES ('888888DK', 0, 2000, 'MINKADET', 2, 2);*/
 
 /*PickupLocationRef*/
 INSERT INTO pickuplocationref
-(address, city, postalCode)
-VALUES ()
+(title, address, city, postalCode)
+VALUES ('Bilsalg Ballerup','Industriparken 34','Ballerup',2750);
+
+INSERT INTO pickuplocationref
+(title, address, city, postalCode)
+VALUES ('FDM: Bilsyn i Taastrup','Mårkærvej 4','Taastrup',2630);
+
+INSERT INTO pickuplocationref
+(title, address, city, postalCode)
+VALUES ('FDM: Bilsyn på Amager','Løjtegårdsvej 153','Kastrup, Tårnby',2770);
 
 /*EquipmentRef*/
+/*INSERT INTO equipmentref (title, ´description´, price, CarTypeRefidCarTypeRef)
+VALUES ()*/
+
 
 /*KilometragePlanRef*/
+INSERT INTO kilometrageplanref (kilometrage, pricePerMonth)
+VALUES (250,300);
+
+INSERT INTO kilometrageplanref (kilometrage, pricePerMonth)
+VALUES (500,590);
+
+INSERT INTO kilometrageplanref (kilometrage, pricePerMonth)
+VALUES (1000,1160);
+
+INSERT INTO kilometrageplanref (kilometrage, pricePerMonth)
+VALUES (1500,1719);
+
+INSERT INTO kilometrageplanref (kilometrage, pricePerMonth)
+VALUES (2000,2240);
+
+INSERT INTO kilometrageplanref (kilometrage, pricePerMonth)
+VALUES (2500,2750);
+
+INSERT INTO kilometrageplanref (kilometrage, pricePerMonth)
+VALUES (3000,3240);
 
 
 

@@ -30,7 +30,7 @@ public class CarTypeRefDAOImpl implements CarTypeRefDAO {
 
     ResultSet rs = psts.executeQuery();
     if (rs.next()) {
-      int idCarType = rs.getInt("idCarType");
+      int idCarTypeRef = rs.getInt("idCarTypeRef");
       int seatingCapacity = rs.getInt("seatingCapacity");
       double taxableValue = rs.getDouble("taxableValue");
       double registrationTax = rs.getDouble("registrationTax");
@@ -44,7 +44,7 @@ public class CarTypeRefDAOImpl implements CarTypeRefDAO {
       FuelType fuelType = FuelType.valueOf(rs.getString("fuelType"));
 
       carTypeRef = new CarTypeRef();
-      carTypeRef.setIdCarType(idCarType);
+      carTypeRef.setIdCarTypeRef(idCarTypeRef);
       carTypeRef.setSeatingCapacity(seatingCapacity);
       carTypeRef.setTaxableValue(taxableValue);
       carTypeRef.setRegistrationTax(registrationTax);
@@ -65,13 +65,13 @@ public class CarTypeRefDAOImpl implements CarTypeRefDAO {
   @Override
   public Collection<CarTypeRef> getAll() throws SQLException {
 
-    List<CarTypeRef> carTypes = new ArrayList<>();
+    List<CarTypeRef> carTypeRefs = new ArrayList<>();
     String sql = "SELECT *FROM cartyperef";
     PreparedStatement psts = conn.prepareStatement(sql);
 
     ResultSet rs = psts.executeQuery();
     while (rs.next()) {
-      int idCarType = rs.getInt("idCarType");
+      int idCarTypeRef = rs.getInt("idCarTypeRef");
       int seatingCapacity = rs.getInt("seatingCapacity");
       double taxableValue = rs.getDouble("taxableValue");
       double registrationTax = rs.getDouble("registrationTax");
@@ -84,24 +84,24 @@ public class CarTypeRefDAOImpl implements CarTypeRefDAO {
       TransmissionType transmissionType = TransmissionType.valueOf(rs.getString("transmissionType"));
       FuelType fuelType = FuelType.valueOf(rs.getString("fuelType"));
 
-      CarTypeRef carType = new CarTypeRef();
-      carType.setIdCarType(idCarType);
-      carType.setSeatingCapacity(seatingCapacity);
-      carType.setTaxableValue(taxableValue);
-      carType.setRegistrationTax(registrationTax);
-      carType.setFuelConsumption(fuelConsumption);
-      carType.setEmission(emission);
-      carType.setPricePerMonth(pricePerMonth);
-      carType.setBrand(brand);
-      carType.setModel(model);
-      carType.setDescription(description);
-      carType.setTransmissionType(transmissionType);
-      carType.setFuelType(fuelType);
+      CarTypeRef carTypeRef = new CarTypeRef();
+      carTypeRef.setIdCarTypeRef(idCarTypeRef);
+      carTypeRef.setSeatingCapacity(seatingCapacity);
+      carTypeRef.setTaxableValue(taxableValue);
+      carTypeRef.setRegistrationTax(registrationTax);
+      carTypeRef.setFuelConsumption(fuelConsumption);
+      carTypeRef.setEmission(emission);
+      carTypeRef.setPricePerMonth(pricePerMonth);
+      carTypeRef.setBrand(brand);
+      carTypeRef.setModel(model);
+      carTypeRef.setDescription(description);
+      carTypeRef.setTransmissionType(transmissionType);
+      carTypeRef.setFuelType(fuelType);
 
-      carTypes.add(carType);
+      carTypeRefs.add(carTypeRef);
     }
 
-    return carTypes;
+    return carTypeRefs;
   }
 
   @Override

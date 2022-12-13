@@ -1,7 +1,15 @@
 package com.srenhrkea.eksamensprojekte22.models.dtos;
 
 public class KilometragePlanDTO {
-  private int idKilometragePlanRef, idLease;
+  private int idKilometragePlan, idKilometragePlanRef, idLease;
+
+  public int getIdKilometragePlan() {
+    return idKilometragePlan;
+  }
+
+  public void setIdKilometragePlan(int idKilometragePlan) {
+    this.idKilometragePlan = idKilometragePlan;
+  }
 
   public int getIdKilometragePlanRef() {
     return idKilometragePlanRef;

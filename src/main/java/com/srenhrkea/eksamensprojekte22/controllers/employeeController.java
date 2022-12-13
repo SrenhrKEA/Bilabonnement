@@ -1,13 +1,9 @@
 package com.srenhrkea.eksamensprojekte22.controllers;
 
-import com.srenhrkea.eksamensprojekte22.enums.SubscriptionType;
 import com.srenhrkea.eksamensprojekte22.models.*;
-import com.srenhrkea.eksamensprojekte22.models.dtos.CarDTO;
-import com.srenhrkea.eksamensprojekte22.models.dtos.CustomerDTO;
-import com.srenhrkea.eksamensprojekte22.models.dtos.LeaseDTO;
+import com.srenhrkea.eksamensprojekte22.models.dtos.*;
 import com.srenhrkea.eksamensprojekte22.services.impl.*;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -56,24 +51,16 @@ public class employeeController {
       redirectAttributes.addFlashAttribute("message", "Du skal være logged ind for at få adgang til denne side.");
       return "redirect:signin";
     }
-/*    try {
-      List<CarTypeRef> carTypeRefs = carTypeRefService.getAllCarTypeRefs();
-      model.addAttribute("carTypeRefs", carTypeRefs);
-      List<PickupLocationRef> pickupLocationRefs = pickupLocationRefService.getAllPickupLocationRefs();
-      model.addAttribute("pickupLocationRefs", pickupLocationRefs);
-      List<EquipmentRef> equipmentRefs = equipmentRefService.getAllEquipmentRefs();
-      model.addAttribute("equipmentRefs", equipmentRefs);
-      List<KilometragePlanRef> kilometragePlanRefs = kilometragePlanRefService.getAllKilometragePlanRefs();
-      model.addAttribute("kilometragePlanRefs", kilometragePlanRefs);
-    } catch (SQLException e) {
-      redirectAttributes.addFlashAttribute("message", "Der skete en database fejl.");
-      return "redirect:signin";
-    }*/
     return "employee";
   }
 
   @GetMapping("/customer-form")
-  public String customerForm(Model model, RedirectAttributes redirectAttributes) {
+  public String customerForm(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+    String userType = (String) session.getAttribute("userType");
+    if (userType == null) {
+      redirectAttributes.addFlashAttribute("message", "Du skal være logged ind for at få adgang til denne side.");
+      return "redirect:signin";
+    }
     try {
       List<Customer> customers = customerService.getAllCustomers();
       model.addAttribute("customers", customers);
@@ -103,7 +90,7 @@ public class employeeController {
     } catch (SQLException e) {
       redirectAttributes.addFlashAttribute("message", "Kunden kunne ikke gemmes, da den allerede findes.");
     }
-    return "redirect:customer-form"; //?step=form_create_lease
+    return "redirect:customer-form";
   }
 
   @PostMapping("customer-form-update")
@@ -125,16 +112,23 @@ public class employeeController {
     } catch (SQLException e) {
       redirectAttributes.addFlashAttribute("message", "Kunden kunne ikke gemmes.");
     }
-    return "redirect:customer-form"; //?step=form_create_lease
+    return "redirect:customer-form";
   }
 
   @GetMapping("/car-form")
-  public String carForm(Model model, RedirectAttributes redirectAttributes) {
+  public String carForm(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+    String userType = (String) session.getAttribute("userType");
+    if (userType == null) {
+      redirectAttributes.addFlashAttribute("message", "Du skal være logged ind for at få adgang til denne side.");
+      return "redirect:signin";
+    }
     try {
       List<CarTypeRef> carTypeRefs = carTypeRefService.getAllCarTypeRefs();
       model.addAttribute("carTypeRefs", carTypeRefs);
+      List<Car> cars = carService.getAllCars();
+      model.addAttribute("cars", cars);
     } catch (SQLException e) {
-      redirectAttributes.addFlashAttribute("message", "Der er opstået en fejl i databasen. Listen med biltyper kunne ikke hentes");
+      redirectAttributes.addFlashAttribute("message", "Der er opstået en fejl i databasen.");
       return "redirect:employee";
     }
     return "employee-car";
@@ -144,8 +138,26 @@ public class employeeController {
   @PostMapping("/car-form-create")
   public String carFormCreate(Model model, @ModelAttribute CarDTO carDTO, RedirectAttributes redirectAttributes) {
     Car car = new Car();
-    car.setAvailable(carDTO.isAvailable());
-    car.setIdCarType(carDTO.getIdCarType());
+    car.setIdCarVIN(carDTO.getIdCarVIN());
+    car.setAvailable(carDTO.getIsAvailable());
+    car.setIdCarTypeRef(carDTO.getIdCarTypeRef());
+    car.setInitialKilometrage(carDTO.getInitialKilometrage());
+    car.setIdCarVIN(carDTO.getIdCarVIN());
+    car.setRegNo(carDTO.getRegNo());
+    try {
+      carService.saveCar(car);
+      redirectAttributes.addFlashAttribute("message", "Bilen er gemt.");
+    } catch (SQLException e) {
+      redirectAttributes.addFlashAttribute("message", "Bilen kunne ikke gemmes.");
+    }
+    return "redirect:car-form";
+  }
+
+  @PostMapping("car-form-update")
+  public String carFormUpdate(Model model, @ModelAttribute CarDTO carDTO, RedirectAttributes redirectAttributes) {
+    Car car = new Car();
+    car.setAvailable(carDTO.getIsAvailable());
+    car.setIdCarTypeRef(carDTO.getIdCarTypeRef());
     car.setInitialKilometrage(carDTO.getInitialKilometrage());
     car.setIdCarVIN(carDTO.getIdCarVIN());
     car.setRegNo(carDTO.getRegNo());
@@ -155,21 +167,33 @@ public class employeeController {
     } catch (SQLException e) {
       redirectAttributes.addFlashAttribute("message", "Bilen kunne ikke gemmes, da den allerede findes.");
     }
-    return "redirect:car-form"; //?step=form_create_lease
-  }
-
-  @PostMapping("car-form-update")
-  public String carFormUpdate() {
     return "redirect:car-form";
   }
 
   @GetMapping("/lease-form")
-  public String leaseForm(Model model, RedirectAttributes redirectAttributes) {
+  public String leaseForm(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+    String userType = (String) session.getAttribute("userType");
+    if (userType == null) {
+      redirectAttributes.addFlashAttribute("message", "Du skal være logged ind for at få adgang til denne side.");
+      return "redirect:signin";
+    }
     try {
       List<Lease> leases = leaseService.getAllLeases();
       model.addAttribute("leases", leases);
+      List<Customer> customers = customerService.getAllCustomers();
+      model.addAttribute("customers", customers);
+      List<Car> cars = carService.getAllCars();
+      model.addAttribute("cars", cars);
+      List<PickupLocationRef> pickupLocationRefs = pickupLocationRefService.getAllPickupLocationRefs();
+      model.addAttribute("pickupLocationRefs", pickupLocationRefs);
+      List<KilometragePlanRef> kilometragePlanRefs = kilometragePlanRefService.getAllKilometragePlanRefs();
+      model.addAttribute("kilometragePlanRefs", kilometragePlanRefs);
+      List<PickupLocation> pickupLocations = pickupLocationService.getAllPickupLocations();
+      model.addAttribute("pickupLocations", pickupLocations);
+      List<KilometragePlan> kilometragePlans = kilometragePlanService.getAllKilometragePlans();
+      model.addAttribute("kilometragePlans", kilometragePlans);
     } catch (SQLException e) {
-      redirectAttributes.addFlashAttribute("message", "Der er opstået en fejl i databasen. Listen med lejeaftaler kunne ikke hentes");
+      redirectAttributes.addFlashAttribute("message", "Der er opstået en fejl i databasen.");
       return "redirect:employee";
     }
     return "employee-lease";
@@ -190,60 +214,180 @@ public class employeeController {
     } catch (SQLException e) {
       redirectAttributes.addFlashAttribute("message", "Lejeaftalen kunne ikke gemmes, da den allerede findes.");
     }
-    return "redirect:lease-form"; //?step=form_create_lease
+    return "redirect:lease-form";
+  }
+
+  @PostMapping("/lease-form-pl")
+  public String leaseFormPL(Model model, @ModelAttribute PickupLocationDTO pickupLocationDTO, RedirectAttributes redirectAttributes) {
+    PickupLocation pickupLocation = new PickupLocation();
+    pickupLocation.setIdLease(pickupLocationDTO.getIdLease());
+    pickupLocation.setIdPickupLocationRef(pickupLocationDTO.getIdPickupLocationRef());
+    try {
+      pickupLocationService.savePickupLocation(pickupLocation);
+      redirectAttributes.addFlashAttribute("message", "Lokation er gemt.");
+    } catch (SQLException e) {
+      redirectAttributes.addFlashAttribute("message", "Lokation kunne ikke gemmes, da den allerede findes.");
+    }
+    return "redirect:lease-form";
+  }
+
+  @PostMapping("/lease-form-kp")
+  public String leaseFormKP(Model model, @ModelAttribute KilometragePlanDTO kilometragePlanDTO, RedirectAttributes redirectAttributes) {
+    KilometragePlan kilometragePlan = new KilometragePlan();
+    kilometragePlan.setIdLease(kilometragePlanDTO.getIdLease());
+    kilometragePlan.setIdKilometragePlanRef(kilometragePlanDTO.getIdKilometragePlanRef());
+    try {
+      kilometragePlanService.saveKilometragePlan(kilometragePlan);
+      redirectAttributes.addFlashAttribute("message", "Kilometerpakken er gemt.");
+    } catch (SQLException e) {
+      redirectAttributes.addFlashAttribute("message", "Kilometerpakken kunne ikke gemmes, da den allerede findes.");
+    }
+    return "redirect:lease-form";
   }
 
   @PostMapping("lease-form-update")
-  public String leaseFormUpdate() {
+  public String leaseFormUpdate(Model model, @ModelAttribute LeaseDTO leaseDTO, RedirectAttributes redirectAttributes) {
+    Lease lease = new Lease();
+    lease.setIdLease(leaseDTO.getIdLease());
+    lease.setDurationMonths(leaseDTO.getDurationMonths());
+    lease.setIdCustomer(leaseDTO.getIdCustomer());
+    lease.setDateOfRent(leaseDTO.getDateOfRent());
+    lease.setDateOfReturn(leaseDTO.getDateOfReturn());
+    lease.setSubscriptionType(leaseDTO.getSubscriptionType());
+    lease.setIdCarVIN(leaseDTO.getIdCarVIN());
+    try {
+      leaseService.updateLease(lease);
+      redirectAttributes.addFlashAttribute("message", "Lejeaftalen er gemt.");
+    } catch (SQLException e) {
+      redirectAttributes.addFlashAttribute("message", "Lejeaftalen kunne ikke gemmes.");
+    }
+    return "redirect:lease-form";
+  }
+
+  @PostMapping("/lease-form-pl-update")
+  public String leaseFormPlUpdate(Model model, @ModelAttribute PickupLocationDTO pickupLocationDTO, RedirectAttributes redirectAttributes) {
+    PickupLocation pickupLocation = new PickupLocation();
+    pickupLocation.setIdPickupLocation(pickupLocationDTO.getIdPickupLocation());
+    pickupLocation.setIdLease(pickupLocationDTO.getIdLease());
+    pickupLocation.setIdPickupLocationRef(pickupLocationDTO.getIdPickupLocationRef());
+    try {
+      pickupLocationService.updatePickupLocation(pickupLocation);
+      redirectAttributes.addFlashAttribute("message", "Lokation er gemt.");
+    } catch (SQLException e) {
+      redirectAttributes.addFlashAttribute("message", "Lokation kunne ikke gemmes.");
+    }
+    return "redirect:lease-form";
+  }
+
+  @PostMapping("/lease-form-kp-update")
+  public String leaseFormKpUpdate(Model model, @ModelAttribute KilometragePlanDTO kilometragePlanDTO, RedirectAttributes redirectAttributes) {
+    KilometragePlan kilometragePlan = new KilometragePlan();
+    kilometragePlan.setIdKilometragePlan(kilometragePlanDTO.getIdKilometragePlan());
+    kilometragePlan.setIdLease(kilometragePlanDTO.getIdLease());
+    kilometragePlan.setIdKilometragePlanRef(kilometragePlanDTO.getIdKilometragePlanRef());
+    try {
+      kilometragePlanService.updateKilometragePlan(kilometragePlan);
+      redirectAttributes.addFlashAttribute("message", "Kilometerpakken er gemt.");
+    } catch (SQLException e) {
+      redirectAttributes.addFlashAttribute("message", "Kilometerpakken kunne ikke gemmes.");
+    }
     return "redirect:lease-form";
   }
 
   @GetMapping("/damage-form")
-  public String damageForm(Model model, RedirectAttributes redirectAttributes) {
-/*    try {
-      List<Car> cars = carService.getAllCars(); //TODO: kun available
+  public String damageForm(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+    String userType = (String) session.getAttribute("userType");
+    if (userType == null) {
+      redirectAttributes.addFlashAttribute("message", "Du skal være logged ind for at få adgang til denne side.");
+      return "redirect:signin";
+    }
+    try {
+      List<Car> cars = carService.getAllCarsByIsAvailable();
       model.addAttribute("cars", cars);
       List<DamageReport> damageReports = damageReportService.getAllDamageReports();
-      model.addAttribute("damageReports", damageReports); //TODO: by Car
-      List<Damage> damages = damageService.getAllDamages(); //TODO: by DamageReport
+      model.addAttribute("damageReports", damageReports);
+      List<Damage> damages = damageService.getAllDamages();
       model.addAttribute("damages", damages);
-
     } catch (SQLException e) {
-      redirectAttributes.addFlashAttribute("message", "Der er opstået en fejl i databasen. En af listerne kunne ikke hentes");
+      redirectAttributes.addFlashAttribute("message", "Der er opstået en fejl i databasen. En af listerne kunne ikke hentes.");
       return "redirect:employee";
-    }*/
+    }
     return "employee-damage";
   }
 
+  @PostMapping("/damage-report-form-create")
+  public String damageReportFormCreate(Model model, @ModelAttribute DamageReportDTO damageReportDTO, RedirectAttributes redirectAttributes) {
+    DamageReport damageReport = new DamageReport();
+    damageReport.setIdCarVIN(damageReportDTO.getIdCarVIN());
+    damageReport.setDateOfReport(damageReportDTO.getDateOfReport());
 
-/*  @PostMapping("/damage-form-create")
-  public String damageFormCreate(Model model, @ModelAttribute CustomerDTO customerDTO, RedirectAttributes redirectAttributes) {
-    Customer customer = new Customer();
-    customer.setFirstName(customerDTO.getFirstName());
-    customer.setLastName(customerDTO.getLastName());
-    customer.setAddress(customerDTO.getAddress());
-    customer.setCity(customerDTO.getCity());
-    customer.setPostalCode(customerDTO.getPostalCode());
-    customer.setNationality(customerDTO.getNationality());
-    customer.setContactNo(customerDTO.getContactNo());
-    customer.setEmail(customerDTO.getEmail());
-    customer.setLicenceNo(customerDTO.getLicenceNo());
     try {
-      customerService.saveCustomer(customer);
+      damageReportService.saveDamageReport(damageReport);
       redirectAttributes.addFlashAttribute("message", "Kunden er gemt.");
     } catch (SQLException e) {
       redirectAttributes.addFlashAttribute("message", "Kunden kunne ikke gemmes, da den allerede findes.");
     }
-    return "redirect:employee"; //?step=form_create_lease
+    return "redirect:damage-form"; //?step=form_create_lease
+  }
+
+  @PostMapping("damage-report-form-update")
+  public String damageReportFormUpdate(Model model, @ModelAttribute DamageReportDTO damageReportDTO, RedirectAttributes redirectAttributes) {
+    DamageReport damageReport = new DamageReport();
+    damageReport.setIdDamageReport(damageReportDTO.getIdDamageReport());
+    damageReport.setIdCarVIN(damageReportDTO.getIdCarVIN());
+    damageReport.setDateOfReport(damageReportDTO.getDateOfReport());
+
+    try {
+      damageReportService.updateDamageReport(damageReport);
+      redirectAttributes.addFlashAttribute("message", "Kunden er gemt.");
+    } catch (SQLException e) {
+      redirectAttributes.addFlashAttribute("message", "Kunden kunne ikke gemmes, da den allerede findes.");
+    }
+    return "redirect:damage-form"; //?step=form_create_lease
+  }
+
+  @PostMapping("/damage-form-create")
+  public String damageFormCreate(Model model, @ModelAttribute DamageDTO damageDTO, RedirectAttributes redirectAttributes) {
+    Damage damage = new Damage();
+    damage.setIdDamageReport(damageDTO.getIdDamageReport());
+    damage.setTitle(damageDTO.getTitle());
+    damage.setDescription(damageDTO.getDescription());
+    damage.setPrice(damageDTO.getPrice());
+
+    try {
+      damageService.saveDamage(damage);
+      redirectAttributes.addFlashAttribute("message", "Skaden er gemt.");
+    } catch (SQLException e) {
+      redirectAttributes.addFlashAttribute("message", "Skaden kunne ikke gemmes, da den allerede findes.");
+    }
+    return "redirect:damage-form"; //?step=form_create_lease
   }
 
   @PostMapping("damage-form-update")
-  public String damageFormUpdate() {
-    return "";
-  }*/
+  public String damageFormUpdate(Model model, @ModelAttribute DamageDTO damageDTO, RedirectAttributes redirectAttributes) {
+    Damage damage = new Damage();
+    damage.setIdDamage(damageDTO.getIdDamage());
+    damage.setIdDamageReport(damageDTO.getIdDamageReport());
+    damage.setTitle(damageDTO.getTitle());
+    damage.setDescription(damageDTO.getDescription());
+    damage.setPrice(damageDTO.getPrice());
+
+    try {
+      damageService.updateDamage(damage);
+      redirectAttributes.addFlashAttribute("message", "Skaden er gemt.");
+    } catch (SQLException e) {
+      redirectAttributes.addFlashAttribute("message", "Skaden kunne ikke gemmes.");
+    }
+    return "redirect:damage-form"; //?step=form_create_lease
+  }
 
   @GetMapping("/dashboard")
-  public String dashboard(Model model, RedirectAttributes redirectAttributes) {
+  public String dashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+    String userType = (String) session.getAttribute("userType");
+    if (userType == null) {
+      redirectAttributes.addFlashAttribute("message", "Du skal være logged ind for at få adgang til denne side.");
+      return "redirect:signin";
+    }
 /*    try {
       List<Customer> customers = customerService.getAllCustomers();
       model.addAttribute("customers", customers);

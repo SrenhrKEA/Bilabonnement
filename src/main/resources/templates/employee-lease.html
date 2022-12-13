@@ -33,7 +33,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="navbar-nav">
-        <!--Log ud-->
+        <!--Sign-out-->
         <div class="nav-item text-nowrap">
             <a class="nav-link px-3" href="/signoutUser"><span data-feather="log-out"></span> Log ud</a>
         </div>
@@ -83,37 +83,429 @@
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
-
+            <!--Alert-->
             <div class="alert alert-primary" role="alert" th:if="${message!=null}">
                 <p th:text="${message}"></p>
             </div>
 
+            <!--Forms-->
             <div id="lease-form" th:if="${session.userType=='BUSINESS'||session.userType=='ADMIN'}">
-                <!--TODO: omdøb ids-->
+                <!--Tabs-->
                 <nav>
-                    <div class="nav nav-tabs" id="nav-tabs-damage-reg" role="tablist">
-                        <button class="nav-link active" id="nav-create-SR-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-create-SR" type="button" role="tab"
-                                aria-controls="nav-create-SR"
+                    <div class="nav nav-tabs" id="nav-tab-lease-forms" role="tablist">
+                        <button class="nav-link active" id="nav-lease-create-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-lease-create" type="button" role="tab"
+                                aria-controls="nav-lease-create"
                                 aria-selected="true">
-                            OPRET SKADESRAPPORT
+                            <strong>Indtast Kontraktindhold</strong>
                         </button>
-                        <button class="nav-link" id="nav-alter-SR-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-alter-SR" type="button" role="tab" aria-controls="nav-alter-SR"
+                        <button class="nav-link" id="nav-lease-update-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-lease-update" type="button" role="tab"
+                                aria-controls="nav-lease-update"
                                 aria-selected="false">
-                            OPDATER SKADESRAPPORT
+                            <strong>Annuler Kontrakt</strong>
                         </button>
                     </div>
                 </nav>
+                <!--Tab Content-->
+                <div class="tab-content" id="nav-tabContent-lease-create">
+                    <div class="tab-pane fade show active p-3" id="nav-lease-create" role="tabpanel"
+                         aria-labelledby="nav-lease-create-tab">
 
-                <div class="tab-content" id="nav-tabContent-SR">
-                    <div class="tab-pane fade show active p-3" id="nav-create-SR" role="tabpanel"
-                         aria-labelledby="nav-create-SR-tab">
-                        <p>PLACEHOLDER OPRET FORM</p>
+                        <!--Accordion-->
+                        <div class="accordion" id="accordionCreateLease">
+                            <div class="accordion-item ">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button id="form_create_lease" class="accordion-button" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                            aria-expanded="false" aria-controls="collapseOne">
+                                        <strong>Lejeaftale</strong>
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse show"
+                                     aria-labelledby="headingOne"
+                                     data-bs-parent="#accordionCreateLease">
+                                    <div class="accordion-body">
+                                        <!--Create lease form-->
+                                        <div class="col-md-7 col-lg-8">
+                                            <h4 class="mb-3">Kontraktindhold</h4>
+                                            <form method="post" action="/lease-form-create" class="needs-validation"
+                                                  novalidate>
+                                                <div class="row g-3">
+                                                    <div class="col-12">
+                                                        <label for="choose-customer" class="form-label">Kunde <span
+                                                                class="text-muted">(Required)</span></label>
+                                                        <select class="form-select" name="idCustomer"
+                                                                id="choose-customer" required>
+                                                            <option disabled selected value>Vælg kunde...</option>
+                                                            <option th:each="customer: ${customers}"
+                                                                    th:value="${customer.idCustomer}"
+                                                                    th:text="${customer.firstName+' '+customer.lastName+'; DLN: '+customer.licenceNo}"></option>
+                                                        </select>
+                                                        <div class="invalid-feedback">
+                                                            Please select a valid customer.
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <label for="choose-car" class="form-label">Bil <span
+                                                                class="text-muted">(Required)</span></label>
+                                                        <select class="form-select" name="idCarVIN"
+                                                                id="choose-car" required>
+                                                            <option disabled selected value>Vælg bil...</option>
+                                                            <option th:each="car: ${cars}"
+                                                                    th:value="${car.idCarVIN}"
+                                                                    th:text="${'VIN: '+car.idCarVIN+'; RegNo: '+car.regNo+'; Available: '+car.available}"></option>
+                                                        </select>
+                                                        <div class="invalid-feedback">
+                                                            Please select a valid car.
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-6">
+                                                        <label for="choose-subscriptionType" class="form-label">Abonnementstype
+                                                            <span
+                                                                    class="text-muted">(Required)</span></label>
+                                                        <select class="form-select" name="subscriptionType"
+                                                                id="choose-subscriptionType" required>
+                                                            <option disabled selected value>Vælg abonnementstype...
+                                                            </option>
+                                                            <option value="LIMITED">LIMITED</option>
+                                                            <option value="UNLIMITED">UNLIMITED</option>
+                                                        </select>
+                                                        <div class="invalid-feedback">
+                                                            Please select a valid type of subscription.
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-6">
+                                                        <label for="durationMonths" class="form-label">Antal måneder
+                                                            <span
+                                                                    class="text-muted">(Required)</span></label>
+                                                        <input name="durationMonths" type="number" class="form-control"
+                                                               id="durationMonths"
+                                                               placeholder="eg. 5"
+                                                               value="" required>
+                                                        <div class="invalid-feedback">
+                                                            Valid number of months is required.
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-6">
+                                                        <label for="dateOfRent" class="form-label">Udlejningsdato <span
+                                                                class="text-muted">(Required)</span></label>
+                                                        <input name="dateOfRent" type="date" class="form-control"
+                                                               id="dateOfRent"
+                                                               placeholder="eg. 11/12/2022" required>
+                                                        <div class="invalid-feedback">
+                                                            Valid date is required.
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-6">
+                                                        <label for="dateOfReturn" class="form-label">Tilbageleveringsdato
+                                                            <span
+                                                                    class="text-muted">(Required)</span></label>
+                                                        <input name="dateOfReturn" type="date" class="form-control"
+                                                               id="dateOfReturn"
+                                                               placeholder="eg. 12/12/2022" required>
+                                                        <div class="invalid-feedback">
+                                                            Valid date is required.
+                                                        </div>
+                                                    </div>
+                                                    <hr class="my-4">
+                                                    <br>
+                                                    <div>
+                                                        <button class="w-100 btn btn-primary btn-lg" type="submit">
+                                                            Fortsæt
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button id="form_choose_kp" class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#collapseTwo" aria-expanded="false"
+                                            aria-controls="collapseTwo">
+                                        <strong>Afhentning</strong>
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                     data-bs-parent="#accordionCreateLease">
+                                    <div class="accordion-body">
+                                        <!--Choose pickup location form-->
+                                        <div class="col-md-7 col-lg-8">
+                                            <h4 class="mb-3">Valg af afhentningssted</h4>
+                                            <form method="post" action="/lease-form-pl" class="needs-validation"
+                                                  novalidate>
+                                                <div class="row g-3">
+                                                    <div class="col-12">
+                                                        <label for="choose-lease-pl" class="form-label">Lejeaftale <span
+                                                                class="text-muted">(Required)</span></label>
+                                                        <select class="form-select" name="idLease"
+                                                                id="choose-lease-pl" required>
+                                                            <option disabled selected value>Vælg lejeaftale...</option>
+                                                            <option th:each="lease: ${leases}"
+                                                                    th:value="${lease.idLease}"
+                                                                    th:text="${'Lease ID: '+lease.idLease+'; Car VIN: '+lease.idCarVIN+'; Customer ID: '+lease.idCustomer}"></option>
+                                                        </select>
+                                                        <div class="invalid-feedback">
+                                                            Please select a valid lease.
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <label for="idPickupLocationRef" class="form-label">Lokation
+                                                            <span
+                                                                    class="text-muted">(Required)</span></label>
+                                                        <select class="form-select" name="idPickupLocationRef"
+                                                                id="idPickupLocationRef" required>
+                                                            <option disabled selected value>Vælg lokation...</option>
+                                                            <option th:each="pickupLocationRef: ${pickupLocationRefs}"
+                                                                    th:value="${pickupLocationRef.idPickupLocationRef}"
+                                                                    th:text="${'Lokation: '+pickupLocationRef.title}"></option>
+                                                        </select>
+                                                        <div class="invalid-feedback">
+                                                            Please select a pickup location.
+                                                        </div>
+                                                    </div>
+                                                    <hr class="my-4">
+                                                    <br>
+                                                    <div>
+                                                        <button class="w-100 btn btn-primary btn-lg" type="submit">
+                                                            Gem
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button id="form_choose_pl" class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#collapseThree" aria-expanded="false"
+                                            aria-controls="collapseThree">
+                                        <strong>Kilometerplan (Tilkøb)</strong>
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse"
+                                     aria-labelledby="headingThree"
+                                     data-bs-parent="#accordionCreateLease">
+                                    <div class="accordion-body">
+                                        <!--Choose kilometrage plan form-->
+                                        <div class="col-md-7 col-lg-8">
+                                            <h4 class="mb-3">Valg af kilometertilkøb</h4>
+                                            <form method="post" action="/lease-form-kp" class="needs-validation"
+                                                  novalidate>
+                                                <div class="row g-3">
+                                                    <div class="col-12">
+                                                        <label for="choose-lease-kp" class="form-label">Lejeaftale <span
+                                                                class="text-muted">(Required)</span></label>
+                                                        <select class="form-select" name="idLease"
+                                                                id="choose-lease-kp" required>
+                                                            <option disabled selected value>Vælg lejeaftale...</option>
+                                                            <option th:each="lease: ${leases}"
+                                                                    th:value="${lease.idLease}"
+                                                                    th:text="${'Car VIN:'+lease.idCarVIN+'; Customer ID: '+lease.idCustomer}"></option>
+                                                        </select>
+                                                        <div class="invalid-feedback">
+                                                            Please select a valid lease.
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <label for="idKilometragePlanRef" class="form-label">Kilometerpakke
+                                                            <span
+                                                                    class="text-muted">(Required)</span></label>
+                                                        <select class="form-select" name="idKilometragePlanRef"
+                                                                id="idKilometragePlanRef" required>
+                                                            <option disabled selected value>Vælg kilometerpakke...
+                                                            </option>
+                                                            <option value="0">Intet tilkøb (max 1000 km per måned)
+                                                            </option>
+                                                            <option th:each="kilometragePlanRef: ${kilometragePlanRefs}"
+                                                                    th:value="${kilometragePlanRef.idKilometragePlanRef}"
+                                                                    th:text="${'Plan: +'+kilometragePlanRef.kilometrage+' km'}"></option>
+                                                        </select>
+                                                        <div class="invalid-feedback">
+                                                            Please select a kilometrage plan.
+                                                        </div>
+                                                    </div>
+                                                    <hr class="my-4">
+                                                    <br>
+                                                    <div>
+                                                        <button class="w-100 btn btn-primary btn-lg" type="submit">
+                                                            Gem
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="tab-pane fade show active p-3" id="nav-alter-SR" role="tabpanel"
-                         aria-labelledby="nav-alter-SR-tab">
-                        <p>PLACEHOLDER OPDATER FORM</p>
+                    <div class="tab-pane fade show p-3" id="nav-lease-update" role="tabpanel"
+                         aria-labelledby="nav-lease-update-tab">
+
+                        <!--Accordion-->
+                        <div class="accordion" id="accordionUpdateLease">
+                            <div class="accordion-item ">
+                                <h2 class="accordion-header" id="headingOneUpdate">
+                                    <button id="form_update_lease" class="accordion-button" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseOneUpdate"
+                                            aria-expanded="false" aria-controls="collapseOneUpdate">
+                                        <strong>Lejeaftale</strong>
+                                    </button>
+                                </h2>
+                                <div id="collapseOneUpdate" class="accordion-collapse collapse show"
+                                     aria-labelledby="headingOneUpdate"
+                                     data-bs-parent="#accordionUpdateLease">
+                                    <div class="accordion-body">
+                                        <!--Cancel lease form-->
+                                        <div class="col-md-7 col-lg-8">
+                                            <h4 class="mb-3">Kontraktindhold</h4>
+                                            <form method="post" action="/lease-form-delete" class="needs-validation"
+                                                  novalidate>
+                                                <div class="row g-3">
+                                                    <div class="col-12">
+                                                        <label for="choose-lease" class="form-label">Annuler lejeaftale <span
+                                                                class="text-muted">(Required)</span></label>
+                                                        <select class="form-select" name="idLease"
+                                                                id="choose-lease" required>
+                                                            <option disabled selected value>Vælg lejeaftale...</option>
+                                                            <option th:each="lease: ${leases}"
+                                                                    th:value="${lease.idLease}"
+                                                                    th:text="${'Car VIN:'+lease.idCarVIN+'; Customer ID: '+lease.idCustomer}"></option>
+                                                        </select>
+                                                        <div class="invalid-feedback">
+                                                            Please select a valid lease.
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <div>
+                                                        <button class="w-100 btn btn-primary btn-lg" type="submit">
+                                                            Fortsæt
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwoUpdate">
+                                    <button id="form_update_kp" class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#collapseTwoUpdate" aria-expanded="false"
+                                            aria-controls="collapseTwoUpdate">
+                                        <strong>Afhentning</strong>
+                                    </button>
+                                </h2>
+                                <div id="collapseTwoUpdate" class="accordion-collapse collapse"
+                                     aria-labelledby="headingTwoUpdate"
+                                     data-bs-parent="#accordionUpdateLease">
+                                    <div class="accordion-body">
+                                        <!--Cancel pickup location form-->
+                                        <div class="col-md-7 col-lg-8">
+                                            <h4 class="mb-3">Valg af afhentningssted</h4>
+                                            <form method="post" action="/lease-form-pl-delete" class="needs-validation"
+                                                  novalidate>
+                                                <div class="row g-3">
+                                                    <div class="row g-3">
+
+                                                        <div class="col-12">
+                                                            <label for="idPickupLocationDelete" class="form-label">Slet lokation <span
+                                                                    class="text-muted">(Required)</span></label>
+                                                            <select class="form-select" name="idPickupLocation"
+                                                                    id="idPickupLocationDelete" required>
+                                                                <option disabled selected value>Vælg lokation...
+                                                                </option>
+                                                                <option th:each="pickupLocation: ${pickupLocations}"
+                                                                        th:value="${pickupLocation.idPickupLocation}"
+                                                                        th:text="${'Lease ID: '+pickupLocation.idLease+'; Lokation :'+pickupLocation.title}"></option>
+                                                            </select>
+                                                            <div class="invalid-feedback">
+                                                                Please select a valid lease.
+                                                            </div>
+                                                        </div>
+
+                                                        <hr class="my-4">
+                                                        <br>
+                                                        <div>
+                                                            <button class="w-100 btn btn-primary btn-lg" type="submit">
+                                                                Gem
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThreeUpdate">
+                                    <button id="form_update_pl" class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#collapseThreeUpdate" aria-expanded="false"
+                                            aria-controls="collapseThreeUpdate">
+                                        <strong>Kilometerplan (Tilkøb)</strong>
+                                    </button>
+                                </h2>
+                                <div id="collapseThreeUpdate" class="accordion-collapse collapse"
+                                     aria-labelledby="headingThreeUpdate"
+                                     data-bs-parent="#accordionUpdateLease">
+                                    <div class="accordion-body">
+                                        <!--Cancel kilometrage plan form-->
+                                        <div class="col-md-7 col-lg-8">
+                                            <h4 class="mb-3">Valg af kilometertilkøb</h4>
+                                            <form method="post" action="/lease-form-kp-delete" class="needs-validation"
+                                                  novalidate>
+                                                <div class="row g-3">
+
+                                                    <div class="col-12">
+                                                        <label for="idKilometragePlanDelete" class="form-label">Slet Kilometerpakke
+                                                            <span
+                                                                    class="text-muted">(Required)</span></label>
+                                                        <select class="form-select" name="idKilometragePlan"
+                                                                id="idKilometragePlanDelete" required>
+                                                            <option disabled selected value>Vælg kilometerpakke...
+                                                            </option>
+                                                            <option th:each="kilometragePlan: ${kilometragePlans}"
+                                                                    th:value="${kilometragePlan.idKilometragePlan}"
+                                                                    th:text="${'Lease ID: '+kilometragePlan.idLease+'; Plan: +'+kilometragePlan.kilometrage+' km'}"></option>
+                                                        </select>
+                                                        <div class="invalid-feedback">
+                                                            Please select a kilometrage plan.
+                                                        </div>
+                                                    </div>
+
+                                                    <hr class="my-4">
+                                                    <br>
+                                                    <div>
+                                                        <button class="w-100 btn btn-primary btn-lg" type="submit">
+                                                            Gem
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -139,5 +531,6 @@
         crossorigin="anonymous"></script>
 <script src="/js/dashboard.js"></script>
 <script src="/js/form-validation.js"></script>
+<script src="/js/accordianDisable.js"></script>
 </body>
 </html>

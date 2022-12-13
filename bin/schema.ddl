@@ -1,7 +1,7 @@
 CREATE TABLE Car
 (
     idCarVIN               varchar(255) NOT NULL,
-    isAvailable            bit(1)       NOT NULL,
+    isAvailable            boolean      NOT NULL,
     initialKilometrage     double       NOT NULL,
     regNo                  varchar(255) NOT NULL,
     CarTypeRefidCarTypeRef int(10)      NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE CarTypeRef
     pricePerMonth    double                                  NOT NULL,
     brand            varchar(255)                            NOT NULL,
     model            varchar(255)                            NOT NULL,
-    ´description´    varchar(255)                            NOT NULL,
+    ´description´    varchar(2550)                           ,
     transmissionType ENUM ('MANUAL', 'AUTOMATIC')            NOT NULL,
     fuelType         ENUM ('GASOLINE', 'DIESEL', 'ELECTRIC') NOT NULL,
     PRIMARY KEY (idCarTypeRef)
@@ -26,7 +26,7 @@ CREATE TABLE CarTypeRef
 CREATE TABLE Customer
 (
     idCustomer  int(10)      NOT NULL AUTO_INCREMENT,
-    licenceNo   varchar(255) NOT NULL UNIQUE ,
+    licenceNo   varchar(255) NOT NULL UNIQUE,
     postalCode  int(10)      NOT NULL,
     firstName   varchar(255) NOT NULL,
     lastName    varchar(255) NOT NULL,
@@ -41,8 +41,8 @@ CREATE TABLE Damage
 (
     idDamage                   int(10)      NOT NULL AUTO_INCREMENT,
     title                      varchar(255) NOT NULL,
-    ´description´              varchar(255) NOT NULL,
-    price                      double,
+    ´description´              varchar(2550),
+    price                      double       NOT NULL,
     DamageReportidDamageReport int(10)      NOT NULL,
     PRIMARY KEY (idDamage)
 );
@@ -62,11 +62,11 @@ CREATE TABLE Equipment
 );
 CREATE TABLE EquipmentRef
 (
-    idEquipmentRef         int(10)      NOT NULL AUTO_INCREMENT,
-    title                  varchar(255) NOT NULL,
-    ´description´          varchar(255) NOT NULL,
-    price                  double,
-    CarTypeRefidCarTypeRef int(10)      NOT NULL,
+    idEquipmentRef         int(10)       NOT NULL AUTO_INCREMENT,
+    title                  varchar(255)  NOT NULL,
+    ´description´          varchar(2550) ,
+    price                  double NOT NULL,
+    CarTypeRefidCarTypeRef int(10)       NOT NULL,
     PRIMARY KEY (idEquipmentRef)
 );
 CREATE TABLE KilometragePlan
@@ -88,7 +88,7 @@ CREATE TABLE Lease
     idLease            int(10)                       NOT NULL AUTO_INCREMENT,
     durationMonths     int(10)                       NOT NULL,
     dateOfRent         date                          NOT NULL,
-    DateOfReturn       date                          NOT NULL,
+    dateOfReturn       date                          NOT NULL,
     subscriptionType   ENUM ('LIMITED', 'UNLIMITED') NOT NULL,
     CustomeridCustomer int(10)                       NOT NULL,
     CaridCarVIN        varchar(255)                  NOT NULL,

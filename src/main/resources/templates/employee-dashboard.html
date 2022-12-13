@@ -33,7 +33,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="navbar-nav">
-        <!--Log ud-->
+        <!--Sign-out-->
         <div class="nav-item text-nowrap">
             <a class="nav-link px-3" href="/signoutUser"><span data-feather="log-out"></span> Log ud</a>
         </div>
@@ -82,15 +82,15 @@
         </nav>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-
+            <!--Alert-->
             <div class="alert alert-primary" role="alert" th:if="${message!=null}">
                 <p th:text="${message}"></p>
             </div>
-
+            <!--Graph-->
             <div id="dashboard" th:if="${session.userType=='BUSINESS'||session.userType=='ADMIN'}">
                 <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
             </div>
-
+            <!--Tables-->
             <div id="reports" th:if="${session.userType=='BUSINESS'||session.userType=='ADMIN'}">
                 <h2>Section title</h2>
                 <div class="table-responsive">

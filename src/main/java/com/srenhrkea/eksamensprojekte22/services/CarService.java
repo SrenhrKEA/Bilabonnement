@@ -13,6 +13,8 @@ public interface CarService {
 
   List<Car> getAllCarsByIdCarTypeRef(int id) throws SQLException;
 
+  List<Car> getAllCarsByIsAvailable() throws SQLException;
+
   boolean saveCar(Car car) throws SQLException;
 
   boolean updateCar(Car car) throws SQLException;

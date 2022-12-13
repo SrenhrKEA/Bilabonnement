@@ -1,15 +1,14 @@
-/*Fundet på Codepen:*/
+/*Fundet på Codepen og ændret så det virker klasser i stedet for id*/
 /*https://codepen.io/nikitahl/pen/PVVrYg*/
 
 const xhttp = new XMLHttpRequest();
 /*
 const select = document.getElementById("country");
 */
-const elements = document.getElementsByClassName("country");
-
 /*
 const flag = document.getElementById("flag");
 */
+let elements = document.getElementsByClassName("country");
 
 let countries;
 

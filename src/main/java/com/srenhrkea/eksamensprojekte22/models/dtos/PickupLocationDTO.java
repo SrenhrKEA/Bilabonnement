@@ -1,7 +1,15 @@
 package com.srenhrkea.eksamensprojekte22.models.dtos;
 
 public class PickupLocationDTO {
-  private int idPickupLocationRef, idLease;
+  private int idPickupLocation, idPickupLocationRef, idLease;
+
+  public int getIdPickupLocation() {
+    return idPickupLocation;
+  }
+
+  public void setIdPickupLocation(int idPickupLocation) {
+    this.idPickupLocation = idPickupLocation;
+  }
 
   public int getIdPickupLocationRef() {
     return idPickupLocationRef;

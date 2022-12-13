@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.*;
 
 @Repository
@@ -28,12 +29,12 @@ public class DamageReportDAOImpl implements DamageReportDAO {
     if (rs.next()) {
       int idDamageReport = rs.getInt("idDamageReport");
       String idCarVIN = rs.getString("CaridCarVIN");
-      Date dateOfReport = rs.getDate("dateOfReport");
+      String dateOfReport = rs.getString("dateOfReport");
 
       damageReport = new DamageReport();
       damageReport.setIdDamageReport(idDamageReport);
       damageReport.setIdCarVIN(idCarVIN);
-      damageReport.setDateOfReport(dateOfReport);
+      damageReport.setDateOfReport(LocalDate.parse(dateOfReport));
 
     }
 
@@ -53,12 +54,12 @@ public class DamageReportDAOImpl implements DamageReportDAO {
     while (rs.next()) {
       int idDamageReport = rs.getInt("idDamageReport");
       String idCarVIN = rs.getString("CaridCarVIN");
-      Date dateOfReport = rs.getDate("dateOfReport");
+      String dateOfReport = rs.getString("dateOfReport");
 
       DamageReport damageReport = new DamageReport();
       damageReport.setIdDamageReport(idDamageReport);
       damageReport.setIdCarVIN(idCarVIN);
-      damageReport.setDateOfReport(dateOfReport);
+      damageReport.setDateOfReport(LocalDate.parse(dateOfReport));
 
       damageReports.add(damageReport);
     }
@@ -78,12 +79,12 @@ public class DamageReportDAOImpl implements DamageReportDAO {
     while (rs.next()) {
       int idDamageReport = rs.getInt("idDamageReport");
       String idCarVIN = rs.getString("CaridCarVIN");
-      Date dateOfReport = rs.getDate("dateOfReport");
+      String dateOfReport = rs.getString("dateOfReport");
 
       DamageReport damageReport = new DamageReport();
       damageReport.setIdDamageReport(idDamageReport);
       damageReport.setIdCarVIN(idCarVIN);
-      damageReport.setDateOfReport(dateOfReport);
+      damageReport.setDateOfReport(LocalDate.parse(dateOfReport));
 
       damageReports.add(damageReport);
     }

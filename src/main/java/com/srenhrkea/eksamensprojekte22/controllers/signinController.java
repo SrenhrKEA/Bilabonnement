@@ -22,12 +22,12 @@ public class signinController {
   }
 
   @GetMapping("/signin")
-  public String login(Model model) {
+  public String login() {
     return "signin";
   }
 
   @PostMapping("/signinUser")
-  public String loginUser(@ModelAttribute UserDTO userDTO, ModelMap model, HttpSession session, RedirectAttributes redirectAttributes) {
+  public String loginUser(@ModelAttribute UserDTO userDTO, HttpSession session, RedirectAttributes redirectAttributes) {
     User user;
     try {
       user = userService.AuthenticateUser(userDTO.getUsername(), userDTO.getPassword());

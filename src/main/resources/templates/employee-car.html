@@ -33,7 +33,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="navbar-nav">
-        <!--Ved log ud afsluttes session-->
+        <!--Sign-out-->
         <div class="nav-item text-nowrap">
             <a class="nav-link px-3" href="/signoutUser"><span data-feather="log-out"></span> Log ud</a>
         </div>
@@ -82,43 +82,192 @@
         </nav>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-
-
+            <!--Alert-->
             <div class="alert alert-primary" role="alert" th:if="${message!=null}">
                 <p th:text="${message}"></p>
             </div>
 
             <div id="car-form" th:if="${session.userType=='DATA_REG'||session.userType=='ADMIN'}">
-                <!--TODO: omdøb ids-->
+                <!--Tabs-->
                 <nav>
-                    <div class="nav nav-tabs" id="nav-tabs-damage-reg" role="tablist">
-                        <button class="nav-link active" id="nav-create-SR-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-create-SR" type="button" role="tab"
-                                aria-controls="nav-create-SR"
+                    <div class="nav nav-tabs" id="nav-tab-car-forms" role="tablist">
+                        <button class="nav-link active" id="nav-car-create-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-car-create" type="button" role="tab"
+                                aria-controls="nav-car-create"
                                 aria-selected="true">
-                            OPRET SKADESRAPPORT
+                            <strong>Indtast Bildata</strong>
                         </button>
-                        <button class="nav-link" id="nav-alter-SR-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-alter-SR" type="button" role="tab" aria-controls="nav-alter-SR"
+                        <button class="nav-link" id="nav-car-update-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-car-update" type="button" role="tab"
+                                aria-controls="nav-car-update"
                                 aria-selected="false">
-                            OPDATER SKADESRAPPORT
+                            <strong>Opdater Bildata</strong>
                         </button>
                     </div>
                 </nav>
+                <!--Tab content-->
+                <div class="tab-content" id="nav-tabContent-car-create">
+                    <div class="tab-pane fade show active p-3" id="nav-car-create" role="tabpanel"
+                         aria-labelledby="nav-car-create-tab">
+                        <!--Create customer form-->
+                        <div class="col-md-7 col-lg-8">
+                            <h4 class="mb-3">Ejerinformation</h4>
+                            <form method="post" action="/car-form-create" class="needs-validation" novalidate id="testBoolean">
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <label for="choose-carType" class="form-label">Bil model <span
+                                                class="text-muted">(Required)</span></label>
+                                        <select class="form-select" name="idCarTypeRef"
+                                                id="choose-carType" required>
+                                            <option disabled selected value>Vælg bil model...</option>
+                                            <option th:each="carTypeRef: ${carTypeRefs}"
+                                                    th:value="${carTypeRef.idCarTypeRef}"
+                                                    th:text="${carTypeRef.brand+' '+carTypeRef.model+'; FT: '+carTypeRef.fuelType+'; TT: '+carTypeRef.transmissionType}"></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a valid car model.
+                                        </div>
+                                    </div>
 
-                <div class="tab-content" id="nav-tabContent-SR">
-                    <div class="tab-pane fade show active p-3" id="nav-create-SR" role="tabpanel"
-                         aria-labelledby="nav-create-SR-tab">
-                        <p>PLACEHOLDER OPRET FORM</p>
+                                    <div class="col-sm-6">
+                                        <label for="idCarVIN" class="form-label">Stelnummer <span
+                                                class="text-muted">(Required)</span></label>
+                                        <input name="idCarVIN" type="text" class="form-control" id="idCarVIN"
+                                               placeholder="eg. XX1XX1234567891011"
+                                               value="" required>
+                                        <div class="invalid-feedback">
+                                            Valid VIN is required.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label for="regNo" class="form-label">Registreringsnummer <span
+                                                class="text-muted">(Required)</span></label>
+                                        <input name="regNo" type="text" class="form-control" id="regNo"
+                                               placeholder="eg. XX 12 345"
+                                               value="" required>
+                                        <div class="invalid-feedback">
+                                            Valid registration number is required.
+                                        </div>
+                                    </div>
+                                    <!--TODO: fix script således at checked retunere value=1-->
+                                    <div class="form-check col-sm-6">
+                                        <input name="isAvailable" type="checkbox" class="form-check-input"
+                                               id="isAvailable" value=1 checked="checked">
+                                        <label class="form-check-label" for="isAvailable">Bilen er ledig</label>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="initialKilometrage" class="form-label">Antal km kørt <span
+                                                class="text-muted">(Required)</span></label>
+                                        <input name="initialKilometrage" type="number" class="form-control"
+                                               id="initialKilometrage"
+                                               placeholder="eg. 100000"
+                                               value="" required>
+                                        <div class="invalid-feedback">
+                                            Valid kilometrage value is required.
+                                        </div>
+                                    </div>
+                                    <hr class="my-4">
+                                    <br>
+                                    <div>
+                                        <button class="w-100 btn btn-primary btn-lg" type="submit">Gem
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <div class="tab-pane fade show active p-3" id="nav-alter-SR" role="tabpanel"
-                         aria-labelledby="nav-alter-SR-tab">
-                        <p>PLACEHOLDER OPDATER FORM</p>
+                    <div class="tab-pane fade show p-3" id="nav-car-update" role="tabpanel"
+                         aria-labelledby="nav-car-update-tab">
+                        <!--Update customer form-->
+                        <div class="col-md-7 col-lg-8">
+                            <h4 class="mb-3">Ejerinformation</h4>
+                            <form method="post" action="/car-form-update" class="needs-validation" novalidate>
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <label for="choose-car" class="form-label">Bil <span
+                                                class="text-muted">(Required)</span></label>
+                                        <select class="form-select" name="idCarVIN"
+                                                id="choose-car" required>
+                                            <option disabled selected value>Vælg bil...</option>
+                                            <option th:each="car: ${cars}"
+                                                    th:value="${car.idCarVIN}"
+                                                    th:text="${'VIN: '+car.idCarVIN+'; RegNo: '+car.regNo}"></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a valid car.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="choose-carTypeUpdate" class="form-label">Bil model <span
+                                                class="text-muted">(Required)</span></label>
+                                        <select class="form-select" name="idCarTypeRef"
+                                                id="choose-carTypeUpdate" required>
+                                            <option disabled selected value>Vælg bil model...</option>
+                                            <option th:each="carTypeRef: ${carTypeRefs}"
+                                                    th:value="${carTypeRef.idCarTypeRef}"
+                                                    th:text="${carTypeRef.brand+' '+carTypeRef.model+'; FT: '+carTypeRef.fuelType+'; TT: '+carTypeRef.transmissionType}"></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a valid car model.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label for="idCarVINUpdate" class="form-label">Stelnummer <span
+                                                class="text-muted">(Required)</span></label>
+                                        <input name="idCarVIN" type="text" class="form-control" id="idCarVINUpdate"
+                                               placeholder="eg. XX1XX1234567891011"
+                                               value="" required>
+                                        <div class="invalid-feedback">
+                                            Valid VIN is required.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label for="regNoUpdate" class="form-label">Registreringsnummer <span
+                                                class="text-muted">(Required)</span></label>
+                                        <input name="regNo" type="text" class="form-control" id="regNoUpdate"
+                                               placeholder="eg. XX 12 345"
+                                               value="" required>
+                                        <div class="invalid-feedback">
+                                            Valid registration number is required.
+                                        </div>
+                                    </div>
+                                    <!--TODO: fix script således at checked retunere value=1-->
+                                    <div class="form-check">
+                                        <input name="isAvailable" type="checkbox" class="form-check-input"
+                                               id="isAvailableUpdate" checked>
+                                        <label class="form-check-label" for="isAvailableUpdate">Bilen er ledig</label>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="initialKilometrageUpdate" class="form-label">Antal km kørt <span
+                                                class="text-muted">(Required)</span></label>
+                                        <input name="initialKilometrage" type="text" class="form-control"
+                                               id="initialKilometrageUpdate"
+                                               placeholder="eg. 100000"
+                                               value="" required>
+                                        <div class="invalid-feedback">
+                                            Valid kilometrage value is required.
+                                        </div>
+                                    </div>
+                                    <hr class="my-4">
+                                    <br>
+                                    <div>
+                                        <button class="w-100 btn btn-primary btn-lg" type="submit">Gem
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
+
+
             </div>
-
-
         </main>
     </div>
 </div>
@@ -141,5 +290,14 @@
         crossorigin="anonymous"></script>
 <script src="/js/dashboard.js"></script>
 <script src="/js/form-validation.js"></script>
+<!--<script>
+    $(document).ready(function(){
+        $("#testBoolean").submit(function(e){
+            e.preventDefault();
+            alert($(this).serialize());
+            $(this).submit();
+        });
+    });
+</script>-->
 </body>
 </html>

@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.*;
 
 @Repository
@@ -30,8 +31,8 @@ public class LeaseDAOImpl implements LeaseDAO {
       int idLease = rs.getInt("idLease");
       int durationMonths = rs.getInt("durationMonths");
       int idCustomer = rs.getInt("CustomeridCustomer");
-      Date dateOfRent = rs.getDate("dateOfRent");
-      Date dateOfReturn = rs.getDate("dateOfReturn");
+      String dateOfRent = rs.getString("dateOfRent");
+      String dateOfReturn = rs.getString("dateOfReturn");
       SubscriptionType subscriptionType = SubscriptionType.valueOf(rs.getString("subscriptionType"));
       String idCarVIN = rs.getString("CaridCarVIN");
 
@@ -39,8 +40,8 @@ public class LeaseDAOImpl implements LeaseDAO {
       lease.setIdLease(idLease);
       lease.setDurationMonths(durationMonths);
       lease.setIdCustomer(idCustomer);
-      lease.setDateOfRent(dateOfRent);
-      lease.setDateOfReturn(dateOfReturn);
+      lease.setDateOfRent(LocalDate.parse(dateOfRent));
+      lease.setDateOfReturn(LocalDate.parse(dateOfReturn));
       lease.setSubscriptionType(subscriptionType);
       lease.setIdCarVIN(idCarVIN);
     }
@@ -61,8 +62,8 @@ public class LeaseDAOImpl implements LeaseDAO {
       int idLease = rs.getInt("idLease");
       int durationMonths = rs.getInt("durationMonths");
       int idCustomer = rs.getInt("CustomeridCustomer");
-      Date dateOfRent = rs.getDate("dateOfRent");
-      Date dateOfReturn = rs.getDate("dateOfReturn");
+      String dateOfRent = rs.getString("dateOfRent");
+      String dateOfReturn = rs.getString("dateOfReturn");
       SubscriptionType subscriptionType = SubscriptionType.valueOf(rs.getString("subscriptionType"));
       String idCarVIN = rs.getString("CaridCarVIN");
 
@@ -70,8 +71,8 @@ public class LeaseDAOImpl implements LeaseDAO {
       lease.setIdLease(idLease);
       lease.setDurationMonths(durationMonths);
       lease.setIdCustomer(idCustomer);
-      lease.setDateOfRent(dateOfRent);
-      lease.setDateOfReturn(dateOfReturn);
+      lease.setDateOfRent(LocalDate.parse(dateOfRent));
+      lease.setDateOfReturn(LocalDate.parse(dateOfReturn));
       lease.setSubscriptionType(subscriptionType);
       lease.setIdCarVIN(idCarVIN);
 
@@ -94,8 +95,8 @@ public class LeaseDAOImpl implements LeaseDAO {
       int idLease = rs.getInt("idLease");
       int durationMonths = rs.getInt("durationMonths");
       int idCustomer = rs.getInt("CustomeridCustomer");
-      Date dateOfRent = rs.getDate("dateOfRent");
-      Date dateOfReturn = rs.getDate("dateOfReturn");
+      String dateOfRent = rs.getString("dateOfRent");
+      String dateOfReturn = rs.getString("dateOfReturn");
       SubscriptionType subscriptionType = SubscriptionType.valueOf(rs.getString("subscriptionType"));
       String idCarVIN = rs.getString("CaridCarVIN");
 
@@ -103,8 +104,8 @@ public class LeaseDAOImpl implements LeaseDAO {
       lease.setIdLease(idLease);
       lease.setDurationMonths(durationMonths);
       lease.setIdCustomer(idCustomer);
-      lease.setDateOfRent(dateOfRent);
-      lease.setDateOfReturn(dateOfReturn);
+      lease.setDateOfRent(LocalDate.parse(dateOfRent));
+      lease.setDateOfReturn(LocalDate.parse(dateOfReturn));
       lease.setSubscriptionType(subscriptionType);
       lease.setIdCarVIN(idCarVIN);
 
@@ -127,8 +128,8 @@ public class LeaseDAOImpl implements LeaseDAO {
       int idLease = rs.getInt("idLease");
       int durationMonths = rs.getInt("durationMonths");
       int idCustomer = rs.getInt("CustomeridCustomer");
-      Date dateOfRent = rs.getDate("dateOfRent");
-      Date dateOfReturn = rs.getDate("dateOfReturn");
+      String dateOfRent = rs.getString("dateOfRent");
+      String dateOfReturn = rs.getString("dateOfReturn");
       SubscriptionType subscriptionType = SubscriptionType.valueOf(rs.getString("subscriptionType"));
       String idCarVIN = rs.getString("CaridCarVIN");
 
@@ -136,8 +137,8 @@ public class LeaseDAOImpl implements LeaseDAO {
       lease.setIdLease(idLease);
       lease.setDurationMonths(durationMonths);
       lease.setIdCustomer(idCustomer);
-      lease.setDateOfRent(dateOfRent);
-      lease.setDateOfReturn(dateOfReturn);
+      lease.setDateOfRent(LocalDate.parse(dateOfRent));
+      lease.setDateOfReturn(LocalDate.parse(dateOfReturn));
       lease.setSubscriptionType(subscriptionType);
       lease.setIdCarVIN(idCarVIN);
 

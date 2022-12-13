@@ -1,12 +1,15 @@
 package com.srenhrkea.eksamensprojekte22.models.dtos;
 
 import com.srenhrkea.eksamensprojekte22.enums.SubscriptionType;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class LeaseDTO {
   private int idLease, durationMonths, idCustomer;
-  private Date dateOfRent, DateOfReturn;
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  private LocalDate dateOfRent, dateOfReturn;
   private SubscriptionType subscriptionType;
   private String idCarVIN;
 
@@ -34,20 +37,20 @@ public class LeaseDTO {
     this.idCustomer = idCustomer;
   }
 
-  public Date getDateOfRent() {
+  public LocalDate getDateOfRent() {
     return dateOfRent;
   }
 
-  public void setDateOfRent(Date dateOfRent) {
+  public void setDateOfRent(LocalDate dateOfRent) {
     this.dateOfRent = dateOfRent;
   }
 
-  public Date getDateOfReturn() {
-    return DateOfReturn;
+  public LocalDate getDateOfReturn() {
+    return dateOfReturn;
   }
 
-  public void setDateOfReturn(Date dateOfReturn) {
-    DateOfReturn = dateOfReturn;
+  public void setDateOfReturn(LocalDate dateOfReturn) {
+    this.dateOfReturn = dateOfReturn;
   }
 
   public SubscriptionType getSubscriptionType() {

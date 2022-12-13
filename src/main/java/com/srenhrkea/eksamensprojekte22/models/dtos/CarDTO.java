@@ -2,24 +2,24 @@ package com.srenhrkea.eksamensprojekte22.models.dtos;
 
 public class CarDTO {
   private boolean isAvailable;
-  private int idCarType;
+  private int idCarTypeRef;
   private double initialKilometrage;
   private String idCarVIN, regNo;
 
-  public boolean isAvailable() {
+  public boolean getIsAvailable() {
     return isAvailable;
   }
 
-  public void setAvailable(boolean available) {
+  public void setIsAvailable(boolean available) {
     isAvailable = available;
   }
 
-  public int getIdCarType() {
-    return idCarType;
+  public int getIdCarTypeRef() {
+    return idCarTypeRef;
   }
 
-  public void setIdCarType(int idCarType) {
-    this.idCarType = idCarType;
+  public void setIdCarTypeRef(int idCarTypeRef) {
+    this.idCarTypeRef = idCarTypeRef;
   }
 
   public double getInitialKilometrage() {

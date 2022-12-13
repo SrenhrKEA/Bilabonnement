@@ -1,32 +1,15 @@
-package com.srenhrkea.eksamensprojekte22.models;
+package com.srenhrkea.eksamensprojekte22.models.dtos;
 
 import com.srenhrkea.eksamensprojekte22.enums.FuelType;
 import com.srenhrkea.eksamensprojekte22.enums.TransmissionType;
 
-public class CarTypeRef {
+public class CarTypeRefDTO {
+
   private int idCarTypeRef, seatingCapacity;
   private double taxableValue, registrationTax, fuelConsumption, emission, pricePerMonth;
   private String brand, model, description;
   private TransmissionType transmissionType;
   private FuelType fuelType;
-
-  public CarTypeRef() {
-  }
-
-  public CarTypeRef(int idCarTypeRef, int seatingCapacity, double taxableValue, double registrationTax, double fuelConsumption, double emission, double pricePerMonth, String brand, String model, String description, TransmissionType transmissionType, FuelType fuelType) {
-    this.idCarTypeRef = idCarTypeRef;
-    this.seatingCapacity = seatingCapacity;
-    this.taxableValue = taxableValue;
-    this.registrationTax = registrationTax;
-    this.fuelConsumption = fuelConsumption;
-    this.emission = emission;
-    this.pricePerMonth = pricePerMonth;
-    this.brand = brand;
-    this.model = model;
-    this.description = description;
-    this.transmissionType = transmissionType;
-    this.fuelType = fuelType;
-  }
 
   public int getIdCarTypeRef() {
     return idCarTypeRef;
@@ -122,23 +105,5 @@ public class CarTypeRef {
 
   public void setFuelType(FuelType fuelType) {
     this.fuelType = fuelType;
-  }
-
-  @Override
-  public String toString() {
-    return "CarTypeRef{" +
-        "idCarTypeRef=" + idCarTypeRef +
-        ", seatingCapacity=" + seatingCapacity +
-        ", taxableValue=" + taxableValue +
-        ", registrationTax=" + registrationTax +
-        ", fuelConsumption=" + fuelConsumption +
-        ", emission=" + emission +
-        ", pricePerMonth=" + pricePerMonth +
-        ", brand='" + brand + '\'' +
-        ", model='" + model + '\'' +
-        ", description='" + description + '\'' +
-        ", transmissionType=" + transmissionType +
-        ", fuelType=" + fuelType +
-        '}';
   }
 }

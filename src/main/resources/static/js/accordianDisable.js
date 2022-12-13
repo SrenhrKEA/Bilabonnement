@@ -1,5 +1,7 @@
+/*Scriptet bruges ikke.*/
+
 $(document).ready(function () {
-    $('#accordion').find('.accordion-toggle').click(function () {
+    $('.accordion').find('.accordion-toggle').click(function () {
         if ($(this).hasClass('disable')) {
             alert("Please complete the above details");
         }else{

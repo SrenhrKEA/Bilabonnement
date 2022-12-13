@@ -9,4 +9,6 @@ import java.util.Collection;
 public interface CarDAO extends GenericDAO<Car, String> {
 
   Collection<Car> getAllByIdCarTypeRef(Integer id) throws SQLException;
+
+  Collection<Car> getAllByIsAvailable() throws SQLException;
 }

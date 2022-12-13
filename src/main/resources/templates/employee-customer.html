@@ -33,7 +33,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="navbar-nav">
-        <!--Log ud-->
+        <!--Sign-out-->
         <div class="nav-item text-nowrap">
             <a class="nav-link px-3" href="/signoutUser"><span data-feather="log-out"></span> Log ud</a>
         </div>
@@ -96,21 +96,21 @@
                                 data-bs-target="#nav-customer-create" type="button" role="tab"
                                 aria-controls="nav-customer-create"
                                 aria-selected="true">
-                            <strong>Indtast Kundeinfo</strong>
+                            <strong>Indtast Kundedata</strong>
                         </button>
                         <button class="nav-link" id="nav-customer-update-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-customer-update" type="button" role="tab"
                                 aria-controls="nav-customer-update"
                                 aria-selected="false">
-                            <strong>Opdater Kundeinfo</strong>
+                            <strong>Opdater Kundedata</strong>
                         </button>
                     </div>
                 </nav>
-
+                <!--Tab content-->
                 <div class="tab-content" id="nav-tabContent-customer-create">
                     <div class="tab-pane fade show active p-3" id="nav-customer-create" role="tabpanel"
                          aria-labelledby="nav-customer-create-tab">
-                        <!--Customer creation form-->
+                        <!--Create customer form-->
                         <div class="col-md-7 col-lg-8">
                             <h4 class="mb-3">Faktureringsadresse</h4>
                             <form method="post" action="/customer-form-create" class="needs-validation" novalidate>
@@ -211,6 +211,7 @@
                                         Valid last driver licence number is required.
                                     </div>
                                 </div>
+                                <hr class="my-4">
                                 <br>
                                 <div>
                                     <button class="w-100 btn btn-primary btn-lg" type="submit">Gem
@@ -221,7 +222,7 @@
                     </div>
                     <div class="tab-pane fade show p-3" id="nav-customer-update" role="tabpanel"
                          aria-labelledby="nav-customer-update-tab">
-                        <!--Customer update form-->
+                        <!--Update customer form-->
                         <div class="col-md-7 col-lg-8">
                             <h4 class="mb-3">Faktureringsadresse</h4>
                             <form method="post" action="/customer-form-update" class="needs-validation" novalidate>
@@ -338,6 +339,7 @@
                                         Valid last driver licence number is required.
                                     </div>
                                 </div>
+                                <hr class="my-4">
                                 <br>
                                 <div>
                                     <button class="w-100 btn btn-primary btn-lg" type="submit">Gem
@@ -351,39 +353,6 @@
 
             </div>
 
-            <!--
-                        <div id="data-reg" th:if="${session.userType=='DATA_REG'||session.userType=='ADMIN'}">
-                            <h3>Dataregistrering</h3>
-                            <div>
-                                <nav>
-                                    <div class="nav nav-tabs" id="nav-tabs-data-reg" role="tablist">
-                                        <button class="nav-link active" id="nav-create-DR-tab" data-bs-toggle="tab"
-                                                data-bs-target="#nav-create-DR" type="button" role="tab"
-                                                aria-controls="nav-create-DR"
-                                                aria-selected="true">
-                                            OPRET LEJEAFTALE
-                                        </button>
-                                        <button class="nav-link" id="nav-alter-DR-tab" data-bs-toggle="tab"
-                                                data-bs-target="#nav-alter-DR" type="button" role="tab" aria-controls="nav-alter-DR"
-                                                aria-selected="false">
-                                            OPDATER LEJEAFTALE
-                                        </button>
-                                    </div>
-                                </nav>
-
-                                <div class="tab-content" id="nav-tabContent-DR">
-                                    <div class="tab-pane fade show active p-3" id="nav-create-DR" role="tabpanel"
-                                         aria-labelledby="nav-create-DR-tab">
-                                        <p>PLACEHOLDER OPRET FORM</p>
-                                    </div>
-                                    <div class="tab-pane fade show active p-3" id="nav-alter-DR" role="tabpanel"
-                                         aria-labelledby="nav-alter-DR-tab">
-                                        <p>PLACEHOLDER OPDATER FORM</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-            -->
         </main>
     </div>
 </div>
@@ -406,7 +375,7 @@
         crossorigin="anonymous"></script>
 <script src="/js/dashboard.js"></script>
 <script src="/js/form-validation.js"></script>
-<!--Egne scripts-->
+<!--custom scripts-->
 <script src="/js/country-list-api.js"></script>
 
 </body>

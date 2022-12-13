@@ -86,11 +86,17 @@
             <div class="alert alert-primary" role="alert" th:if="${message!=null}">
                 <p th:text="${message}"></p>
             </div>
-            <!--Graph-->
-            <div id="dashboard" th:if="${session.userType=='BUSINESS'||session.userType=='ADMIN'}">
-                <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+            <div id="kpi" th:if="${session.userType=='BUSINESS'||session.userType=='ADMIN'}">
+                <div><span>antal udlejede biler</span><span th:text="${carsLeased.size()}"></span></div>
+                <div><span>indkomst fra biler</span><span th:text="${carIncome}"></span></div>
+                <div><span>indkomst fra kilometerpakker</span><span th:text="${kpIncome}"></span></div>
             </div>
+            <!--Graph-->
+<!--            <div id="dashboard" th:if="${session.userType=='BUSINESS'||session.userType=='ADMIN'}">
+                <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+            </div>-->
             <!--Tables-->
+<!--
             <div id="reports" th:if="${session.userType=='BUSINESS'||session.userType=='ADMIN'}">
                 <h2>Section title</h2>
                 <div class="table-responsive">
@@ -221,6 +227,7 @@
                     </table>
                 </div>
             </div>
+-->
         </main>
     </div>
 </div>

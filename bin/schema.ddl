@@ -72,7 +72,7 @@ CREATE TABLE EquipmentRef
 CREATE TABLE KilometragePlan
 (
     idKilometragePlan                      int(10) NOT NULL AUTO_INCREMENT,
-    LeaseidLease                           int(10) NOT NULL,
+    LeaseidLease                           int(10) NOT NULL UNIQUE ,
     KilometragePlanRefidKilometragePlanRef int(10) NOT NULL,
     PRIMARY KEY (idKilometragePlan)
 );
@@ -97,7 +97,7 @@ CREATE TABLE Lease
 CREATE TABLE PickupLocation
 (
     idPickupLocation                     int(10) NOT NULL AUTO_INCREMENT,
-    LeaseidLease                         int(10) NOT NULL,
+    LeaseidLease                         int(10) NOT NULL UNIQUE ,
     PickupLocationRefidPickupLocationRef int(10) NOT NULL,
     PRIMARY KEY (idPickupLocation)
 );

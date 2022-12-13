@@ -130,6 +130,33 @@ public class CarDAOImpl implements CarDAO {
   }
 
   @Override
+  public Collection<Car> getAllByIsNotAvailable() throws SQLException {
+
+    List<Car> cars = new ArrayList<>();
+    String sql = "SELECT *FROM car WHERE isAvailable=0";
+    PreparedStatement psts = conn.prepareStatement(sql);
+
+    ResultSet rs = psts.executeQuery();
+    while (rs.next()) {
+      String idCarVIN = rs.getString("idCarVIN");
+      boolean isAvailable = rs.getBoolean("isAvailable");
+      double initialKilometrage = rs.getDouble("initialKilometrage");
+      String regNo = rs.getString("regNo");
+      int idCarTypeRef = rs.getInt("CarTypeRefidCarTypeRef");
+
+      Car car = new Car();
+      car.setIdCarVIN(idCarVIN);
+      car.setAvailable(isAvailable);
+      car.setInitialKilometrage(initialKilometrage);
+      car.setRegNo(regNo);
+      car.setIdCarTypeRef(idCarTypeRef);
+
+      cars.add(car);
+    }
+    return cars;
+  }
+
+  @Override
   public boolean save(Car car) throws SQLException {
 
     String sql = "INSERT INTO car (idCarVIN, isAvailable,initialKilometrage,regNo,CarTypeRefidCarTypeRef)VALUES(?,?,?,?,?)";

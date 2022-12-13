@@ -21,4 +21,7 @@ public interface KilometragePlanService {
 
   boolean deleteKilometragePlanById(int id) throws SQLException;
 
+  double GetIncomePerMonth() throws SQLException;
+
+
 }

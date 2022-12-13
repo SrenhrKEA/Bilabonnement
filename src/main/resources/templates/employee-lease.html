@@ -185,7 +185,7 @@
                                                         <input name="durationMonths" type="number" class="form-control"
                                                                id="durationMonths"
                                                                placeholder="eg. 5"
-                                                               value="" required>
+                                                               value="" maxlength="10" required>
                                                         <div class="invalid-feedback">
                                                             Valid number of months is required.
                                                         </div>
@@ -196,7 +196,7 @@
                                                                 class="text-muted">(Required)</span></label>
                                                         <input name="dateOfRent" type="date" class="form-control"
                                                                id="dateOfRent"
-                                                               placeholder="eg. 11/12/2022" required>
+                                                               placeholder="eg. 11/12/2022" max="9999-12-31" step="1" required>
                                                         <div class="invalid-feedback">
                                                             Valid date is required.
                                                         </div>
@@ -208,7 +208,7 @@
                                                                     class="text-muted">(Required)</span></label>
                                                         <input name="dateOfReturn" type="date" class="form-control"
                                                                id="dateOfReturn"
-                                                               placeholder="eg. 12/12/2022" required>
+                                                               placeholder="eg. 12/12/2022" max="9999-12-31" step="1" required>
                                                         <div class="invalid-feedback">
                                                             Valid date is required.
                                                         </div>
@@ -217,7 +217,7 @@
                                                     <br>
                                                     <div>
                                                         <button class="w-100 btn btn-primary btn-lg" type="submit">
-                                                            Fortsæt
+                                                            Gem
                                                         </button>
                                                     </div>
                                                 </div>
@@ -271,7 +271,7 @@
                                                                     th:text="${'Lokation: '+pickupLocationRef.title}"></option>
                                                         </select>
                                                         <div class="invalid-feedback">
-                                                            Please select a pickup location.
+                                                            Please select a valid pickup location.
                                                         </div>
                                                     </div>
                                                     <hr class="my-4">
@@ -336,7 +336,7 @@
                                                                     th:text="${'Plan: +'+kilometragePlanRef.kilometrage+' km'}"></option>
                                                         </select>
                                                         <div class="invalid-feedback">
-                                                            Please select a kilometrage plan.
+                                                            Please select a valid kilometrage plan.
                                                         </div>
                                                     </div>
                                                     <hr class="my-4">
@@ -394,7 +394,7 @@
                                                     <br>
                                                     <div>
                                                         <button class="w-100 btn btn-primary btn-lg" type="submit">
-                                                            Fortsæt
+                                                            Gem
                                                         </button>
                                                     </div>
                                                 </div>
@@ -426,15 +426,15 @@
                                                     <div class="row g-3">
 
                                                         <div class="col-12">
-                                                            <label for="idPickupLocationDelete" class="form-label">Slet lokation <span
+                                                            <label for="idPickupLocationDelete" class="form-label">Annuler lokation <span
                                                                     class="text-muted">(Required)</span></label>
                                                             <select class="form-select" name="idPickupLocation"
                                                                     id="idPickupLocationDelete" required>
-                                                                <option disabled selected value>Vælg lokation...
+                                                                <option disabled selected value>Vælg lejeaftale...
                                                                 </option>
                                                                 <option th:each="pickupLocation: ${pickupLocations}"
                                                                         th:value="${pickupLocation.idPickupLocation}"
-                                                                        th:text="${'Lease ID: '+pickupLocation.idLease+'; Lokation :'+pickupLocation.title}"></option>
+                                                                        th:text="${'Lease ID: '+pickupLocation.idLease}"></option>
                                                             </select>
                                                             <div class="invalid-feedback">
                                                                 Please select a valid lease.
@@ -476,19 +476,19 @@
                                                 <div class="row g-3">
 
                                                     <div class="col-12">
-                                                        <label for="idKilometragePlanDelete" class="form-label">Slet Kilometerpakke
+                                                        <label for="idKilometragePlanDelete" class="form-label">Annuler Kilometerpakke
                                                             <span
                                                                     class="text-muted">(Required)</span></label>
                                                         <select class="form-select" name="idKilometragePlan"
                                                                 id="idKilometragePlanDelete" required>
-                                                            <option disabled selected value>Vælg kilometerpakke...
+                                                            <option disabled selected value>Vælg lejeaftale...
                                                             </option>
                                                             <option th:each="kilometragePlan: ${kilometragePlans}"
                                                                     th:value="${kilometragePlan.idKilometragePlan}"
-                                                                    th:text="${'Lease ID: '+kilometragePlan.idLease+'; Plan: +'+kilometragePlan.kilometrage+' km'}"></option>
+                                                                    th:text="${'Lease ID: '+kilometragePlan.idLease}"></option>
                                                         </select>
                                                         <div class="invalid-feedback">
-                                                            Please select a kilometrage plan.
+                                                            Please select a valid lease.
                                                         </div>
                                                     </div>
 

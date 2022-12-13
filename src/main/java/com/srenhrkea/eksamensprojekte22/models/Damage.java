@@ -60,6 +60,7 @@ public class Damage {
   public String toString() {
     return "Damage{" +
         "idDamage=" + idDamage +
+        ", idDamageReport=" + idDamageReport +
         ", price=" + price +
         ", title='" + title + '\'' +
         ", description='" + description + '\'' +

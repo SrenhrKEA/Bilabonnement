@@ -1,7 +1,11 @@
 package com.srenhrkea.eksamensprojekte22.services.impl;
 
+import com.srenhrkea.eksamensprojekte22.daos.impl.DamageDAOImpl;
 import com.srenhrkea.eksamensprojekte22.daos.impl.DamageReportDAOImpl;
+import com.srenhrkea.eksamensprojekte22.models.Damage;
 import com.srenhrkea.eksamensprojekte22.models.DamageReport;
+import com.srenhrkea.eksamensprojekte22.models.KilometragePlan;
+import com.srenhrkea.eksamensprojekte22.models.PickupLocation;
 import com.srenhrkea.eksamensprojekte22.services.DamageReportService;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +17,11 @@ import java.util.Optional;
 public class DamageReportServiceImpl implements DamageReportService {
 
   private DamageReportDAOImpl damageReportDAO;
+  private DamageDAOImpl damageDAO;
 
-  public DamageReportServiceImpl(DamageReportDAOImpl damageReportDAO) {
+  public DamageReportServiceImpl(DamageReportDAOImpl damageReportDAO, DamageDAOImpl damageDAO) {
     this.damageReportDAO = damageReportDAO;
+    this.damageDAO = damageDAO;
   }
 
   @Override
@@ -47,6 +53,10 @@ public class DamageReportServiceImpl implements DamageReportService {
 
   @Override
   public boolean deleteDamageReportById(int id) throws SQLException {
+    List<Damage> damages = (List<Damage>) damageDAO.getAllByIdDamageReport(id);
+    for (Damage damage : damages) {
+      damageDAO.delete(damage.getIdDamage());
+    }
     return damageReportDAO.delete(id);
   }
 }

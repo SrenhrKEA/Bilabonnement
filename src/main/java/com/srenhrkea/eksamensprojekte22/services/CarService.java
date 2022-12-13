@@ -15,10 +15,13 @@ public interface CarService {
 
   List<Car> getAllCarsByIsAvailable() throws SQLException;
 
+  List<Car> getAllCarsByIsNotAvailable() throws SQLException;
+
   boolean saveCar(Car car) throws SQLException;
 
   boolean updateCar(Car car) throws SQLException;
 
   boolean deleteCarById(String id) throws SQLException;
 
+  double GetIncomePerMonth() throws SQLException;
 }

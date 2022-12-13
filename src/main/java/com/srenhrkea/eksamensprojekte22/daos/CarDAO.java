@@ -11,4 +11,6 @@ public interface CarDAO extends GenericDAO<Car, String> {
   Collection<Car> getAllByIdCarTypeRef(Integer id) throws SQLException;
 
   Collection<Car> getAllByIsAvailable() throws SQLException;
+
+  Collection<Car> getAllByIsNotAvailable() throws SQLException;
 }

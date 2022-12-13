@@ -102,7 +102,7 @@
                                 data-bs-target="#nav-damageReport-update" type="button" role="tab"
                                 aria-controls="nav-damageReport-update"
                                 aria-selected="false">
-                            <strong>Opdater Skadesanmeldelse</strong>
+                            <strong>Annuler Skadesanmeldelse</strong>
                         </button>
                     </div>
                 </nav>
@@ -152,7 +152,7 @@
                                                                 class="text-muted">(Required)</span></label>
                                                         <input name="dateOfReport" type="date" class="form-control"
                                                                id="dateOfReport"
-                                                               placeholder="eg. 11/12/2022" required>
+                                                               placeholder="eg. 11/12/2022" max="9999-12-31" step="1" required>
                                                         <div class="invalid-feedback">
                                                             Valid date is required.
                                                         </div>
@@ -162,7 +162,7 @@
                                                     <br>
                                                     <div>
                                                         <button class="w-100 btn btn-primary btn-lg" type="submit">
-                                                            Fortsæt
+                                                            Gem
                                                         </button>
                                                     </div>
                                                 </div>
@@ -178,7 +178,7 @@
                                             data-bs-toggle="collapse"
                                             data-bs-target="#collapseTwo" aria-expanded="false"
                                             aria-controls="collapseTwo">
-                                        <strong>Skadesanmeldelse</strong>
+                                        <strong>Skade</strong>
                                     </button>
                                 </h2>
                                 <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
@@ -186,20 +186,20 @@
                                     <div class="accordion-body">
                                         <!--Create damage form-->
                                         <div class="col-md-7 col-lg-8">
-                                            <h4 class="mb-3">Skadesanmeldelse</h4>
+                                            <h4 class="mb-3">Skade</h4>
                                             <form method="post" action="/damage-form-create"
                                                   class="needs-validation"
                                                   novalidate>
                                                 <div class="row g-3">
                                                     <div class="col-12">
-                                                        <label for="choose-damageReport" class="form-label">skadesanmeldelse <span
+                                                        <label for="choose-damageReport" class="form-label">Skadesanmeldelse <span
                                                                 class="text-muted">(Required)</span></label>
                                                         <select class="form-select" name="idDamageReport"
                                                                 id="choose-damageReport" required>
                                                             <option disabled selected value>Vælg skadesanmeldelse...</option>
                                                             <option th:each="damageReport: ${damageReports}"
                                                                     th:value="${damageReport.idDamageReport}"
-                                                                    th:text="${'VIN: '+damageReport.idDamageReport}"></option>
+                                                                    th:text="${'Damage report ID: '+damageReport.idDamageReport+'; VIN: '+damageReport.idCarVIN}"></option>
                                                         </select>
                                                         <div class="invalid-feedback">
                                                             Please select a valid damage report.
@@ -231,7 +231,7 @@
                                                     <div class="col-12">
                                                         <label for="price" class="form-label">Prisestimat <span
                                                                 class="text-muted">(Required)</span></label>
-                                                        <input name="price" type="text" class="form-control"
+                                                        <input name="price" type="number" class="form-control"
                                                                id="price"
                                                                placeholder="eg. xxxxxx kr" required>
                                                         <div class="invalid-feedback">
@@ -243,7 +243,7 @@
                                                     <br>
                                                     <div>
                                                         <button class="w-100 btn btn-primary btn-lg" type="submit">
-                                                            Fortsæt
+                                                            Gem
                                                         </button>
                                                     </div>
                                                 </div>
@@ -270,55 +270,29 @@
                                      aria-labelledby="headingOneUpdate"
                                      data-bs-parent="#accordionUpdateDamageReport">
                                     <div class="accordion-body">
-                                        <!--Update damage report form-->
+                                        <!--Cancel damage report form-->
                                         <div class="col-md-7 col-lg-8">
                                             <h4 class="mb-3">Skadesanmeldelse</h4>
-                                            <form method="post" action="/damage-report-form-update"
+                                            <form method="post" action="/damage-report-form-delete"
                                                   class="needs-validation"
                                                   novalidate>
                                                 <div class="row g-3">
                                                     <div class="col-12">
-                                                        <label for="choose-damageReportUpdate" class="form-label">Skadesanmeldelse
+                                                        <label for="choose-damageReportDelete" class="form-label">Annuler skadesanmeldelse
                                                             <span
                                                                     class="text-muted">(Required)</span></label>
                                                         <select class="form-select" name="idDamageReport"
-                                                                id="choose-damageReportUpdate" required>
-                                                            <option disabled selected value>Vælg bil...</option>
+                                                                id="choose-damageReportDelete" required>
+                                                            <option disabled selected value>Vælg skadesanmeldelse...</option>
                                                             <option th:each="damageReport: ${damageReports}"
                                                                     th:value="${damageReport.idDamageReport}"
-                                                                    th:text="${'ID: '+damageReport.idDamageReport}"></option>
+                                                                    th:text="${'Damage report ID: '+damageReport.idDamageReport+'; VIN: '+damageReport.idCarVIN}"></option>
                                                         </select>
                                                         <div class="invalid-feedback">
-                                                            Please select a valid car.
+                                                            Please select a valid damagereport.
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-12">
-                                                        <label for="choose-carUpdate" class="form-label">Bil <span
-                                                                class="text-muted">(Required)</span></label>
-                                                        <select class="form-select" name="idCarVIN"
-                                                                id="choose-carUpdate" required>
-                                                            <option disabled selected value>Vælg bil...</option>
-                                                            <option th:each="car: ${cars}"
-                                                                    th:value="${car.idCarVIN}"
-                                                                    th:text="${'VIN: '+car.idCarVIN+'; RegNo: '+car.regNo}"></option>
-                                                        </select>
-                                                        <div class="invalid-feedback">
-                                                            Please select a valid car.
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6">
-                                                        <label for="dateOfReportUpdate" class="form-label">Skadedato
-                                                            <span
-                                                                    class="text-muted">(Required)</span></label>
-                                                        <input name="dateOfReport" type="date" class="form-control"
-                                                               id="dateOfReportUpdate"
-                                                               placeholder="eg. 11/12/2022" required>
-                                                        <div class="invalid-feedback">
-                                                            Valid date is required.
-                                                        </div>
-                                                    </div>
                                                     <hr class="my-4">
                                                     <br>
                                                     <div>
@@ -339,13 +313,45 @@
                                             data-bs-toggle="collapse"
                                             data-bs-target="#collapseTwoUpdate" aria-expanded="false"
                                             aria-controls="collapseTwoUpdate">
-                                        <strong>Skadesanmeldelse</strong>
+                                        <strong>Skade</strong>
                                     </button>
                                 </h2>
                                 <div id="collapseTwoUpdate" class="accordion-collapse collapse" aria-labelledby="headingTwoUpdate"
                                      data-bs-parent="#accordionUpdateDamageReport">
                                     <div class="accordion-body">
-                                        <!--missing body-->
+                                        <!--Cancel damage form-->
+                                        <div class="col-md-7 col-lg-8">
+                                            <h4 class="mb-3">Skade</h4>
+                                            <form method="post" action="/damage-form-delete"
+                                                  class="needs-validation"
+                                                  novalidate>
+                                                <div class="row g-3">
+                                                    <div class="col-12">
+                                                        <label for="choose-damageDelete" class="form-label">Annuler skade
+                                                            <span
+                                                                    class="text-muted">(Required)</span></label>
+                                                        <select class="form-select" name="idDamage"
+                                                                id="choose-damageDelete" required>
+                                                            <option disabled selected value>Vælg skade...</option>
+                                                            <option th:each="damage: ${damages}"
+                                                                    th:value="${damage.idDamage}"
+                                                                    th:text="${'Damage ID: '+damage.idDamage+'; Damage report ID: '+damage.idDamageReport}"></option>
+                                                        </select>
+                                                        <div class="invalid-feedback">
+                                                            Please select a valid damage.
+                                                        </div>
+                                                    </div>
+
+                                                    <hr class="my-4">
+                                                    <br>
+                                                    <div>
+                                                        <button class="w-100 btn btn-primary btn-lg" type="submit">
+                                                            Gem
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

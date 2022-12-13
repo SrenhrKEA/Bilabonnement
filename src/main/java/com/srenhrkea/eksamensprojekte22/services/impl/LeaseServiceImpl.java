@@ -1,7 +1,11 @@
 package com.srenhrkea.eksamensprojekte22.services.impl;
 
+import com.srenhrkea.eksamensprojekte22.daos.impl.KilometragePlanDAOImpl;
 import com.srenhrkea.eksamensprojekte22.daos.impl.LeaseDAOImpl;
+import com.srenhrkea.eksamensprojekte22.daos.impl.PickupLocationDAOImpl;
+import com.srenhrkea.eksamensprojekte22.models.KilometragePlan;
 import com.srenhrkea.eksamensprojekte22.models.Lease;
+import com.srenhrkea.eksamensprojekte22.models.PickupLocation;
 import com.srenhrkea.eksamensprojekte22.services.LeaseService;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +17,13 @@ import java.util.Optional;
 public class LeaseServiceImpl implements LeaseService {
 
   private LeaseDAOImpl leaseDAO;
+  private PickupLocationDAOImpl pickupLocationDAO;
+  private KilometragePlanDAOImpl kilometragePlanDAO;
 
-  public LeaseServiceImpl(LeaseDAOImpl leaseDAO) {
+  public LeaseServiceImpl(LeaseDAOImpl leaseDAO, PickupLocationDAOImpl pickupLocationDAO, KilometragePlanDAOImpl kilometragePlanDAO) {
     this.leaseDAO = leaseDAO;
+    this.pickupLocationDAO = pickupLocationDAO;
+    this.kilometragePlanDAO = kilometragePlanDAO;
   }
 
   @Override
@@ -47,6 +55,14 @@ public class LeaseServiceImpl implements LeaseService {
 
   @Override
   public boolean deleteLeaseById(int id) throws SQLException {
+    List<PickupLocation> plList = (List<PickupLocation>) pickupLocationDAO.getAllByIdLease(id);
+    for (PickupLocation pickupLocation : plList) {
+      pickupLocationDAO.delete(pickupLocation.getIdPickupLocation());
+    }
+    List<KilometragePlan> kpList = (List<KilometragePlan>) kilometragePlanDAO.getAllByIdLease(id);
+    for (KilometragePlan kilometragePlan : kpList) {
+      kilometragePlanDAO.delete(kilometragePlan.getIdKilometragePlan());
+    }
     return leaseDAO.delete(id);
   }
 }

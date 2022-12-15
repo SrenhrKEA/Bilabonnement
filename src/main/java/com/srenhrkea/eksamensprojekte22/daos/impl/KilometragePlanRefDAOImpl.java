@@ -1,7 +1,7 @@
 package com.srenhrkea.eksamensprojekte22.daos.impl;
 
 import com.srenhrkea.eksamensprojekte22.daos.KilometragePlanRefDAO;
-import com.srenhrkea.eksamensprojekte22.models.KilometragePlanRef;
+import com.srenhrkea.eksamensprojekte22.entities.KilometragePlanRef;
 import com.srenhrkea.eksamensprojekte22.utilities.DatabaseConnectionManager;
 import org.springframework.stereotype.Repository;
 

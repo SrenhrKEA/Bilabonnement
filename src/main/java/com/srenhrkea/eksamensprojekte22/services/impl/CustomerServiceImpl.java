@@ -1,7 +1,7 @@
 package com.srenhrkea.eksamensprojekte22.services.impl;
 
 import com.srenhrkea.eksamensprojekte22.daos.impl.CustomerDAOImpl;
-import com.srenhrkea.eksamensprojekte22.models.Customer;
+import com.srenhrkea.eksamensprojekte22.entities.Customer;
 import com.srenhrkea.eksamensprojekte22.services.CustomerService;
 import org.springframework.stereotype.Service;
 

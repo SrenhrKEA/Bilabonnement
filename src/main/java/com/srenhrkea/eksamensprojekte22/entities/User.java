@@ -1,4 +1,4 @@
-package com.srenhrkea.eksamensprojekte22.models;
+package com.srenhrkea.eksamensprojekte22.entities;
 
 import com.srenhrkea.eksamensprojekte22.enums.UserType;
 

@@ -2,7 +2,7 @@ package com.srenhrkea.eksamensprojekte22.daos.impl;
 
 import com.srenhrkea.eksamensprojekte22.daos.LeaseDAO;
 import com.srenhrkea.eksamensprojekte22.enums.SubscriptionType;
-import com.srenhrkea.eksamensprojekte22.models.Lease;
+import com.srenhrkea.eksamensprojekte22.entities.Lease;
 import com.srenhrkea.eksamensprojekte22.utilities.DatabaseConnectionManager;
 import org.springframework.stereotype.Repository;
 

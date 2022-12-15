@@ -1,4 +1,4 @@
-package com.srenhrkea.eksamensprojekte22.models.dtos;
+package com.srenhrkea.eksamensprojekte22.dtos;
 
 public class PickupLocationDTO {
   private int idPickupLocation, idPickupLocationRef, idLease;

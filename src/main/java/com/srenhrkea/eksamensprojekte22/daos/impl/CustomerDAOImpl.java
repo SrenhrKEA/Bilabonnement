@@ -1,7 +1,7 @@
 package com.srenhrkea.eksamensprojekte22.daos.impl;
 
 import com.srenhrkea.eksamensprojekte22.daos.CustomerDAO;
-import com.srenhrkea.eksamensprojekte22.models.Customer;
+import com.srenhrkea.eksamensprojekte22.entities.Customer;
 import com.srenhrkea.eksamensprojekte22.utilities.DatabaseConnectionManager;
 import org.springframework.stereotype.Repository;
 

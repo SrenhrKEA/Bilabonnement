@@ -1,10 +1,6 @@
 package com.srenhrkea.eksamensprojekte22;
 
 import com.srenhrkea.eksamensprojekte22.daos.impl.LeaseDAOImpl;
-import com.srenhrkea.eksamensprojekte22.daos.impl.UserDAOImpl;
-import com.srenhrkea.eksamensprojekte22.enums.UserType;
-import com.srenhrkea.eksamensprojekte22.models.Car;
-import com.srenhrkea.eksamensprojekte22.models.User;
 import com.srenhrkea.eksamensprojekte22.services.impl.CarServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

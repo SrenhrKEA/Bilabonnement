@@ -3,9 +3,9 @@ package com.srenhrkea.eksamensprojekte22.services.impl;
 import com.srenhrkea.eksamensprojekte22.daos.impl.KilometragePlanDAOImpl;
 import com.srenhrkea.eksamensprojekte22.daos.impl.LeaseDAOImpl;
 import com.srenhrkea.eksamensprojekte22.daos.impl.PickupLocationDAOImpl;
-import com.srenhrkea.eksamensprojekte22.models.KilometragePlan;
-import com.srenhrkea.eksamensprojekte22.models.Lease;
-import com.srenhrkea.eksamensprojekte22.models.PickupLocation;
+import com.srenhrkea.eksamensprojekte22.entities.KilometragePlan;
+import com.srenhrkea.eksamensprojekte22.entities.Lease;
+import com.srenhrkea.eksamensprojekte22.entities.PickupLocation;
 import com.srenhrkea.eksamensprojekte22.services.LeaseService;
 import org.springframework.stereotype.Service;
 
@@ -53,6 +53,7 @@ public class LeaseServiceImpl implements LeaseService {
     return leaseDAO.update(lease);
   }
 
+  /*Metode til at slette en lease. Da idLease bruges som foreign key i både pickupLocation og kilometragePlan tabellerne, slettes relevante rækker der indeholder det specifikke idLease. */
   @Override
   public boolean deleteLeaseById(int id) throws SQLException {
     List<PickupLocation> plList = (List<PickupLocation>) pickupLocationDAO.getAllByIdLease(id);

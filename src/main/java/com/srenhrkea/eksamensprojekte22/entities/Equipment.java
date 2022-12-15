@@ -1,4 +1,4 @@
-package com.srenhrkea.eksamensprojekte22.models;
+package com.srenhrkea.eksamensprojekte22.entities;
 
 public class Equipment extends EquipmentRef {
   private int idEquipment, idEquipmentRef, idLease;

@@ -192,9 +192,8 @@
                                     <div class="col-sm-6">
                                         <label for="postalCode" class="form-label">Postnummer <span
                                                 class="text-muted">(Required)</span></label>
-                                        <input name="postalCode" type="number" class="form-control" id="postalCode"
-                                               placeholder="eg. 1234" maxlength="10"
-                                               required>
+                                        <input name="postalCode" type="text" class="form-control" id="postalCode"
+                                               placeholder="eg. 1234" pattern="\d*" maxlength="10" required>
                                         <div class="invalid-feedback">
                                             Valid postal code is required.
                                         </div>
@@ -322,7 +321,7 @@
                                                 class="text-muted">(Required)</span></label>
                                         <input name="postalCode" type="text" class="form-control"
                                                id="postalCodeUpdate"
-                                               placeholder="eg. 1234" required>
+                                               placeholder="eg. 1234" pattern="\d*" maxlength="10" required>
                                         <div class="invalid-feedback">
                                             Valid postal code is required.
                                         </div>

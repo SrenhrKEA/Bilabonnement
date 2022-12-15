@@ -1,7 +1,7 @@
 package com.srenhrkea.eksamensprojekte22.daos;
 
 import com.srenhrkea.eksamensprojekte22.daos.generic.GenericDAO;
-import com.srenhrkea.eksamensprojekte22.models.Lease;
+import com.srenhrkea.eksamensprojekte22.entities.Lease;
 
 import java.sql.SQLException;
 import java.util.Collection;

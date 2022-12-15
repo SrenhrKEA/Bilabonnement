@@ -4,10 +4,10 @@ import com.srenhrkea.eksamensprojekte22.daos.impl.CarDAOImpl;
 import com.srenhrkea.eksamensprojekte22.daos.impl.KilometragePlanDAOImpl;
 import com.srenhrkea.eksamensprojekte22.daos.impl.KilometragePlanRefDAOImpl;
 import com.srenhrkea.eksamensprojekte22.daos.impl.LeaseDAOImpl;
-import com.srenhrkea.eksamensprojekte22.models.Car;
-import com.srenhrkea.eksamensprojekte22.models.KilometragePlan;
-import com.srenhrkea.eksamensprojekte22.models.KilometragePlanRef;
-import com.srenhrkea.eksamensprojekte22.models.Lease;
+import com.srenhrkea.eksamensprojekte22.entities.Car;
+import com.srenhrkea.eksamensprojekte22.entities.KilometragePlan;
+import com.srenhrkea.eksamensprojekte22.entities.KilometragePlanRef;
+import com.srenhrkea.eksamensprojekte22.entities.Lease;
 import com.srenhrkea.eksamensprojekte22.services.KilometragePlanService;
 import org.springframework.stereotype.Service;
 
@@ -68,6 +68,8 @@ public class KilometragePlanServiceImpl implements KilometragePlanService {
     return kilometragePlanDAO.delete(id);
   }
 
+
+  /*Metode til udregning af indkomst per måned baseret på antal kilometerplaner for alle udlånte biler. Altså biler hvor isAvailable = false */
   @Override
   public double GetIncomePerMonth() throws SQLException {
     double income = 0;

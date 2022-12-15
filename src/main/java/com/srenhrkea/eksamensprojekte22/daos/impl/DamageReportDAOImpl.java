@@ -1,7 +1,7 @@
 package com.srenhrkea.eksamensprojekte22.daos.impl;
 
 import com.srenhrkea.eksamensprojekte22.daos.DamageReportDAO;
-import com.srenhrkea.eksamensprojekte22.models.DamageReport;
+import com.srenhrkea.eksamensprojekte22.entities.DamageReport;
 import com.srenhrkea.eksamensprojekte22.utilities.DatabaseConnectionManager;
 import org.springframework.stereotype.Repository;
 

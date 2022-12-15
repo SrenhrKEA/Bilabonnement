@@ -2,8 +2,8 @@ package com.srenhrkea.eksamensprojekte22.services.impl;
 
 import com.srenhrkea.eksamensprojekte22.daos.impl.CarDAOImpl;
 import com.srenhrkea.eksamensprojekte22.daos.impl.CarTypeRefDAOImpl;
-import com.srenhrkea.eksamensprojekte22.models.Car;
-import com.srenhrkea.eksamensprojekte22.models.CarTypeRef;
+import com.srenhrkea.eksamensprojekte22.entities.Car;
+import com.srenhrkea.eksamensprojekte22.entities.CarTypeRef;
 import com.srenhrkea.eksamensprojekte22.services.CarService;
 import org.springframework.stereotype.Service;
 
@@ -64,6 +64,7 @@ public class CarServiceImpl implements CarService {
     return carDAO.delete(id);
   }
 
+  /*Metode til udregning af indkomst per måned baseret på antal udlånte biler. Altså biler hvor isAvailable = false */
   @Override
   public double GetIncomePerMonth() throws SQLException {
     double income = 0;

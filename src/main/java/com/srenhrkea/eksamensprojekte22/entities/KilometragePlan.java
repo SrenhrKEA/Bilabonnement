@@ -1,4 +1,4 @@
-package com.srenhrkea.eksamensprojekte22.models;
+package com.srenhrkea.eksamensprojekte22.entities;
 
 public class KilometragePlan extends KilometragePlanRef {
   private int idKilometragePlan, idKilometragePlanRef, idLease;

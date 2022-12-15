@@ -1,19 +1,31 @@
-package com.srenhrkea.eksamensprojekte22.models.dtos;
+package com.srenhrkea.eksamensprojekte22.entities;
 
-public class CarDTO {
+public class Car extends CarTypeRef {
   private boolean isAvailable;
   private int idCarTypeRef;
   private double initialKilometrage;
   private String idCarVIN, regNo;
 
-  public boolean getIsAvailable() {
+  public Car() {
+  }
+
+  public Car(boolean isAvailable, int idCarTypeRef, double initialKilometrage, String idCarVIN, String regNo) {
+    this.isAvailable = isAvailable;
+    this.idCarTypeRef = idCarTypeRef;
+    this.initialKilometrage = initialKilometrage;
+    this.idCarVIN = idCarVIN;
+    this.regNo = regNo;
+  }
+
+  public boolean isAvailable() {
     return isAvailable;
   }
 
-  public void setIsAvailable(boolean available) {
+  public void setAvailable(boolean available) {
     isAvailable = available;
   }
 
+  @Override
   public int getIdCarTypeRef() {
     return idCarTypeRef;
   }
@@ -44,5 +56,16 @@ public class CarDTO {
 
   public void setRegNo(String regNo) {
     this.regNo = regNo;
+  }
+
+  @Override
+  public String toString() {
+    return "Car{" +
+        "isAvailable=" + isAvailable +
+        ", idCarTypeRef=" + idCarTypeRef +
+        ", initialKilometrage=" + initialKilometrage +
+        ", idCarVIN='" + idCarVIN + '\'' +
+        ", regNo='" + regNo + '\'' +
+        '}';
   }
 }

@@ -1,7 +1,7 @@
 package com.srenhrkea.eksamensprojekte22.daos.impl;
 
 import com.srenhrkea.eksamensprojekte22.daos.EquipmentDAO;
-import com.srenhrkea.eksamensprojekte22.models.Equipment;
+import com.srenhrkea.eksamensprojekte22.entities.Equipment;
 import com.srenhrkea.eksamensprojekte22.utilities.DatabaseConnectionManager;
 import org.springframework.stereotype.Repository;
 

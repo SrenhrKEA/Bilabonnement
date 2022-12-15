@@ -1,7 +1,7 @@
 package com.srenhrkea.eksamensprojekte22.services.impl;
 
 import com.srenhrkea.eksamensprojekte22.daos.impl.EquipmentRefDAOImpl;
-import com.srenhrkea.eksamensprojekte22.models.EquipmentRef;
+import com.srenhrkea.eksamensprojekte22.entities.EquipmentRef;
 import com.srenhrkea.eksamensprojekte22.services.EquipmentRefService;
 import org.springframework.stereotype.Service;
 

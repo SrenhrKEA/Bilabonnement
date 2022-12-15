@@ -2,7 +2,7 @@ package com.srenhrkea.eksamensprojekte22.daos.impl;
 
 import com.srenhrkea.eksamensprojekte22.daos.UserDAO;
 import com.srenhrkea.eksamensprojekte22.enums.UserType;
-import com.srenhrkea.eksamensprojekte22.models.User;
+import com.srenhrkea.eksamensprojekte22.entities.User;
 import com.srenhrkea.eksamensprojekte22.utilities.DatabaseConnectionManager;
 import org.springframework.stereotype.Repository;
 

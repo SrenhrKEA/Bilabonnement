@@ -1,6 +1,6 @@
 package com.srenhrkea.eksamensprojekte22.services;
 
-import com.srenhrkea.eksamensprojekte22.models.Car;
+import com.srenhrkea.eksamensprojekte22.entities.Car;
 
 import java.sql.SQLException;
 import java.util.List;

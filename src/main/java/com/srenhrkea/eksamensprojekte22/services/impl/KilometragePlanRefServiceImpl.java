@@ -1,7 +1,7 @@
 package com.srenhrkea.eksamensprojekte22.services.impl;
 
 import com.srenhrkea.eksamensprojekte22.daos.impl.KilometragePlanRefDAOImpl;
-import com.srenhrkea.eksamensprojekte22.models.KilometragePlanRef;
+import com.srenhrkea.eksamensprojekte22.entities.KilometragePlanRef;
 import com.srenhrkea.eksamensprojekte22.services.KilometragePlanRefService;
 import org.springframework.stereotype.Service;
 

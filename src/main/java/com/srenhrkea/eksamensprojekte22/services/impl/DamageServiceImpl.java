@@ -1,7 +1,7 @@
 package com.srenhrkea.eksamensprojekte22.services.impl;
 
 import com.srenhrkea.eksamensprojekte22.daos.impl.DamageDAOImpl;
-import com.srenhrkea.eksamensprojekte22.models.Damage;
+import com.srenhrkea.eksamensprojekte22.entities.Damage;
 import com.srenhrkea.eksamensprojekte22.services.DamageService;
 import org.springframework.stereotype.Service;
 

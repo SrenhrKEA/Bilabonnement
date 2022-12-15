@@ -1,7 +1,7 @@
 package com.srenhrkea.eksamensprojekte22.services.impl;
 
 import com.srenhrkea.eksamensprojekte22.daos.impl.PickupLocationDAOImpl;
-import com.srenhrkea.eksamensprojekte22.models.PickupLocation;
+import com.srenhrkea.eksamensprojekte22.entities.PickupLocation;
 import com.srenhrkea.eksamensprojekte22.services.PickupLocationService;
 import org.springframework.stereotype.Service;
 

@@ -3,7 +3,7 @@ package com.srenhrkea.eksamensprojekte22.daos.impl;
 import com.srenhrkea.eksamensprojekte22.daos.CarTypeRefDAO;
 import com.srenhrkea.eksamensprojekte22.enums.FuelType;
 import com.srenhrkea.eksamensprojekte22.enums.TransmissionType;
-import com.srenhrkea.eksamensprojekte22.models.CarTypeRef;
+import com.srenhrkea.eksamensprojekte22.entities.CarTypeRef;
 import com.srenhrkea.eksamensprojekte22.utilities.DatabaseConnectionManager;
 import org.springframework.stereotype.Repository;
 

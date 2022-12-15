@@ -1,6 +1,6 @@
 package com.srenhrkea.eksamensprojekte22.services;
 
-import com.srenhrkea.eksamensprojekte22.models.EquipmentRef;
+import com.srenhrkea.eksamensprojekte22.entities.EquipmentRef;
 
 import java.sql.SQLException;
 import java.util.List;

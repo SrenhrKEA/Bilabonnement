@@ -1,7 +1,7 @@
 package com.srenhrkea.eksamensprojekte22.controllers;
 
-import com.srenhrkea.eksamensprojekte22.models.*;
-import com.srenhrkea.eksamensprojekte22.models.dtos.*;
+import com.srenhrkea.eksamensprojekte22.dtos.*;
+import com.srenhrkea.eksamensprojekte22.entities.*;
 import com.srenhrkea.eksamensprojekte22.services.impl.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -44,6 +44,7 @@ public class employeeController {
     this.damageService = damageService;
   }
 
+  /*forside*/
   @GetMapping("/employee")
   public String employee(HttpSession session, RedirectAttributes redirectAttributes) {
     String userType = (String) session.getAttribute("userType");
@@ -54,6 +55,7 @@ public class employeeController {
     return "employee";
   }
 
+  /*kunde*/
   @GetMapping("/customer-form")
   public String customerForm(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
     String userType = (String) session.getAttribute("userType");
@@ -70,7 +72,6 @@ public class employeeController {
     }
     return "employee-customer";
   }
-
 
   @PostMapping("/customer-form-create")
   public String customerFormCreate(@ModelAttribute CustomerDTO customerDTO, RedirectAttributes redirectAttributes) {
@@ -115,6 +116,7 @@ public class employeeController {
     return "redirect:customer-form";
   }
 
+  /*bil*/
   @GetMapping("/car-form")
   public String carForm(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
     String userType = (String) session.getAttribute("userType");
@@ -133,7 +135,6 @@ public class employeeController {
     }
     return "employee-car";
   }
-
 
   @PostMapping("/car-form-create")
   public String carFormCreate(@ModelAttribute CarDTO carDTO, RedirectAttributes redirectAttributes) {
@@ -170,6 +171,7 @@ public class employeeController {
     return "redirect:car-form";
   }
 
+  /*lejeaftale, lokation og kilometerplan*/
   @GetMapping("/lease-form")
   public String leaseForm(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
     String userType = (String) session.getAttribute("userType");
@@ -281,6 +283,7 @@ public class employeeController {
     return "redirect:lease-form";
   }
 
+  /*Skadesanmeldelse og skade*/
   @GetMapping("/damage-form")
   public String damageForm(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
     String userType = (String) session.getAttribute("userType");
@@ -358,6 +361,7 @@ public class employeeController {
     return "redirect:damage-form"; //?step=form_create_lease
   }
 
+  /*dashboard*/
   @GetMapping("/dashboard")
   public String dashboard(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
     String userType = (String) session.getAttribute("userType");
@@ -381,6 +385,7 @@ public class employeeController {
     return "employee-dashboard";
   }
 
+  /*test - bruges ikke*/
   @GetMapping("/test")
   public String test() {
     return "test";

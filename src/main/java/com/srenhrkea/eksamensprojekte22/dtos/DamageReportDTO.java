@@ -1,23 +1,15 @@
-package com.srenhrkea.eksamensprojekte22.models;
+package com.srenhrkea.eksamensprojekte22.dtos;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
-public class DamageReport {
+public class DamageReportDTO {
+
   private int idDamageReport;
   private String idCarVIN;
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate dateOfReport;
-
-  public DamageReport() {
-  }
-
-  public DamageReport(int idDamageReport, String idCarVIN, LocalDate dateOfReport) {
-    this.idDamageReport = idDamageReport;
-    this.idCarVIN = idCarVIN;
-    this.dateOfReport = dateOfReport;
-  }
 
   public int getIdDamageReport() {
     return idDamageReport;
@@ -41,14 +33,5 @@ public class DamageReport {
 
   public void setDateOfReport(LocalDate dateOfReport) {
     this.dateOfReport = dateOfReport;
-  }
-
-  @Override
-  public String toString() {
-    return "DamageReport{" +
-        "idDamageReport=" + idDamageReport +
-        ", idCarVIN='" + idCarVIN + '\'' +
-        ", dateOfReport=" + dateOfReport +
-        '}';
   }
 }

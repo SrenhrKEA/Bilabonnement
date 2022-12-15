@@ -1,7 +1,7 @@
 package com.srenhrkea.eksamensprojekte22.daos.impl;
 
 import com.srenhrkea.eksamensprojekte22.daos.CarDAO;
-import com.srenhrkea.eksamensprojekte22.models.Car;
+import com.srenhrkea.eksamensprojekte22.entities.Car;
 import com.srenhrkea.eksamensprojekte22.utilities.DatabaseConnectionManager;
 import org.springframework.stereotype.Repository;
 

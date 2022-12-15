@@ -1,7 +1,7 @@
 package com.srenhrkea.eksamensprojekte22.daos.impl;
 
 import com.srenhrkea.eksamensprojekte22.daos.PickupLocationRefDAO;
-import com.srenhrkea.eksamensprojekte22.models.PickupLocationRef;
+import com.srenhrkea.eksamensprojekte22.entities.PickupLocationRef;
 import com.srenhrkea.eksamensprojekte22.utilities.DatabaseConnectionManager;
 import org.springframework.stereotype.Repository;
 

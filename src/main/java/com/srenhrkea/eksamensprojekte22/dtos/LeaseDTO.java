@@ -1,4 +1,4 @@
-package com.srenhrkea.eksamensprojekte22.models.dtos;
+package com.srenhrkea.eksamensprojekte22.dtos;
 
 import com.srenhrkea.eksamensprojekte22.enums.SubscriptionType;
 import org.springframework.format.annotation.DateTimeFormat;

@@ -1,4 +1,4 @@
-package com.srenhrkea.eksamensprojekte22.models;
+package com.srenhrkea.eksamensprojekte22.entities;
 
 public class PickupLocation extends PickupLocationRef {
   private int idPickupLocation, idPickupLocationRef, idLease;

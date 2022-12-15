@@ -49,13 +49,8 @@ public class DamageReportServiceImpl implements DamageReportService {
     return damageReportDAO.update(damageReport);
   }
 
-  /*Metode til at slette en damageReport. Da idDamageReport bruges som foreign key i Damage tabellen, slettes relevante rækker der indeholder det specifikke idDamageReport. */
   @Override
   public boolean deleteDamageReportById(int id) throws SQLException {
-    List<Damage> damages = (List<Damage>) damageDAO.getAllByIdDamageReport(id);
-    for (Damage damage : damages) {
-      damageDAO.delete(damage.getIdDamage());
-    }
     return damageReportDAO.delete(id);
   }
 }

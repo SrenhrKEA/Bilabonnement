@@ -53,17 +53,8 @@ public class LeaseServiceImpl implements LeaseService {
     return leaseDAO.update(lease);
   }
 
-  /*Metode til at slette en lease. Da idLease bruges som foreign key i både pickupLocation og kilometragePlan tabellerne, slettes relevante rækker der indeholder det specifikke idLease. */
   @Override
   public boolean deleteLeaseById(int id) throws SQLException {
-    List<PickupLocation> plList = (List<PickupLocation>) pickupLocationDAO.getAllByIdLease(id);
-    for (PickupLocation pickupLocation : plList) {
-      pickupLocationDAO.delete(pickupLocation.getIdPickupLocation());
-    }
-    List<KilometragePlan> kpList = (List<KilometragePlan>) kilometragePlanDAO.getAllByIdLease(id);
-    for (KilometragePlan kilometragePlan : kpList) {
-      kilometragePlanDAO.delete(kilometragePlan.getIdKilometragePlan());
-    }
     return leaseDAO.delete(id);
   }
 }

@@ -118,27 +118,27 @@ CREATE TABLE `User`
     PRIMARY KEY (username)
 );
 ALTER TABLE Lease
-    ADD CONSTRAINT FKLease876541 FOREIGN KEY (CaridCarVIN) REFERENCES Car (idCarVIN);
+    ADD CONSTRAINT FKLease876541 FOREIGN KEY (CaridCarVIN) REFERENCES Car (idCarVIN) ON DELETE CASCADE;
 ALTER TABLE EquipmentRef
-    ADD CONSTRAINT FKEquipmentR218579 FOREIGN KEY (CarTypeRefidCarTypeRef) REFERENCES CarTypeRef (idCarTypeRef);
+    ADD CONSTRAINT FKEquipmentR218579 FOREIGN KEY (CarTypeRefidCarTypeRef) REFERENCES CarTypeRef (idCarTypeRef) ON DELETE CASCADE;
 ALTER TABLE Car
-    ADD CONSTRAINT FKCar966112 FOREIGN KEY (CarTypeRefidCarTypeRef) REFERENCES CarTypeRef (idCarTypeRef);
+    ADD CONSTRAINT FKCar966112 FOREIGN KEY (CarTypeRefidCarTypeRef) REFERENCES CarTypeRef (idCarTypeRef) ON DELETE CASCADE;
 ALTER TABLE PickupLocation
-    ADD CONSTRAINT FKPickupLoca717196 FOREIGN KEY (PickupLocationRefidPickupLocationRef) REFERENCES PickupLocationRef (idPickupLocationRef);
+    ADD CONSTRAINT FKPickupLoca717196 FOREIGN KEY (PickupLocationRefidPickupLocationRef) REFERENCES PickupLocationRef (idPickupLocationRef) ON DELETE CASCADE;
 ALTER TABLE Equipment
-    ADD CONSTRAINT FKEquipment456582 FOREIGN KEY (EquipmentRefidEquipmentRef) REFERENCES EquipmentRef (idEquipmentRef);
+    ADD CONSTRAINT FKEquipment456582 FOREIGN KEY (EquipmentRefidEquipmentRef) REFERENCES EquipmentRef (idEquipmentRef) ON DELETE CASCADE;
 ALTER TABLE Equipment
-    ADD CONSTRAINT FKEquipment419857 FOREIGN KEY (LeaseidLease) REFERENCES Lease (idLease);
+    ADD CONSTRAINT FKEquipment419857 FOREIGN KEY (LeaseidLease) REFERENCES Lease (idLease) ON DELETE CASCADE;
 ALTER TABLE KilometragePlan
-    ADD CONSTRAINT FKKilometrag832788 FOREIGN KEY (KilometragePlanRefidKilometragePlanRef) REFERENCES KilometragePlanRef (idKilometragePlanRef);
+    ADD CONSTRAINT FKKilometrag832788 FOREIGN KEY (KilometragePlanRefidKilometragePlanRef) REFERENCES KilometragePlanRef (idKilometragePlanRef) ON DELETE CASCADE;
 ALTER TABLE KilometragePlan
-    ADD CONSTRAINT FKKilometrag584886 FOREIGN KEY (LeaseidLease) REFERENCES Lease (idLease);
+    ADD CONSTRAINT FKKilometrag584886 FOREIGN KEY (LeaseidLease) REFERENCES Lease (idLease) ON DELETE CASCADE;
 ALTER TABLE PickupLocation
-    ADD CONSTRAINT FKPickupLoca279153 FOREIGN KEY (LeaseidLease) REFERENCES Lease (idLease);
+    ADD CONSTRAINT FKPickupLoca279153 FOREIGN KEY (LeaseidLease) REFERENCES Lease (idLease) ON DELETE CASCADE;
 ALTER TABLE DamageReport
-    ADD CONSTRAINT FKDamageRepo166854 FOREIGN KEY (CaridCarVIN) REFERENCES Car (idCarVIN);
+    ADD CONSTRAINT FKDamageRepo166854 FOREIGN KEY (CaridCarVIN) REFERENCES Car (idCarVIN) ON DELETE CASCADE;
 ALTER TABLE Damage
-    ADD CONSTRAINT FKDamage718366 FOREIGN KEY (DamageReportidDamageReport) REFERENCES DamageReport (idDamageReport);
+    ADD CONSTRAINT FKDamage718366 FOREIGN KEY (DamageReportidDamageReport) REFERENCES DamageReport (idDamageReport) ON DELETE CASCADE;
 ALTER TABLE Lease
-    ADD CONSTRAINT FKLease644241 FOREIGN KEY (CustomeridCustomer) REFERENCES Customer (idCustomer);
+    ADD CONSTRAINT FKLease644241 FOREIGN KEY (CustomeridCustomer) REFERENCES Customer (idCustomer) ON DELETE CASCADE;
 

@@ -2,7 +2,6 @@ package com.srenhrkea.eksamensprojekte22.services.impl;
 
 import com.srenhrkea.eksamensprojekte22.daos.impl.DamageDAOImpl;
 import com.srenhrkea.eksamensprojekte22.daos.impl.DamageReportDAOImpl;
-import com.srenhrkea.eksamensprojekte22.entities.Damage;
 import com.srenhrkea.eksamensprojekte22.entities.DamageReport;
 import com.srenhrkea.eksamensprojekte22.services.DamageReportService;
 import org.springframework.stereotype.Service;
@@ -15,11 +14,9 @@ import java.util.Optional;
 public class DamageReportServiceImpl implements DamageReportService {
 
   private DamageReportDAOImpl damageReportDAO;
-  private DamageDAOImpl damageDAO;
 
-  public DamageReportServiceImpl(DamageReportDAOImpl damageReportDAO, DamageDAOImpl damageDAO) {
+  public DamageReportServiceImpl(DamageReportDAOImpl damageReportDAO) {
     this.damageReportDAO = damageReportDAO;
-    this.damageDAO = damageDAO;
   }
 
   @Override

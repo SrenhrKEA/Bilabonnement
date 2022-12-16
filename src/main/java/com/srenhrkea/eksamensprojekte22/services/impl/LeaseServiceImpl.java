@@ -3,9 +3,7 @@ package com.srenhrkea.eksamensprojekte22.services.impl;
 import com.srenhrkea.eksamensprojekte22.daos.impl.KilometragePlanDAOImpl;
 import com.srenhrkea.eksamensprojekte22.daos.impl.LeaseDAOImpl;
 import com.srenhrkea.eksamensprojekte22.daos.impl.PickupLocationDAOImpl;
-import com.srenhrkea.eksamensprojekte22.entities.KilometragePlan;
 import com.srenhrkea.eksamensprojekte22.entities.Lease;
-import com.srenhrkea.eksamensprojekte22.entities.PickupLocation;
 import com.srenhrkea.eksamensprojekte22.services.LeaseService;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +15,9 @@ import java.util.Optional;
 public class LeaseServiceImpl implements LeaseService {
 
   private LeaseDAOImpl leaseDAO;
-  private PickupLocationDAOImpl pickupLocationDAO;
-  private KilometragePlanDAOImpl kilometragePlanDAO;
 
-  public LeaseServiceImpl(LeaseDAOImpl leaseDAO, PickupLocationDAOImpl pickupLocationDAO, KilometragePlanDAOImpl kilometragePlanDAO) {
+  public LeaseServiceImpl(LeaseDAOImpl leaseDAO) {
     this.leaseDAO = leaseDAO;
-    this.pickupLocationDAO = pickupLocationDAO;
-    this.kilometragePlanDAO = kilometragePlanDAO;
   }
 
   @Override

@@ -12,9 +12,9 @@ public class DatabaseConnectionManager {
       return conn;
     }
 
-    String hostname = "jdbc:mysql://localhost:3306/bilabonnement";
-    String username = "root";
-    String password = "root";
+    String hostname = System.getenv("DB.URL");
+    String username = System.getenv("DB.USERNAME");
+    String password = System.getenv("DB.PASSWORD");
 
     try {
       conn = DriverManager.getConnection(hostname, username, password);
